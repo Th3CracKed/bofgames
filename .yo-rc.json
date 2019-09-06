@@ -1,0 +1,41 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "fr.bofgames",
+      "nativeLanguage": "fr"
+    },
+    "jhipsterVersion": "6.2.0",
+    "applicationType": "gateway",
+    "baseName": "bofGames",
+    "packageName": "fr.bofgames",
+    "packageFolder": "fr/bofgames",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": false,
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZGYxMmU0MTI0YWMyYTJiMzg4NmY1YzYzNDcwMmNjNzVhOTJjMjBkNzdiYzgwMWNjYmIzNTY0YjVmOTZkNzg4NzM3YjZhMWI0YTU1ZThlNWU4MTkzNTZmZTdiOWE3MTcwYTFlNjY5NjMxYTJiYTVlZTI4YWFiMWQ5ODkxNjU4NDU=",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "testFrameworks": ["cucumber", "protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "fr",
+    "languages": ["fr", "en"],
+    "blueprints": []
+  }
+}
