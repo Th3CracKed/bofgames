@@ -1,0 +1,24 @@
+{
+  "bofGamesApp": {
+    "platform": {
+      "home": {
+        "title": "Platforms",
+        "createLabel": "Créer un nouveau Platform",
+        "createOrEditLabel": "Créer ou éditer un Platform",
+        "search": "Recherche pour Platform",
+        "notFound": "Aucun Platform trouvé"
+      },
+      "created": "Un nouveau Platform a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Platform avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Platform avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Platform {{ id }} ?"
+      },
+      "detail": {
+        "title": "Platform"
+      },
+      "name": "Name",
+      "item": "Item"
+    }
+  }
+}

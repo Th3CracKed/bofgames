@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="order">
+            <h2><span jhiTranslate="bofGamesApp.order.detail.title">Order</span> {{order.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="bofGamesApp.order.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{order.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.order.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{order.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.order.email">Email</span></dt>
+                <dd>
+                    <span>{{order.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.order.street">Street</span></dt>
+                <dd>
+                    <span>{{order.street}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.order.postcode">Postcode</span></dt>
+                <dd>
+                    <span>{{order.postcode}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.order.city">City</span></dt>
+                <dd>
+                    <span>{{order.city}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.order.country">Country</span></dt>
+                <dd>
+                    <span>{{order.country}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.order.items">Items</span></dt>
+                <dd>
+                    <span>{{order.items}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.order.client">Client</span></dt>
+                <dd>
+                    <div *ngIf="order.client">
+                        <a [routerLink]="['/client', order.client?.id, 'view']">{{order.client?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/order', order.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

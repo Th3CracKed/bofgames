@@ -1,0 +1,33 @@
+{
+  "bofGamesApp": {
+    "client": {
+      "home": {
+        "title": "Clients",
+        "createLabel": "Create a new Client",
+        "createOrEditLabel": "Create or edit a Client",
+        "search": "Search for Client",
+        "notFound": "No Clients found"
+      },
+      "created": "A new Client is created with identifier {{ param }}",
+      "updated": "A Client is updated with identifier {{ param }}",
+      "deleted": "A Client is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Client {{ id }}?"
+      },
+      "detail": {
+        "title": "Client"
+      },
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "street": "Street",
+      "postCode": "Post Code",
+      "city": "City",
+      "country": "Country",
+      "birthday": "Birthday",
+      "cart": "Cart",
+      "review": "Review",
+      "order": "Order"
+    }
+  }
+}

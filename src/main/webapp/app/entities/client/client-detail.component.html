@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="client">
+            <h2><span jhiTranslate="bofGamesApp.client.detail.title">Client</span> {{client.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="bofGamesApp.client.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{client.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.client.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{client.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.client.email">Email</span></dt>
+                <dd>
+                    <span>{{client.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.client.street">Street</span></dt>
+                <dd>
+                    <span>{{client.street}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.client.postCode">Post Code</span></dt>
+                <dd>
+                    <span>{{client.postCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.client.city">City</span></dt>
+                <dd>
+                    <span>{{client.city}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.client.country">Country</span></dt>
+                <dd>
+                    <span>{{client.country}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.client.birthday">Birthday</span></dt>
+                <dd>
+                    <span>{{client.birthday}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofGamesApp.client.cart">Cart</span></dt>
+                <dd>
+                    <div *ngIf="client.cart">
+                        <a [routerLink]="['/cart', client.cart?.id, 'view']">{{client.cart?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/client', client.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
