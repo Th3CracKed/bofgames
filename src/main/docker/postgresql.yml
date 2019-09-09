@@ -1,0 +1,11 @@
+version: '2'
+services:
+  bofgames-postgresql:
+    image: postgres:11.4
+    # volumes:
+    #     - ~/volumes/jhipster/bofgames/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=bofgames
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
