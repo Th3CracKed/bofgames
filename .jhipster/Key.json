@@ -1,0 +1,39 @@
+{
+    "name": "Key",
+    "fields": [
+        {
+            "fieldName": "value",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "KEYSTATUS",
+            "fieldValues": "AVAILABLE,RESERVED,BUYED"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "item",
+            "otherEntityRelationshipName": "key",
+            "relationshipName": "item",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "cartLine",
+            "otherEntityRelationshipName": "key",
+            "relationshipName": "cartLine",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190909125717",
+    "entityTableName": "key",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

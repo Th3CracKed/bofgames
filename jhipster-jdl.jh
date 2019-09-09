@@ -1,0 +1,81 @@
+entity Client {
+    street String,
+    postCode String,
+    city String,
+    country String,
+    birthdate LocalDate
+}
+
+enum KEYSTATUS {
+	AVAILABLE, RESERVED, BUYED
+}
+
+entity Key {
+    value String,
+    status KEYSTATUS
+}
+
+entity Review {
+	mark Integer,
+	comment String
+}
+
+entity Cart {
+	expired Boolean
+}
+
+entity Item {
+	price Long,
+    isBuyable Boolean
+}
+
+entity Game {
+    name String,
+    description String
+}
+
+entity Media {
+	url String,
+    alt String
+}
+
+entity Promo {
+    sale Double,
+    start LocalDate,
+    end LocalDate
+}
+
+entity Platform {
+    name String
+}
+
+entity Tag {
+    name String
+}
+
+entity CartLine {
+    quantity Integer,
+    unitPrice Double,
+    expired Boolean
+}
+
+relationship ManyToMany {
+	Tag to Game
+}
+
+relationship OneToMany {
+	Game to Media,
+    Game to Review,
+    Game to Item,
+    Platform to Item,
+    Client to Review,
+    Item to Key,
+    Item to Promo,
+    CartLine to Key
+}
+
+relationship OneToOne {
+	Client{cart} to Cart{driver},
+    CartLine to Item,
+    CartLine{cart} to Cart{cartLine}
+}

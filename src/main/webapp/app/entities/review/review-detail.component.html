@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="review">
+            <h2><span jhiTranslate="bofgamesApp.review.detail.title">Review</span> {{review.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="bofgamesApp.review.mark">Mark</span></dt>
+                <dd>
+                    <span>{{review.mark}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.review.comment">Comment</span></dt>
+                <dd>
+                    <span>{{review.comment}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.review.game">Game</span></dt>
+                <dd>
+                    <div *ngIf="review.game">
+                        <a [routerLink]="['/game', review.game?.id, 'view']">{{review.game?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.review.client">Client</span></dt>
+                <dd>
+                    <div *ngIf="review.client">
+                        <a [routerLink]="['/client', review.client?.id, 'view']">{{review.client?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/review', review.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

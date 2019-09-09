@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-key-heading" jhiTranslate="bofgamesApp.key.home.createOrEditLabel">Create or edit a Key</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="bofgamesApp.key.value" for="field_value">Value</label>
+                    <input type="text" class="form-control" name="value" id="field_value"
+                           formControlName="value"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="bofgamesApp.key.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="AVAILABLE">{{'bofgamesApp.KEYSTATUS.AVAILABLE' | translate}}</option>
+                        <option value="RESERVED">{{'bofgamesApp.KEYSTATUS.RESERVED' | translate}}</option>
+                        <option value="BUYED">{{'bofgamesApp.KEYSTATUS.BUYED' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="bofgamesApp.key.item" for="field_item">Item</label>
+                    <select class="form-control" id="field_item" name="item" formControlName="item">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="itemOption.id === editForm.get('item').value?.id ? editForm.get('item').value : itemOption" *ngFor="let itemOption of items; trackBy: trackItemById">{{itemOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="bofgamesApp.key.cartLine" for="field_cartLine">Cart Line</label>
+                    <select class="form-control" id="field_cartLine" name="cartLine" formControlName="cartLine">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="cartLineOption.id === editForm.get('cartLine').value?.id ? editForm.get('cartLine').value : cartLineOption" *ngFor="let cartLineOption of cartlines; trackBy: trackCartLineById">{{cartLineOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

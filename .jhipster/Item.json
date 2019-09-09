@@ -1,0 +1,57 @@
+{
+    "name": "Item",
+    "fields": [
+        {
+            "fieldName": "price",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "isBuyable",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "key",
+            "otherEntityRelationshipName": "item",
+            "relationshipName": "key"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "promo",
+            "otherEntityRelationshipName": "item",
+            "relationshipName": "promo"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "cartLine",
+            "otherEntityRelationshipName": "item",
+            "relationshipName": "cartLine",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "game",
+            "otherEntityRelationshipName": "item",
+            "relationshipName": "game",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "platform",
+            "otherEntityRelationshipName": "item",
+            "relationshipName": "platform",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190909125720",
+    "entityTableName": "item",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

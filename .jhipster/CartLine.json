@@ -1,0 +1,50 @@
+{
+    "name": "CartLine",
+    "fields": [
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "unitPrice",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "expired",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "item",
+            "otherEntityRelationshipName": "cartLine",
+            "relationshipName": "item",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "cart",
+            "otherEntityRelationshipName": "cartLine",
+            "relationshipName": "cart",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "key",
+            "otherEntityRelationshipName": "cartLine",
+            "relationshipName": "key"
+        }
+    ],
+    "changelogDate": "20190909125726",
+    "entityTableName": "cart_line",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

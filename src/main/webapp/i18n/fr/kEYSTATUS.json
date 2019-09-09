@@ -1,0 +1,10 @@
+{
+  "bofgamesApp": {
+    "KEYSTATUS": {
+      "null": "",
+      "AVAILABLE": "AVAILABLE",
+      "RESERVED": "RESERVED",
+      "BUYED": "BUYED"
+    }
+  }
+}

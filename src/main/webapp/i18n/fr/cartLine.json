@@ -1,0 +1,28 @@
+{
+  "bofgamesApp": {
+    "cartLine": {
+      "home": {
+        "title": "CartLines",
+        "createLabel": "Créer un nouveau Cart Line",
+        "createOrEditLabel": "Créer ou éditer un Cart Line",
+        "search": "Recherche pour Cart Line",
+        "notFound": "Aucun Cart Line trouvé"
+      },
+      "created": "Un nouveau Cart Line a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Cart Line avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Cart Line avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Cart Line {{ id }} ?"
+      },
+      "detail": {
+        "title": "Cart Line"
+      },
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "expired": "Expired",
+      "item": "Item",
+      "cart": "Cart",
+      "key": "Key"
+    }
+  }
+}

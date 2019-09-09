@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="key">
+            <h2><span jhiTranslate="bofgamesApp.key.detail.title">Key</span> {{key.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="bofgamesApp.key.value">Value</span></dt>
+                <dd>
+                    <span>{{key.value}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.key.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'bofgamesApp.KEYSTATUS.' + key.status}}">{{key.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.key.item">Item</span></dt>
+                <dd>
+                    <div *ngIf="key.item">
+                        <a [routerLink]="['/item', key.item?.id, 'view']">{{key.item?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.key.cartLine">Cart Line</span></dt>
+                <dd>
+                    <div *ngIf="key.cartLine">
+                        <a [routerLink]="['/cart-line', key.cartLine?.id, 'view']">{{key.cartLine?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/key', key.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

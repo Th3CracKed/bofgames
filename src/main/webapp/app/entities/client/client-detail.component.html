@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="client">
+            <h2><span jhiTranslate="bofgamesApp.client.detail.title">Client</span> {{client.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="bofgamesApp.client.street">Street</span></dt>
+                <dd>
+                    <span>{{client.street}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.client.postCode">Post Code</span></dt>
+                <dd>
+                    <span>{{client.postCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.client.city">City</span></dt>
+                <dd>
+                    <span>{{client.city}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.client.country">Country</span></dt>
+                <dd>
+                    <span>{{client.country}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.client.birthdate">Birthdate</span></dt>
+                <dd>
+                    <span>{{client.birthdate}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.client.cart">Cart</span></dt>
+                <dd>
+                    <div *ngIf="client.cart">
+                        <a [routerLink]="['/cart', client.cart?.id, 'view']">{{client.cart?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/client', client.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="cartLine">
+            <h2><span jhiTranslate="bofgamesApp.cartLine.detail.title">Cart Line</span> {{cartLine.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="bofgamesApp.cartLine.quantity">Quantity</span></dt>
+                <dd>
+                    <span>{{cartLine.quantity}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.cartLine.unitPrice">Unit Price</span></dt>
+                <dd>
+                    <span>{{cartLine.unitPrice}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.cartLine.expired">Expired</span></dt>
+                <dd>
+                    <span>{{cartLine.expired}}</span>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.cartLine.item">Item</span></dt>
+                <dd>
+                    <div *ngIf="cartLine.item">
+                        <a [routerLink]="['/item', cartLine.item?.id, 'view']">{{cartLine.item?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="bofgamesApp.cartLine.cart">Cart</span></dt>
+                <dd>
+                    <div *ngIf="cartLine.cart">
+                        <a [routerLink]="['/cart', cartLine.cart?.id, 'view']">{{cartLine.cart?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cart-line', cartLine.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
