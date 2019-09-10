@@ -31,6 +31,10 @@
                         <a [routerLink]="['/cart', client.cart?.id, 'view']">{{client.cart?.id}}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="bofgamesApp.client.user">User</span></dt>
+                <dd>
+                    {{client.user?.login}}
+                </dd>
             </dl>
 
             <button type="submit"

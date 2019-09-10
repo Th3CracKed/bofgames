@@ -32,6 +32,7 @@ export class ClientUpdatePage {
   countryInput = element(by.id('field_country'));
   birthdateInput = element(by.id('field_birthdate'));
   cartSelect = element(by.id('field_cart'));
+  userSelect = element(by.id('field_user'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -94,6 +95,25 @@ export class ClientUpdatePage {
 
   async getCartSelectedOption() {
     return await this.cartSelect.element(by.css('option:checked')).getText();
+  }
+
+  async userSelectLastOption(timeout?: number) {
+    await this.userSelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
+  }
+
+  async userSelectOption(option) {
+    await this.userSelect.sendKeys(option);
+  }
+
+  getUserSelect(): ElementFinder {
+    return this.userSelect;
+  }
+
+  async getUserSelectedOption() {
+    return await this.userSelect.element(by.css('option:checked')).getText();
   }
 
   async save(timeout?: number) {

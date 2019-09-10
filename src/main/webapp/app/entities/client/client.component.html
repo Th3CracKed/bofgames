@@ -39,6 +39,7 @@
             <th><span jhiTranslate="bofgamesApp.client.country">Country</span></th>
             <th><span jhiTranslate="bofgamesApp.client.birthdate">Birthdate</span></th>
             <th><span jhiTranslate="bofgamesApp.client.cart">Cart</span></th>
+            <th><span jhiTranslate="bofgamesApp.client.user">User</span></th>
             <th></th>
             </tr>
             </thead>
@@ -54,6 +55,9 @@
                     <div *ngIf="client.cart">
                         <a [routerLink]="['/cart', client.cart?.id, 'view' ]" >{{client.cart?.id}}</a>
                     </div>
+                </td>
+                <td>
+                    {{client.user?.login}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group">

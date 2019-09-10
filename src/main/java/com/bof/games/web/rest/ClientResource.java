@@ -2,6 +2,7 @@ package com.bof.games.web.rest;
 
 import com.bof.games.domain.Client;
 import com.bof.games.repository.ClientRepository;
+import com.bof.games.repository.UserRepository;
 import com.bof.games.repository.search.ClientSearchRepository;
 import com.bof.games.web.rest.errors.BadRequestAlertException;
 
@@ -11,12 +12,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional; 
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -28,6 +31,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @RestController
 @RequestMapping("/api")
+@Transactional
 public class ClientResource {
 
     private final Logger log = LoggerFactory.getLogger(ClientResource.class);
@@ -41,9 +45,12 @@ public class ClientResource {
 
     private final ClientSearchRepository clientSearchRepository;
 
-    public ClientResource(ClientRepository clientRepository, ClientSearchRepository clientSearchRepository) {
+    private final UserRepository userRepository;
+
+    public ClientResource(ClientRepository clientRepository, ClientSearchRepository clientSearchRepository, UserRepository userRepository) {
         this.clientRepository = clientRepository;
         this.clientSearchRepository = clientSearchRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -59,6 +66,11 @@ public class ClientResource {
         if (client.getId() != null) {
             throw new BadRequestAlertException("A new client cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if (Objects.isNull(client.getUser())) {
+            throw new BadRequestAlertException("Invalid association value provided", ENTITY_NAME, "null");
+        }
+        Long userId = client.getUser().getId();
+        userRepository.findById(userId).ifPresent(client::user);
         Client result = clientRepository.save(client);
         clientSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/clients/" + result.getId()))
@@ -95,6 +107,7 @@ public class ClientResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of clients in body.
      */
     @GetMapping("/clients")
+    @Transactional(readOnly = true)
     public List<Client> getAllClients() {
         log.debug("REST request to get all Clients");
         return clientRepository.findAll();
@@ -107,6 +120,7 @@ public class ClientResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the client, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/clients/{id}")
+    @Transactional(readOnly = true)
     public ResponseEntity<Client> getClient(@PathVariable Long id) {
         log.debug("REST request to get Client : {}", id);
         Optional<Client> client = clientRepository.findById(id);
@@ -122,7 +136,6 @@ public class ClientResource {
     @DeleteMapping("/clients/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
         log.debug("REST request to delete Client : {}", id);
-        // TODO when deleting client : should we delete user ??? I would say, it doesn't matter
         clientRepository.deleteById(id);
         clientSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
