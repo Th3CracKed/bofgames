@@ -27,13 +27,15 @@ public class Test {
 
     private static final String ENTITY_NAME = "test";
 
+    private String value = "{\"key\": \"Test Initial\"}";
+
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
 
     @GetMapping("/test")
     public String getTest() {
-        return "Test Initial";
+        return this.value;
     }
 
 }

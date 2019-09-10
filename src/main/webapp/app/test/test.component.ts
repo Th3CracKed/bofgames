@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TestService } from 'app/service/test.service';
 
 @Component({
   selector: 'jhi-test',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements OnInit {
-  constructor() {}
+  res: any = 'nope';
+  constructor(private testService: TestService) {}
 
   ngOnInit() {
-    console.log('Hello world!!');
+    this.testService.GetTest().subscribe(result => {
+      this.res = result;
+      console.log(' mon resultat   est : ' + this.res.key);
+    });
   }
 }
