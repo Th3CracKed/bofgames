@@ -2,7 +2,9 @@ package com.bof.games.web.rest;
 
 import com.bof.games.BofgamesApp;
 import com.bof.games.domain.Client;
+import com.bof.games.domain.User;
 import com.bof.games.repository.ClientRepository;
+import com.bof.games.repository.UserRepository;
 import com.bof.games.repository.search.ClientSearchRepository;
 import com.bof.games.web.rest.errors.ExceptionTranslator;
 
@@ -57,6 +59,8 @@ public class ClientResourceIT {
 
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     /**
      * This repository is mocked in the com.bof.games.repository.search test package.
@@ -88,7 +92,7 @@ public class ClientResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ClientResource clientResource = new ClientResource(clientRepository, mockClientSearchRepository);
+        final ClientResource clientResource = new ClientResource(clientRepository, mockClientSearchRepository, userRepository);
         this.restClientMockMvc = MockMvcBuilders.standaloneSetup(clientResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -110,6 +114,11 @@ public class ClientResourceIT {
             .city(DEFAULT_CITY)
             .country(DEFAULT_COUNTRY)
             .birthdate(DEFAULT_BIRTHDATE);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        client.setUser(user);
         return client;
     }
     /**
@@ -125,6 +134,11 @@ public class ClientResourceIT {
             .city(UPDATED_CITY)
             .country(UPDATED_COUNTRY)
             .birthdate(UPDATED_BIRTHDATE);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        client.setUser(user);
         return client;
     }
 
@@ -154,6 +168,9 @@ public class ClientResourceIT {
         assertThat(testClient.getCountry()).isEqualTo(DEFAULT_COUNTRY);
         assertThat(testClient.getBirthdate()).isEqualTo(DEFAULT_BIRTHDATE);
 
+        // Validate the id for MapsId, the ids must be same
+        assertThat(testClient.getId()).isEqualTo(testClient.getUser().getId());
+
         // Validate the Client in Elasticsearch
         verify(mockClientSearchRepository, times(1)).save(testClient);
     }
@@ -180,6 +197,41 @@ public class ClientResourceIT {
         verify(mockClientSearchRepository, times(0)).save(client);
     }
 
+    @Test
+    @Transactional
+    public void updateClientMapsIdAssociationWithNewId() throws Exception {
+        // Initialize the database
+        clientRepository.saveAndFlush(client);
+        int databaseSizeBeforeCreate = clientRepository.findAll().size();
+
+
+        // Load the client
+        Client updatedClient = clientRepository.findById(client.getId()).get();
+        // Disconnect from session so that the updates on updatedClient are not directly saved in db
+        em.detach(updatedClient);
+
+        // Update the User with new association value
+        updatedClient.setUser(null);
+
+        // Update the entity
+        restClientMockMvc.perform(put("/api/clients")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(updatedClient)))
+            .andExpect(status().isOk());
+
+        // Validate the Client in the database
+        List<Client> clientList = clientRepository.findAll();
+        assertThat(clientList).hasSize(databaseSizeBeforeCreate);
+        Client testClient = clientList.get(clientList.size() - 1);
+
+        // Validate the id for MapsId, the ids must be same
+        // Uncomment the following line for assertion. However, please note that there is a known issue and uncommenting will fail the test.
+        // Please look at https://github.com/jhipster/generator-jhipster/issues/9100. You can modify this test as necessary.
+        // assertThat(testClient.getId()).isEqualTo(testClient.getUser().getId());
+
+        // Validate the Client in Elasticsearch
+        verify(mockClientSearchRepository, times(1)).save(client);
+    }
 
     @Test
     @Transactional
@@ -198,7 +250,7 @@ public class ClientResourceIT {
             .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY.toString())))
             .andExpect(jsonPath("$.[*].birthdate").value(hasItem(DEFAULT_BIRTHDATE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getClient() throws Exception {

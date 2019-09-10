@@ -23,7 +23,8 @@
       "country": "Country",
       "birthdate": "Birthdate",
       "cart": "Cart",
-      "review": "Review"
+      "review": "Review",
+      "user": "User"
     }
   }
 }

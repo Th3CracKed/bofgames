@@ -19,8 +19,6 @@ public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
@@ -41,14 +39,15 @@ public class Client implements Serializable {
 
     @OneToOne
     @JoinColumn(unique = true)
-    private User user;
-
-    @OneToOne
-    @JoinColumn(unique = true)
     private Cart cart;
 
     @OneToMany(mappedBy = "client")
     private Set<Review> reviews = new HashSet<>();
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -161,15 +160,20 @@ public class Client implements Serializable {
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     public User getUser() {
         return user;
     }
 
+    public Client user(User user) {
+        this.user = user;
+        return this;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

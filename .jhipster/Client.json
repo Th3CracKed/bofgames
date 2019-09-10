@@ -1,5 +1,32 @@
 {
-    "name": "Client",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "cart",
+            "otherEntityRelationshipName": "driver",
+            "relationshipName": "cart",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "review",
+            "otherEntityRelationshipName": "client",
+            "relationshipName": "review"
+        },
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": [],
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "useJPADerivedIdentifier": true,
+            "otherEntityRelationshipName": "client"
+        }
+    ],
     "fields": [
         {
             "fieldName": "street",
@@ -20,35 +47,14 @@
         {
             "fieldName": "birthdate",
             "fieldType": "LocalDate"
-        },
-		{
-			"fieldName": "USER_ID",
-			"fieldType": "BIGINT"
-		}
-    ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "cart",
-            "otherEntityRelationshipName": "driver",
-            "relationshipName": "cart",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "review",
-            "otherEntityRelationshipName": "client",
-            "relationshipName": "review"
         }
     ],
     "changelogDate": "20190909125716",
-    "entityTableName": "client",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": "elasticsearch",
     "service": "no",
+    "entityTableName": "client",
+    "databaseType": "sql",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }

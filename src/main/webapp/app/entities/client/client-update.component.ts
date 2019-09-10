@@ -10,6 +10,7 @@ import { IClient, Client } from 'app/shared/model/client.model';
 import { ClientService } from './client.service';
 import { ICart } from 'app/shared/model/cart.model';
 import { CartService } from 'app/entities/cart';
+import { IUser, UserService } from 'app/core';
 
 @Component({
   selector: 'jhi-client-update',
@@ -19,6 +20,8 @@ export class ClientUpdateComponent implements OnInit {
   isSaving: boolean;
 
   carts: ICart[];
+
+  users: IUser[];
   birthdateDp: any;
 
   editForm = this.fb.group({
@@ -28,13 +31,15 @@ export class ClientUpdateComponent implements OnInit {
     city: [],
     country: [],
     birthdate: [],
-    cart: []
+    cart: [],
+    user: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected clientService: ClientService,
     protected cartService: CartService,
+    protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -69,6 +74,13 @@ export class ClientUpdateComponent implements OnInit {
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+    this.userService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IUser[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IUser[]>) => response.body)
+      )
+      .subscribe((res: IUser[]) => (this.users = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(client: IClient) {
@@ -79,7 +91,8 @@ export class ClientUpdateComponent implements OnInit {
       city: client.city,
       country: client.country,
       birthdate: client.birthdate,
-      cart: client.cart
+      cart: client.cart,
+      user: client.user
     });
   }
 
@@ -106,7 +119,8 @@ export class ClientUpdateComponent implements OnInit {
       city: this.editForm.get(['city']).value,
       country: this.editForm.get(['country']).value,
       birthdate: this.editForm.get(['birthdate']).value,
-      cart: this.editForm.get(['cart']).value
+      cart: this.editForm.get(['cart']).value,
+      user: this.editForm.get(['user']).value
     };
   }
 
@@ -127,6 +141,10 @@ export class ClientUpdateComponent implements OnInit {
   }
 
   trackCartById(index: number, item: ICart) {
+    return item.id;
+  }
+
+  trackUserById(index: number, item: IUser) {
     return item.id;
   }
 }
