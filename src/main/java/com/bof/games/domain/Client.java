@@ -41,6 +41,10 @@ public class Client implements Serializable {
 
     @OneToOne
     @JoinColumn(unique = true)
+    private User user;
+
+    @OneToOne
+    @JoinColumn(unique = true)
     private Cart cart;
 
     @OneToMany(mappedBy = "client")
@@ -158,6 +162,14 @@ public class Client implements Serializable {
         this.reviews = reviews;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public boolean equals(Object o) {

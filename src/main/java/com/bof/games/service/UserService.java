@@ -2,9 +2,12 @@ package com.bof.games.service;
 
 import com.bof.games.config.Constants;
 import com.bof.games.domain.Authority;
+import com.bof.games.domain.Client;
 import com.bof.games.domain.User;
 import com.bof.games.repository.AuthorityRepository;
+import com.bof.games.repository.ClientRepository;
 import com.bof.games.repository.UserRepository;
+import com.bof.games.repository.search.ClientSearchRepository;
 import com.bof.games.repository.search.UserSearchRepository;
 import com.bof.games.security.AuthoritiesConstants;
 import com.bof.games.security.SecurityUtils;
@@ -38,18 +41,24 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final ClientRepository clientRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final UserSearchRepository userSearchRepository;
+
+    private final ClientSearchRepository clientSearchRepository;
 
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserSearchRepository userSearchRepository, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, ClientRepository clientRepository, PasswordEncoder passwordEncoder, UserSearchRepository userSearchRepository, ClientSearchRepository clientSearchRepository, AuthorityRepository authorityRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
+        this.clientRepository = clientRepository;
         this.passwordEncoder = passwordEncoder;
         this.userSearchRepository = userSearchRepository;
+        this.clientSearchRepository = clientSearchRepository;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
     }
@@ -116,7 +125,7 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        newUser.setActivated(false);
+        newUser.setActivated(false); // TODO true to enable account automatically without account confirmation
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
@@ -125,6 +134,7 @@ public class UserService {
         userRepository.save(newUser);
         userSearchRepository.save(newUser);
         this.clearUserCaches(newUser);
+        saveClient(createClient(newUser));
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
@@ -133,6 +143,9 @@ public class UserService {
         if (existingUser.getActivated()) {
              return false;
         }
+        // TODO delete client when deleting user
+        // clientRepository.delete();
+        // clientSearchRepository.delete(user);
         userRepository.delete(existingUser);
         userRepository.flush();
         this.clearUserCaches(existingUser);
@@ -167,8 +180,21 @@ public class UserService {
         userRepository.save(user);
         userSearchRepository.save(user);
         this.clearUserCaches(user);
+        saveClient(createClient(user));
         log.debug("Created Information for User: {}", user);
         return user;
+    }
+
+    private Client createClient(User user){
+        // Create and save the Client entity
+        Client client = new Client();
+        client.setUser(user);
+        return client;
+    }
+
+    private void saveClient(Client client){
+        clientRepository.save(client);
+        clientSearchRepository.save(client);
     }
 
     /**
@@ -232,6 +258,9 @@ public class UserService {
 
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
+            // TODO delete client when deleting user
+            // clientRepository.delete();
+            // clientSearchRepository.delete(user);
             userRepository.delete(user);
             userSearchRepository.delete(user);
             this.clearUserCaches(user);
@@ -285,6 +314,9 @@ public class UserService {
             .findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS))
             .forEach(user -> {
                 log.debug("Deleting not activated user {}", user.getLogin());
+                // TODO delete client when deleting user
+                // clientRepository.delete();
+                // clientSearchRepository.delete(user);
                 userRepository.delete(user);
                 userSearchRepository.delete(user);
                 this.clearUserCaches(user);

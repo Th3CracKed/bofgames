@@ -122,6 +122,7 @@ public class ClientResource {
     @DeleteMapping("/clients/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
         log.debug("REST request to delete Client : {}", id);
+        // TODO when deleting client : should we delete user ??? I would say, it doesn't matter
         clientRepository.deleteById(id);
         clientSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();

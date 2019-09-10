@@ -20,7 +20,11 @@
         {
             "fieldName": "birthdate",
             "fieldType": "LocalDate"
-        }
+        },
+		{
+			"fieldName": "USER_ID",
+			"fieldType": "BIGINT"
+		}
     ],
     "relationships": [
         {
