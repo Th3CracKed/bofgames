@@ -22,7 +22,7 @@ import * as moment from 'moment';
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 import { TestComponent } from './test/test.component';
 import { ItemListComponent } from './component/item-list/item-list.component';
-import { DetailComponent } from './detail/detail.component';
+import { ItemDetailComponent } from './item-detail/item-detail.component';
 
 @NgModule({
   imports: [
@@ -52,7 +52,7 @@ import { DetailComponent } from './detail/detail.component';
     FooterComponent,
     TestComponent,
     ItemListComponent,
-    DetailComponent
+    ItemDetailComponent
   ],
   providers: [
     {

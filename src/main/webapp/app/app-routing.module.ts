@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { errorRoute, navbarRoute } from './layouts';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { TestComponent } from './test';
-import { DetailComponent } from './detail/detail.component';
+import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { ItemListComponent } from './component/item-list/item-list.component';
 const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
 
@@ -15,10 +15,16 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
           path: 'test',
           component: TestComponent
         },
-        { path: 'detail', component: DetailComponent },
+        {
+          path: 'games/:id',
+          component: ItemDetailComponent
+        },
         {
           path: 'games',
-          component: ItemListComponent
+          component: ItemListComponent,
+          data: {
+            pageTitle: 'home.title'
+          }
         },
         {
           path: 'admin',
