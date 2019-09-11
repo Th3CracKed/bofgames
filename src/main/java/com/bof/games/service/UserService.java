@@ -143,9 +143,8 @@ public class UserService {
         if (existingUser.getActivated()) {
              return false;
         }
-        // TODO delete client when deleting user
-        // clientRepository.delete();
-        // clientSearchRepository.delete(user);
+        clientRepository.deleteById(existingUser.getId());
+        clientSearchRepository.deleteById(existingUser.getId());
         userRepository.delete(existingUser);
         userRepository.flush();
         this.clearUserCaches(existingUser);
@@ -258,9 +257,8 @@ public class UserService {
 
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
-            // TODO delete client when deleting user
-            // clientRepository.delete();
-            // clientSearchRepository.delete(user);
+            clientRepository.deleteById(user.getId());
+            clientSearchRepository.deleteById(user.getId());
             userRepository.delete(user);
             userSearchRepository.delete(user);
             this.clearUserCaches(user);
@@ -314,9 +312,8 @@ public class UserService {
             .findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS))
             .forEach(user -> {
                 log.debug("Deleting not activated user {}", user.getLogin());
-                // TODO delete client when deleting user
-                // clientRepository.delete();
-                // clientSearchRepository.delete(user);
+                clientRepository.deleteById(user.getId());
+                clientSearchRepository.deleteById(user.getId());
                 userRepository.delete(user);
                 userSearchRepository.delete(user);
                 this.clearUserCaches(user);
