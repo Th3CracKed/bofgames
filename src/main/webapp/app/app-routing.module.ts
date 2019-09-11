@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { errorRoute, navbarRoute } from './layouts';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { TestComponent } from './test';
+import { ItemListComponent } from './component/item-list/item-list.component';
 const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
 
 @NgModule({
@@ -12,6 +13,10 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         {
           path: 'test',
           component: TestComponent
+        },
+        {
+          path: 'games',
+          component: ItemListComponent
         },
         {
           path: 'admin',
