@@ -30,7 +30,8 @@ public class Game implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "game")
+    @OneToMany(fetch = FetchType.EAGER,
+               mappedBy = "game")
     private Set<Media> media = new HashSet<>();
 
     @OneToMany(mappedBy = "game")

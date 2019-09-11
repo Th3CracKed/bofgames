@@ -1,0 +1,12 @@
+article {
+  display: inline-block;
+}
+
+img {
+  width: 260px;
+  height: 260px;
+}
+div:not(:last-child) {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #7b877e;
+}
