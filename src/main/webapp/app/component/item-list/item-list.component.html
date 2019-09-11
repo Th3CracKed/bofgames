@@ -1,3 +1,13 @@
-<p>
-  item-list works!
-</p>
+<div *ngFor="let item of items;">
+  <article>
+    <a href="/games/{{item.id}}">
+        <img *ngIf="item.game.media[0]" src="{{item.game.media[0].url}}" alt="{{item.game.media[0].alt}}" />
+        <img *ngIf="!item.game.media[0]" src="https://www.kasterencultuur.nl/editor/placeholder.jpg" alt="Image not found"/>
+    </a>
+  </article>
+  <article>
+      <a href="/games/{{item.id}}"> {{item.game.name}} </a>
+      <p> Prix : {{item.price}} € </p>
+      <p> Plateforme : {{item.platform.name}} </p>
+  </article>
+</div>

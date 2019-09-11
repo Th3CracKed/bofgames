@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class ItemListService {
   constructor(private http: HttpClient) {}
 
-  public GetItems(): Observable<Item> {
+  public GetItems(): Observable<Item[]> {
     return this.http.get('http://localhost:8080/api/itemsList').pipe(map((body: any) => body));
   }
 }

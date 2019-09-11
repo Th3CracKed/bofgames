@@ -1,6 +1,7 @@
 package com.bof.games.web.rest;
 
 import com.bof.games.domain.Item;
+import com.bof.games.domain.Media;
 import com.bof.games.repository.ItemRepository;
 import com.bof.games.repository.search.ItemSearchRepository;
 import com.bof.games.web.rest.errors.BadRequestAlertException;
@@ -18,6 +19,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -126,10 +128,13 @@ public class ItemResource {
         log.debug("REST request to get all Items");
 
         List<Item> items = itemRepository.findAll(); 
-       /* for(Item item : items ){   
-            item.keys = null;
+        for(Item item : items ){   
+            for (Media m : item.getGame().getMedia()) {
+                m.setGame(null);
+            }
+        }
 
-        }*/
+        
         return items;
 
 

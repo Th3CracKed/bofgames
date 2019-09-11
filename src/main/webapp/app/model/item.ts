@@ -8,5 +8,5 @@ export class Item {
   // keys
   // promos
   game: Games;
-  plateform: Plateform;
+  platform: Plateform;
 }

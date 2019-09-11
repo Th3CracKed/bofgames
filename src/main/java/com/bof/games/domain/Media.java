@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
+import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 
@@ -28,7 +29,8 @@ public class Media implements Serializable {
     @Column(name = "alt")
     private String alt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JsonIgnoreProperties("media")
     private Game game;
 
