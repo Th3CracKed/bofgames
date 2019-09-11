@@ -11,7 +11,11 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
       [
         {
           path: 'test',
-          component: TestComponent
+          component: TestComponent,
+          data: {
+            isEcom: true,
+            pageTitle: 'ecom.title'
+          }
         },
         {
           path: 'admin',
