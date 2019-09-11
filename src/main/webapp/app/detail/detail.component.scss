@@ -6,4 +6,29 @@
     display: inline-block;
     vertical-align: top;
   }
+  padding: 0 10px 0 10px;
+}
+#supportedgame {
+  img {
+    width: 50px;
+  }
+}
+
+.game_cover_space {
+  background-color: lightgray;
+  text-align: center;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+#game-desc {
+  padding-left: 10px;
+}
+
+#item_footer {
+  float: right;
+}
+
+#header_item {
+  margin-bottom: 10px;
 }
