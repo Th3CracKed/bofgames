@@ -8,18 +8,17 @@
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-one",
+            "relationshipType": "one-to-many",
+            "otherEntityName": "cartLine",
+            "otherEntityRelationshipName": "cart",
+            "relationshipName": "cartLine"
+        },
+        {
+            "relationshipType": "many-to-one",
             "otherEntityName": "client",
             "otherEntityRelationshipName": "cart",
             "relationshipName": "driver",
-            "ownerSide": false
-        },
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "cartLine",
-            "otherEntityRelationshipName": "cart",
-            "relationshipName": "cartLine",
-            "ownerSide": false
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190909125719",

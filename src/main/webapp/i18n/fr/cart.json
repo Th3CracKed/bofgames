@@ -18,8 +18,8 @@
         "title": "Cart"
       },
       "expired": "Expired",
-      "driver": "Driver",
-      "cartLine": "Cart Line"
+      "cartLine": "Cart Line",
+      "driver": "Driver"
     }
   }
 }

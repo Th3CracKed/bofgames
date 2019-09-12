@@ -9,7 +9,7 @@ entity Client {
 enum KEYSTATUS {
 	AVAILABLE, RESERVED, BUYED
 }
-
+ 
 entity Key {
     value String,
     status KEYSTATUS
@@ -25,7 +25,7 @@ entity Cart {
 }
 
 entity Item {
-	price Long,
+	price Double,
     isBuyable Boolean
 }
 
@@ -64,18 +64,21 @@ relationship ManyToMany {
 }
 
 relationship OneToMany {
-	Game to Media,
-    Game to Review,
     Game to Item,
     Platform to Item,
     Client to Review,
     Item to Key,
     Item to Promo,
-    CartLine to Key
+	Client{cart} to Cart{driver},
+    CartLine to Key,
+    Cart{cartLine} to CartLine{cart}
+}
+
+relationship ManyToOne {
+    Review to Game,
+    Media to Game,
 }
 
 relationship OneToOne {
-	Client{cart} to Cart{driver},
-    CartLine to Item,
-    CartLine{cart} to Cart{cartLine}
+    CartLine to Item
 }

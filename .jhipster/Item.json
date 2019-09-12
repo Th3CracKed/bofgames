@@ -38,13 +38,12 @@
     ],
     "fields": [
         {
-            "fieldName": "isBuyable",
-            "fieldType": "Boolean"
+            "fieldName": "price",
+            "fieldType": "Double"
         },
         {
-            "fieldName": "price",
-            "fieldType": "Double",
-            "fieldValidateRules": []
+            "fieldName": "isBuyable",
+            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20190909125720",
@@ -54,5 +53,7 @@
     "entityTableName": "item",
     "databaseType": "sql",
     "jpaMetamodelFiltering": false,
-    "pagination": "no"
+    "pagination": "no",
+    "name": "Item",
+    "applications": "*"
 }

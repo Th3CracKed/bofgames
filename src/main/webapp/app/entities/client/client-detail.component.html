@@ -25,12 +25,6 @@
                 <dd>
                     <span>{{client.birthdate}}</span>
                 </dd>
-                <dt><span jhiTranslate="bofgamesApp.client.cart">Cart</span></dt>
-                <dd>
-                    <div *ngIf="client.cart">
-                        <a [routerLink]="['/cart', client.cart?.id, 'view']">{{client.cart?.id}}</a>
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="bofgamesApp.client.user">User</span></dt>
                 <dd>
                     {{client.user?.login}}

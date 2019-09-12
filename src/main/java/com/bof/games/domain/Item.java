@@ -25,11 +25,11 @@ public class Item implements Serializable {
     @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
-    @Column(name = "is_buyable")
-    private Boolean isBuyable;
-
     @Column(name = "price")
     private Double price;
+
+    @Column(name = "is_buyable")
+    private Boolean isBuyable;
 
     @OneToMany(mappedBy = "item")
     private Set<Key> keys = new HashSet<>();
@@ -58,19 +58,6 @@ public class Item implements Serializable {
         this.id = id;
     }
 
-    public Boolean isIsBuyable() {
-        return isBuyable;
-    }
-
-    public Item isBuyable(Boolean isBuyable) {
-        this.isBuyable = isBuyable;
-        return this;
-    }
-
-    public void setIsBuyable(Boolean isBuyable) {
-        this.isBuyable = isBuyable;
-    }
-
     public Double getPrice() {
         return price;
     }
@@ -82,6 +69,19 @@ public class Item implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Boolean isIsBuyable() {
+        return isBuyable;
+    }
+
+    public Item isBuyable(Boolean isBuyable) {
+        this.isBuyable = isBuyable;
+        return this;
+    }
+
+    public void setIsBuyable(Boolean isBuyable) {
+        this.isBuyable = isBuyable;
     }
 
     public Set<Key> getKeys() {
@@ -194,8 +194,8 @@ public class Item implements Serializable {
     public String toString() {
         return "Item{" +
             "id=" + getId() +
-            ", isBuyable='" + isIsBuyable() + "'" +
             ", price=" + getPrice() +
+            ", isBuyable='" + isIsBuyable() + "'" +
             "}";
     }
 }

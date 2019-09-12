@@ -1,10 +1,12 @@
 package com.bof.games.domain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Cart.
@@ -25,13 +27,12 @@ public class Cart implements Serializable {
     @Column(name = "expired")
     private Boolean expired;
 
-    @OneToOne(mappedBy = "cart")
-    @JsonIgnore
-    private Client driver;
+    @OneToMany(mappedBy = "cart")
+    private Set<CartLine> cartLines = new HashSet<>();
 
-    @OneToOne(mappedBy = "cart")
-    @JsonIgnore
-    private CartLine cartLine;
+    @ManyToOne
+    @JsonIgnoreProperties("carts")
+    private Client driver;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -55,6 +56,31 @@ public class Cart implements Serializable {
         this.expired = expired;
     }
 
+    public Set<CartLine> getCartLines() {
+        return cartLines;
+    }
+
+    public Cart cartLines(Set<CartLine> cartLines) {
+        this.cartLines = cartLines;
+        return this;
+    }
+
+    public Cart addCartLine(CartLine cartLine) {
+        this.cartLines.add(cartLine);
+        cartLine.setCart(this);
+        return this;
+    }
+
+    public Cart removeCartLine(CartLine cartLine) {
+        this.cartLines.remove(cartLine);
+        cartLine.setCart(null);
+        return this;
+    }
+
+    public void setCartLines(Set<CartLine> cartLines) {
+        this.cartLines = cartLines;
+    }
+
     public Client getDriver() {
         return driver;
     }
@@ -66,19 +92,6 @@ public class Cart implements Serializable {
 
     public void setDriver(Client client) {
         this.driver = client;
-    }
-
-    public CartLine getCartLine() {
-        return cartLine;
-    }
-
-    public Cart cartLine(CartLine cartLine) {
-        this.cartLine = cartLine;
-        return this;
-    }
-
-    public void setCartLine(CartLine cartLine) {
-        this.cartLine = cartLine;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

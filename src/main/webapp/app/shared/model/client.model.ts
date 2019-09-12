@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
-import { ICart } from 'app/shared/model/cart.model';
 import { IReview } from 'app/shared/model/review.model';
+import { ICart } from 'app/shared/model/cart.model';
 import { IUser } from 'app/core/user/user.model';
 
 export interface IClient {
@@ -10,8 +10,8 @@ export interface IClient {
   city?: string;
   country?: string;
   birthdate?: Moment;
-  cart?: ICart;
   reviews?: IReview[];
+  carts?: ICart[];
   user?: IUser;
 }
 
@@ -23,8 +23,8 @@ export class Client implements IClient {
     public city?: string,
     public country?: string,
     public birthdate?: Moment,
-    public cart?: ICart,
     public reviews?: IReview[],
+    public carts?: ICart[],
     public user?: IUser
   ) {}
 }

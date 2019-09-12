@@ -37,12 +37,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = BofgamesApp.class)
 public class ItemResourceIT {
 
-    private static final Boolean DEFAULT_IS_BUYABLE = false;
-    private static final Boolean UPDATED_IS_BUYABLE = true;
-
     private static final Double DEFAULT_PRICE = 1D;
     private static final Double UPDATED_PRICE = 2D;
     private static final Double SMALLER_PRICE = 1D - 1D;
+
+    private static final Boolean DEFAULT_IS_BUYABLE = false;
+    private static final Boolean UPDATED_IS_BUYABLE = true;
 
     @Autowired
     private ItemRepository itemRepository;
@@ -94,8 +94,8 @@ public class ItemResourceIT {
      */
     public static Item createEntity(EntityManager em) {
         Item item = new Item()
-            .isBuyable(DEFAULT_IS_BUYABLE)
-            .price(DEFAULT_PRICE);
+            .price(DEFAULT_PRICE)
+            .isBuyable(DEFAULT_IS_BUYABLE);
         return item;
     }
     /**
@@ -106,8 +106,8 @@ public class ItemResourceIT {
      */
     public static Item createUpdatedEntity(EntityManager em) {
         Item item = new Item()
-            .isBuyable(UPDATED_IS_BUYABLE)
-            .price(UPDATED_PRICE);
+            .price(UPDATED_PRICE)
+            .isBuyable(UPDATED_IS_BUYABLE);
         return item;
     }
 
@@ -131,8 +131,8 @@ public class ItemResourceIT {
         List<Item> itemList = itemRepository.findAll();
         assertThat(itemList).hasSize(databaseSizeBeforeCreate + 1);
         Item testItem = itemList.get(itemList.size() - 1);
-        assertThat(testItem.isIsBuyable()).isEqualTo(DEFAULT_IS_BUYABLE);
         assertThat(testItem.getPrice()).isEqualTo(DEFAULT_PRICE);
+        assertThat(testItem.isIsBuyable()).isEqualTo(DEFAULT_IS_BUYABLE);
 
         // Validate the Item in Elasticsearch
         verify(mockItemSearchRepository, times(1)).save(testItem);
@@ -172,8 +172,8 @@ public class ItemResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(item.getId().intValue())))
-            .andExpect(jsonPath("$.[*].isBuyable").value(hasItem(DEFAULT_IS_BUYABLE.booleanValue())))
-            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())));
+            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
+            .andExpect(jsonPath("$.[*].isBuyable").value(hasItem(DEFAULT_IS_BUYABLE.booleanValue())));
     }
     
     @Test
@@ -187,8 +187,8 @@ public class ItemResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(item.getId().intValue()))
-            .andExpect(jsonPath("$.isBuyable").value(DEFAULT_IS_BUYABLE.booleanValue()))
-            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()));
+            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
+            .andExpect(jsonPath("$.isBuyable").value(DEFAULT_IS_BUYABLE.booleanValue()));
     }
 
     @Test
@@ -212,8 +212,8 @@ public class ItemResourceIT {
         // Disconnect from session so that the updates on updatedItem are not directly saved in db
         em.detach(updatedItem);
         updatedItem
-            .isBuyable(UPDATED_IS_BUYABLE)
-            .price(UPDATED_PRICE);
+            .price(UPDATED_PRICE)
+            .isBuyable(UPDATED_IS_BUYABLE);
 
         restItemMockMvc.perform(put("/api/items")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -224,8 +224,8 @@ public class ItemResourceIT {
         List<Item> itemList = itemRepository.findAll();
         assertThat(itemList).hasSize(databaseSizeBeforeUpdate);
         Item testItem = itemList.get(itemList.size() - 1);
-        assertThat(testItem.isIsBuyable()).isEqualTo(UPDATED_IS_BUYABLE);
         assertThat(testItem.getPrice()).isEqualTo(UPDATED_PRICE);
+        assertThat(testItem.isIsBuyable()).isEqualTo(UPDATED_IS_BUYABLE);
 
         // Validate the Item in Elasticsearch
         verify(mockItemSearchRepository, times(1)).save(testItem);
@@ -285,8 +285,8 @@ public class ItemResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(item.getId().intValue())))
-            .andExpect(jsonPath("$.[*].isBuyable").value(hasItem(DEFAULT_IS_BUYABLE.booleanValue())))
-            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())));
+            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
+            .andExpect(jsonPath("$.[*].isBuyable").value(hasItem(DEFAULT_IS_BUYABLE.booleanValue())));
     }
 
     @Test

@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Transactional; 
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -138,7 +138,6 @@ public class ClientResource {
         log.debug("REST request to delete Client : {}", id);
         clientRepository.deleteById(id);
         clientSearchRepository.deleteById(id);
-        userRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 

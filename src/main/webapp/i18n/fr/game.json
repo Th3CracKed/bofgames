@@ -19,9 +19,9 @@
       },
       "name": "Name",
       "description": "Description",
-      "media": "Media",
-      "review": "Review",
       "item": "Item",
+      "review": "Review",
+      "media": "Media",
       "tag": "Tag"
     }
   }

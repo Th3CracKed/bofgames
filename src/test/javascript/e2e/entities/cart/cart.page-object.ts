@@ -27,6 +27,7 @@ export class CartUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
   expiredInput = element(by.id('field_expired'));
+  driverSelect = element(by.id('field_driver'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -34,6 +35,25 @@ export class CartUpdatePage {
 
   getExpiredInput(timeout?: number) {
     return this.expiredInput;
+  }
+
+  async driverSelectLastOption(timeout?: number) {
+    await this.driverSelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
+  }
+
+  async driverSelectOption(option) {
+    await this.driverSelect.sendKeys(option);
+  }
+
+  getDriverSelect(): ElementFinder {
+    return this.driverSelect;
+  }
+
+  async getDriverSelectedOption() {
+    return await this.driverSelect.element(by.css('option:checked')).getText();
   }
 
   async save(timeout?: number) {

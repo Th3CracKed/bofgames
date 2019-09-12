@@ -8,8 +8,6 @@ import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { IClient, Client } from 'app/shared/model/client.model';
 import { ClientService } from './client.service';
-import { ICart } from 'app/shared/model/cart.model';
-import { CartService } from 'app/entities/cart';
 import { IUser, UserService } from 'app/core';
 
 @Component({
@@ -18,8 +16,6 @@ import { IUser, UserService } from 'app/core';
 })
 export class ClientUpdateComponent implements OnInit {
   isSaving: boolean;
-
-  carts: ICart[];
 
   users: IUser[];
   birthdateDp: any;
@@ -31,14 +27,12 @@ export class ClientUpdateComponent implements OnInit {
     city: [],
     country: [],
     birthdate: [],
-    cart: [],
     user: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected clientService: ClientService,
-    protected cartService: CartService,
     protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -49,31 +43,6 @@ export class ClientUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ client }) => {
       this.updateForm(client);
     });
-    this.cartService
-      .query({ filter: 'driver-is-null' })
-      .pipe(
-        filter((mayBeOk: HttpResponse<ICart[]>) => mayBeOk.ok),
-        map((response: HttpResponse<ICart[]>) => response.body)
-      )
-      .subscribe(
-        (res: ICart[]) => {
-          if (!this.editForm.get('cart').value || !this.editForm.get('cart').value.id) {
-            this.carts = res;
-          } else {
-            this.cartService
-              .find(this.editForm.get('cart').value.id)
-              .pipe(
-                filter((subResMayBeOk: HttpResponse<ICart>) => subResMayBeOk.ok),
-                map((subResponse: HttpResponse<ICart>) => subResponse.body)
-              )
-              .subscribe(
-                (subRes: ICart) => (this.carts = [subRes].concat(res)),
-                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-              );
-          }
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
     this.userService
       .query()
       .pipe(
@@ -91,7 +60,6 @@ export class ClientUpdateComponent implements OnInit {
       city: client.city,
       country: client.country,
       birthdate: client.birthdate,
-      cart: client.cart,
       user: client.user
     });
   }
@@ -119,7 +87,6 @@ export class ClientUpdateComponent implements OnInit {
       city: this.editForm.get(['city']).value,
       country: this.editForm.get(['country']).value,
       birthdate: this.editForm.get(['birthdate']).value,
-      cart: this.editForm.get(['cart']).value,
       user: this.editForm.get(['user']).value
     };
   }
@@ -138,10 +105,6 @@ export class ClientUpdateComponent implements OnInit {
   }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
-  }
-
-  trackCartById(index: number, item: ICart) {
-    return item.id;
   }
 
   trackUserById(index: number, item: IUser) {

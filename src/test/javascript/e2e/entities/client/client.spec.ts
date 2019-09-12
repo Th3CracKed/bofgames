@@ -45,7 +45,6 @@ describe('Client e2e test', () => {
             clientUpdatePage.setCityInput('city'),
             clientUpdatePage.setCountryInput('country'),
             clientUpdatePage.setBirthdateInput('2000-12-31'),
-            clientUpdatePage.cartSelectLastOption(),
             clientUpdatePage.userSelectLastOption(),
         ]);
         expect(await clientUpdatePage.getStreetInput()).to.eq('street', 'Expected Street value to be equals to street');

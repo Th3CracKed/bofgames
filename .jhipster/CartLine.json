@@ -24,18 +24,17 @@
             "ownerSide": true
         },
         {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "cart",
-            "otherEntityRelationshipName": "cartLine",
-            "relationshipName": "cart",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
             "relationshipType": "one-to-many",
             "otherEntityName": "key",
             "otherEntityRelationshipName": "cartLine",
             "relationshipName": "key"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "cart",
+            "otherEntityRelationshipName": "cartLine",
+            "relationshipName": "cart",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190909125726",

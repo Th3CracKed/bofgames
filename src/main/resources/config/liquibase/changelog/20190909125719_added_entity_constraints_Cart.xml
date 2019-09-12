@@ -4,15 +4,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
     <!--
-        Added the constraints for entity Client.
+        Added the constraints for entity Cart.
     -->
-    <changeSet id="20190909125716-2" author="jhipster">
+    <changeSet id="20190909125719-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="id"
-                                 baseTableName="client"
-                                 constraintName="fk_client_user_id"
+        <addForeignKeyConstraint baseColumnNames="driver_id"
+                                 baseTableName="cart"
+                                 constraintName="fk_cart_driver_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="jhi_user"/>
+                                 referencedTableName="client"/>
 
     </changeSet>
 </databaseChangeLog>

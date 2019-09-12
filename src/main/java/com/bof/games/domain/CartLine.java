@@ -1,4 +1,5 @@
 package com.bof.games.domain;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -36,12 +37,12 @@ public class CartLine implements Serializable {
     @JoinColumn(unique = true)
     private Item item;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Cart cart;
-
     @OneToMany(mappedBy = "cartLine")
     private Set<Key> keys = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("cartLines")
+    private Cart cart;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -104,19 +105,6 @@ public class CartLine implements Serializable {
         this.item = item;
     }
 
-    public Cart getCart() {
-        return cart;
-    }
-
-    public CartLine cart(Cart cart) {
-        this.cart = cart;
-        return this;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
     public Set<Key> getKeys() {
         return keys;
     }
@@ -140,6 +128,19 @@ public class CartLine implements Serializable {
 
     public void setKeys(Set<Key> keys) {
         this.keys = keys;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public CartLine cart(Cart cart) {
+        this.cart = cart;
+        return this;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

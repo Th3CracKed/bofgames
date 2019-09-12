@@ -92,25 +92,10 @@ public class CartResource {
      * {@code GET  /carts} : get all the carts.
      *
 
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of carts in body.
      */
     @GetMapping("/carts")
-    public List<Cart> getAllCarts(@RequestParam(required = false) String filter) {
-        if ("driver-is-null".equals(filter)) {
-            log.debug("REST request to get all Carts where driver is null");
-            return StreamSupport
-                .stream(cartRepository.findAll().spliterator(), false)
-                .filter(cart -> cart.getDriver() == null)
-                .collect(Collectors.toList());
-        }
-        if ("cartline-is-null".equals(filter)) {
-            log.debug("REST request to get all Carts where cartLine is null");
-            return StreamSupport
-                .stream(cartRepository.findAll().spliterator(), false)
-                .filter(cart -> cart.getCartLine() == null)
-                .collect(Collectors.toList());
-        }
+    public List<Cart> getAllCarts() {
         log.debug("REST request to get all Carts");
         return cartRepository.findAll();
     }

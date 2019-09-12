@@ -9,8 +9,6 @@ import { ICart, Cart } from 'app/shared/model/cart.model';
 import { CartService } from './cart.service';
 import { IClient } from 'app/shared/model/client.model';
 import { ClientService } from 'app/entities/client';
-import { ICartLine } from 'app/shared/model/cart-line.model';
-import { CartLineService } from 'app/entities/cart-line';
 
 @Component({
   selector: 'jhi-cart-update',
@@ -21,18 +19,16 @@ export class CartUpdateComponent implements OnInit {
 
   clients: IClient[];
 
-  cartlines: ICartLine[];
-
   editForm = this.fb.group({
     id: [],
-    expired: []
+    expired: [],
+    driver: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected cartService: CartService,
     protected clientService: ClientService,
-    protected cartLineService: CartLineService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -49,19 +45,13 @@ export class CartUpdateComponent implements OnInit {
         map((response: HttpResponse<IClient[]>) => response.body)
       )
       .subscribe((res: IClient[]) => (this.clients = res), (res: HttpErrorResponse) => this.onError(res.message));
-    this.cartLineService
-      .query()
-      .pipe(
-        filter((mayBeOk: HttpResponse<ICartLine[]>) => mayBeOk.ok),
-        map((response: HttpResponse<ICartLine[]>) => response.body)
-      )
-      .subscribe((res: ICartLine[]) => (this.cartlines = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(cart: ICart) {
     this.editForm.patchValue({
       id: cart.id,
-      expired: cart.expired
+      expired: cart.expired,
+      driver: cart.driver
     });
   }
 
@@ -83,7 +73,8 @@ export class CartUpdateComponent implements OnInit {
     return {
       ...new Cart(),
       id: this.editForm.get(['id']).value,
-      expired: this.editForm.get(['expired']).value
+      expired: this.editForm.get(['expired']).value,
+      driver: this.editForm.get(['driver']).value
     };
   }
 
@@ -104,10 +95,6 @@ export class CartUpdateComponent implements OnInit {
   }
 
   trackClientById(index: number, item: IClient) {
-    return item.id;
-  }
-
-  trackCartLineById(index: number, item: ICartLine) {
     return item.id;
   }
 }

@@ -22,8 +22,8 @@
       "city": "City",
       "country": "Country",
       "birthdate": "Birthdate",
-      "cart": "Cart",
       "review": "Review",
+      "cart": "Cart",
       "user": "User"
     }
   }

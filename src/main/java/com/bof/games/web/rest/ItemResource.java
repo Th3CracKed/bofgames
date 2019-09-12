@@ -126,8 +126,8 @@ public class ItemResource {
         }
         log.debug("REST request to get all Items");
 
-        List<Item> items = itemRepository.findAll(); 
-        for(Item item : items ){   
+        List<Item> items = itemRepository.findAll();
+        for(Item item : items ){
             for (Media m : item.getGame().getMedia()) {
                 m.setGame(null);
             }

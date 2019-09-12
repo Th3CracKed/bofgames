@@ -39,7 +39,7 @@ describe('Cart e2e test', () => {
     const nbButtonsBeforeCreate = await cartComponentsPage.countDeleteButtons();
 
     await cartComponentsPage.clickOnCreateButton();
-    await promise.all([]);
+    await promise.all([cartUpdatePage.driverSelectLastOption()]);
     const selectedExpired = cartUpdatePage.getExpiredInput();
     if (await selectedExpired.isSelected()) {
       await cartUpdatePage.getExpiredInput().click();

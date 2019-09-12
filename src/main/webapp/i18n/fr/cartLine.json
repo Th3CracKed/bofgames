@@ -21,8 +21,8 @@
       "unitPrice": "Unit Price",
       "expired": "Expired",
       "item": "Item",
-      "cart": "Cart",
-      "key": "Key"
+      "key": "Key",
+      "cart": "Cart"
     }
   }
 }

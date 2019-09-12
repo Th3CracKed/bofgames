@@ -17,8 +17,8 @@
       "detail": {
         "title": "Item"
       },
-      "isBuyable": "Is Buyable",
       "price": "Price",
+      "isBuyable": "Is Buyable",
       "key": "Key",
       "promo": "Promo",
       "cartLine": "Cart Line",

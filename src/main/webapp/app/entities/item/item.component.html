@@ -33,8 +33,8 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="bofgamesApp.item.isBuyable">Is Buyable</span></th>
             <th><span jhiTranslate="bofgamesApp.item.price">Price</span></th>
+            <th><span jhiTranslate="bofgamesApp.item.isBuyable">Is Buyable</span></th>
             <th><span jhiTranslate="bofgamesApp.item.game">Game</span></th>
             <th><span jhiTranslate="bofgamesApp.item.platform">Platform</span></th>
             <th></th>
@@ -43,8 +43,8 @@
             <tbody>
             <tr *ngFor="let item of items ;trackBy: trackId">
                 <td><a [routerLink]="['/item', item.id, 'view' ]">{{item.id}}</a></td>
-                <td>{{item.isBuyable}}</td>
                 <td>{{item.price}}</td>
+                <td>{{item.isBuyable}}</td>
                 <td>
                     <div *ngIf="item.game">
                         <a [routerLink]="['/game', item.game?.id, 'view' ]" >{{item.game?.id}}</a>

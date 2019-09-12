@@ -72,30 +72,12 @@ export class CartLineUpdateComponent implements OnInit {
         (res: HttpErrorResponse) => this.onError(res.message)
       );
     this.cartService
-      .query({ filter: 'cartline-is-null' })
+      .query()
       .pipe(
         filter((mayBeOk: HttpResponse<ICart[]>) => mayBeOk.ok),
         map((response: HttpResponse<ICart[]>) => response.body)
       )
-      .subscribe(
-        (res: ICart[]) => {
-          if (!this.editForm.get('cart').value || !this.editForm.get('cart').value.id) {
-            this.carts = res;
-          } else {
-            this.cartService
-              .find(this.editForm.get('cart').value.id)
-              .pipe(
-                filter((subResMayBeOk: HttpResponse<ICart>) => subResMayBeOk.ok),
-                map((subResponse: HttpResponse<ICart>) => subResponse.body)
-              )
-              .subscribe(
-                (subRes: ICart) => (this.carts = [subRes].concat(res)),
-                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-              );
-          }
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
+      .subscribe((res: ICart[]) => (this.carts = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(cartLine: ICartLine) {

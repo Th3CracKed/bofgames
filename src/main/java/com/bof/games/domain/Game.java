@@ -30,16 +30,14 @@ public class Game implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(fetch = FetchType.EAGER,
-               mappedBy = "game")
-    private Set<Media> media = new HashSet<>();
-
-    @OneToMany(fetch = FetchType.EAGER,
-        mappedBy = "game")
-    private Set<Review> reviews = new HashSet<>();
-
     @OneToMany(mappedBy = "game")
     private Set<Item> items = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
+    private Set<Review> reviews = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
+    private Set<Media> media = new HashSet<>();
 
     @ManyToMany(mappedBy = "games")
     @JsonIgnore
@@ -80,29 +78,29 @@ public class Game implements Serializable {
         this.description = description;
     }
 
-    public Set<Media> getMedia() {
-        return media;
+    public Set<Item> getItems() {
+        return items;
     }
 
-    public Game media(Set<Media> media) {
-        this.media = media;
+    public Game items(Set<Item> items) {
+        this.items = items;
         return this;
     }
 
-    public Game addMedia(Media media) {
-        this.media.add(media);
-        media.setGame(this);
+    public Game addItem(Item item) {
+        this.items.add(item);
+        item.setGame(this);
         return this;
     }
 
-    public Game removeMedia(Media media) {
-        this.media.remove(media);
-        media.setGame(null);
+    public Game removeItem(Item item) {
+        this.items.remove(item);
+        item.setGame(null);
         return this;
     }
 
-    public void setMedia(Set<Media> media) {
-        this.media = media;
+    public void setItems(Set<Item> items) {
+        this.items = items;
     }
 
     public Set<Review> getReviews() {
@@ -130,29 +128,29 @@ public class Game implements Serializable {
         this.reviews = reviews;
     }
 
-    public Set<Item> getItems() {
-        return items;
+    public Set<Media> getMedia() {
+        return media;
     }
 
-    public Game items(Set<Item> items) {
-        this.items = items;
+    public Game media(Set<Media> media) {
+        this.media = media;
         return this;
     }
 
-    public Game addItem(Item item) {
-        this.items.add(item);
-        item.setGame(this);
+    public Game addMedia(Media media) {
+        this.media.add(media);
+        media.setGame(this);
         return this;
     }
 
-    public Game removeItem(Item item) {
-        this.items.remove(item);
-        item.setGame(null);
+    public Game removeMedia(Media media) {
+        this.media.remove(media);
+        media.setGame(null);
         return this;
     }
 
-    public void setItems(Set<Item> items) {
-        this.items = items;
+    public void setMedia(Set<Media> media) {
+        this.media = media;
     }
 
     public Set<Tag> getTags() {

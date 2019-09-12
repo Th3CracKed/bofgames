@@ -31,7 +31,6 @@ export class ClientUpdatePage {
   cityInput = element(by.id('field_city'));
   countryInput = element(by.id('field_country'));
   birthdateInput = element(by.id('field_birthdate'));
-  cartSelect = element(by.id('field_cart'));
   userSelect = element(by.id('field_user'));
 
   async getPageTitle() {
@@ -76,25 +75,6 @@ export class ClientUpdatePage {
 
   async getBirthdateInput() {
     return await this.birthdateInput.getAttribute('value');
-  }
-
-  async cartSelectLastOption(timeout?: number) {
-    await this.cartSelect
-      .all(by.tagName('option'))
-      .last()
-      .click();
-  }
-
-  async cartSelectOption(option) {
-    await this.cartSelect.sendKeys(option);
-  }
-
-  getCartSelect(): ElementFinder {
-    return this.cartSelect;
-  }
-
-  async getCartSelectedOption() {
-    return await this.cartSelect.element(by.css('option:checked')).getText();
   }
 
   async userSelectLastOption(timeout?: number) {

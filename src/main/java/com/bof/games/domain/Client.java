@@ -37,12 +37,11 @@ public class Client implements Serializable {
     @Column(name = "birthdate")
     private LocalDate birthdate;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Cart cart;
-
     @OneToMany(mappedBy = "client")
     private Set<Review> reviews = new HashSet<>();
+
+    @OneToMany(mappedBy = "driver")
+    private Set<Cart> carts = new HashSet<>();
 
     @OneToOne
     @MapsId
@@ -123,19 +122,6 @@ public class Client implements Serializable {
         this.birthdate = birthdate;
     }
 
-    public Cart getCart() {
-        return cart;
-    }
-
-    public Client cart(Cart cart) {
-        this.cart = cart;
-        return this;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
     public Set<Review> getReviews() {
         return reviews;
     }
@@ -159,6 +145,31 @@ public class Client implements Serializable {
 
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public Set<Cart> getCarts() {
+        return carts;
+    }
+
+    public Client carts(Set<Cart> carts) {
+        this.carts = carts;
+        return this;
+    }
+
+    public Client addCart(Cart cart) {
+        this.carts.add(cart);
+        cart.setDriver(this);
+        return this;
+    }
+
+    public Client removeCart(Cart cart) {
+        this.carts.remove(cart);
+        cart.setDriver(null);
+        return this;
+    }
+
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
     }
 
     public User getUser() {

@@ -6,8 +6,8 @@ import { IPlatform } from 'app/shared/model/platform.model';
 
 export interface IItem {
   id?: number;
-  isBuyable?: boolean;
   price?: number;
+  isBuyable?: boolean;
   keys?: IKey[];
   promos?: IPromo[];
   cartLine?: ICartLine;
@@ -18,8 +18,8 @@ export interface IItem {
 export class Item implements IItem {
   constructor(
     public id?: number,
-    public isBuyable?: boolean,
     public price?: number,
+    public isBuyable?: boolean,
     public keys?: IKey[],
     public promos?: IPromo[],
     public cartLine?: ICartLine,

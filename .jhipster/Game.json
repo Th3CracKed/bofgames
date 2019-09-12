@@ -13,9 +13,9 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "otherEntityName": "media",
+            "otherEntityName": "item",
             "otherEntityRelationshipName": "game",
-            "relationshipName": "media"
+            "relationshipName": "item"
         },
         {
             "relationshipType": "one-to-many",
@@ -25,9 +25,9 @@
         },
         {
             "relationshipType": "one-to-many",
-            "otherEntityName": "item",
+            "otherEntityName": "media",
             "otherEntityRelationshipName": "game",
-            "relationshipName": "item"
+            "relationshipName": "media"
         },
         {
             "relationshipType": "many-to-many",

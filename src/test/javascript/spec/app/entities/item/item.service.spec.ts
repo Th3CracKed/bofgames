@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(ItemService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Item(0, false, 0);
+      elemDefault = new Item(0, 0, false);
     });
 
     describe('Service methods', () => {
@@ -59,8 +59,8 @@ describe('Service Tests', () => {
       it('should update a Item', async () => {
         const returnedFromService = Object.assign(
           {
-            isBuyable: true,
-            price: 1
+            price: 1,
+            isBuyable: true
           },
           elemDefault
         );
@@ -78,8 +78,8 @@ describe('Service Tests', () => {
       it('should return a list of Item', async () => {
         const returnedFromService = Object.assign(
           {
-            isBuyable: true,
-            price: 1
+            price: 1,
+            isBuyable: true
           },
           elemDefault
         );

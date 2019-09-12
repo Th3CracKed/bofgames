@@ -1,6 +1,6 @@
 import { IItem } from 'app/shared/model/item.model';
-import { ICart } from 'app/shared/model/cart.model';
 import { IKey } from 'app/shared/model/key.model';
+import { ICart } from 'app/shared/model/cart.model';
 
 export interface ICartLine {
   id?: number;
@@ -8,8 +8,8 @@ export interface ICartLine {
   unitPrice?: number;
   expired?: boolean;
   item?: IItem;
-  cart?: ICart;
   keys?: IKey[];
+  cart?: ICart;
 }
 
 export class CartLine implements ICartLine {
@@ -19,8 +19,8 @@ export class CartLine implements ICartLine {
     public unitPrice?: number,
     public expired?: boolean,
     public item?: IItem,
-    public cart?: ICart,
-    public keys?: IKey[]
+    public keys?: IKey[],
+    public cart?: ICart
   ) {
     this.expired = this.expired || false;
   }

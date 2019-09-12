@@ -44,6 +44,7 @@ describe('Item e2e test', () => {
       itemUpdatePage.gameSelectLastOption(),
       itemUpdatePage.platformSelectLastOption()
     ]);
+    expect(await itemUpdatePage.getPriceInput()).to.eq('5', 'Expected price value to be equals to 5');
     const selectedIsBuyable = itemUpdatePage.getIsBuyableInput();
     if (await selectedIsBuyable.isSelected()) {
       await itemUpdatePage.getIsBuyableInput().click();
@@ -52,7 +53,6 @@ describe('Item e2e test', () => {
       await itemUpdatePage.getIsBuyableInput().click();
       expect(await itemUpdatePage.getIsBuyableInput().isSelected(), 'Expected isBuyable to be selected').to.be.true;
     }
-    expect(await itemUpdatePage.getPriceInput()).to.eq('5', 'Expected price value to be equals to 5');
     await itemUpdatePage.save();
     expect(await itemUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
