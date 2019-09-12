@@ -1,6 +1,7 @@
 package com.bof.games.web.rest;
 
 import com.bof.games.domain.Cart;
+import com.bof.games.domain.CartLine;
 import com.bof.games.domain.Client;
 import com.bof.games.domain.Item;
 import com.bof.games.repository.ClientRepository;
@@ -159,35 +160,6 @@ public class ClientResource {
             .stream(clientSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
     }
-
-
-    class Data {long idClient; long idItem;}
-
-    /**
-     * {@code PUT  /clients} : Updates an existing client.
-     *
-     * @param client the client to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated client,
-     * or with status {@code 400 (Bad Request)} if the client is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the client couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    // @PutMapping("/clients")
-    // public ResponseEntity<Client> addToCard(@RequestBody Data data) throws URISyntaxException {
-    //     log.debug("REST request to add an Item into an user card whit data {}",data);
-
-    //     Optional<Client> client = clientRepository.findById(data.idClient);
-
-    //     if (client == null) {
-    //         throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "client not found");
-    //     }
-
-    //     client.get();
-
-    //     return ResponseEntity.ok()
-    //         .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.get().getId().toString()))
-    //         .body("");
-    // }
 
 
 }
