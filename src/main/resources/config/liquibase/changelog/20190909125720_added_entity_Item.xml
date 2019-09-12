@@ -15,11 +15,11 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="price" type="bigint">
+            <column name="is_buyable" type="boolean">
                 <constraints nullable="true" />
             </column>
 
-            <column name="is_buyable" type="boolean">
+            <column name="price" type="double">
                 <constraints nullable="true" />
             </column>
 
@@ -55,8 +55,8 @@
                   separator=";"
                   tableName="item">
             <column name="id" type="numeric"/>
-            <column name="price" type="numeric"/>
             <column name="is_buyable" type="boolean"/>
+            <column name="price" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

@@ -29,8 +29,8 @@ export class ItemUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    price: [],
     isBuyable: [],
+    price: [],
     game: [],
     platform: []
   });
@@ -76,8 +76,8 @@ export class ItemUpdateComponent implements OnInit {
   updateForm(item: IItem) {
     this.editForm.patchValue({
       id: item.id,
-      price: item.price,
       isBuyable: item.isBuyable,
+      price: item.price,
       game: item.game,
       platform: item.platform
     });
@@ -101,8 +101,8 @@ export class ItemUpdateComponent implements OnInit {
     return {
       ...new Item(),
       id: this.editForm.get(['id']).value,
-      price: this.editForm.get(['price']).value,
       isBuyable: this.editForm.get(['isBuyable']).value,
+      price: this.editForm.get(['price']).value,
       game: this.editForm.get(['game']).value,
       platform: this.editForm.get(['platform']).value
     };

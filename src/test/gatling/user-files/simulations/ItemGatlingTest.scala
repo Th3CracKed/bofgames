@@ -72,8 +72,8 @@ class ItemGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "price":null
                 , "isBuyable":null
+                , "price":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_item_url"))).exitHereIfFailed

@@ -26,8 +26,8 @@ export class ItemUpdatePage {
   pageTitle = element(by.id('jhi-item-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  priceInput = element(by.id('field_price'));
   isBuyableInput = element(by.id('field_isBuyable'));
+  priceInput = element(by.id('field_price'));
   gameSelect = element(by.id('field_game'));
   platformSelect = element(by.id('field_platform'));
 
@@ -35,16 +35,15 @@ export class ItemUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
+  getIsBuyableInput(timeout?: number) {
+    return this.isBuyableInput;
+  }
   async setPriceInput(price) {
     await this.priceInput.sendKeys(price);
   }
 
   async getPriceInput() {
     return await this.priceInput.getAttribute('value');
-  }
-
-  getIsBuyableInput(timeout?: number) {
-    return this.isBuyableInput;
   }
 
   async gameSelectLastOption(timeout?: number) {

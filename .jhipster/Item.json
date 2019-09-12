@@ -1,15 +1,6 @@
 {
-    "name": "Item",
-    "fields": [
-        {
-            "fieldName": "price",
-            "fieldType": "Long"
-        },
-        {
-            "fieldName": "isBuyable",
-            "fieldType": "Boolean"
-        }
-    ],
+    "fluentMethods": true,
+    "clientRootFolder": "",
     "relationships": [
         {
             "relationshipType": "one-to-many",
@@ -45,13 +36,23 @@
             "otherEntityField": "id"
         }
     ],
+    "fields": [
+        {
+            "fieldName": "isBuyable",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Double",
+            "fieldValidateRules": []
+        }
+    ],
     "changelogDate": "20190909125720",
-    "entityTableName": "item",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": "elasticsearch",
     "service": "no",
+    "entityTableName": "item",
+    "databaseType": "sql",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }
