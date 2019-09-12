@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ItemDetailService } from 'app/service/item-detail.service';
 import { Item } from 'app/shared/model/item.model';
+import { CookieService } from 'ngx-cookie';
+import { AccountService } from 'app/core';
 
 @Component({
   selector: 'jhi-detail',
@@ -11,7 +13,12 @@ import { Item } from 'app/shared/model/item.model';
 export class ItemDetailComponent implements OnInit {
   item: Item;
 
-  constructor(private route: ActivatedRoute, private itemDetailService: ItemDetailService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private itemDetailService: ItemDetailService,
+    private accountService: AccountService,
+    private coockies: CookieService
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params =>
@@ -20,5 +27,20 @@ export class ItemDetailComponent implements OnInit {
         console.log(` mon resultat  pour l'item numéro ${params.id}` + JSON.stringify(this.item));
       })
     );
+  }
+
+  addToCard() {
+    if (this.isAuthenticated()) {
+      console.log('auth');
+      this.accountService.identity().then(account => {
+        //request
+      });
+    } else {
+      console.log('not auth');
+    }
+  }
+
+  isAuthenticated() {
+    return this.accountService.isAuthenticated();
   }
 }
