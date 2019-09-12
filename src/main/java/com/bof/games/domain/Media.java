@@ -29,8 +29,7 @@ public class Media implements Serializable {
     @Column(name = "alt")
     private String alt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
+    @ManyToOne
     @JsonIgnoreProperties("media")
     private Game game;
 
