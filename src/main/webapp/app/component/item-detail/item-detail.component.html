@@ -9,12 +9,18 @@
     </div>
     <div class="col col-md-9">
       <h1>{{item.game.name}}</h1>
-      <p>Note: </p><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i>
+      <h5>Note: </h5>
+      <span *ngFor="let m of mark | fill">
+        <i class="fa fa-star" aria-hidden="true"></i>
+      </span>
+      <span *ngFor="let m of (5 - mark) | fill">
+        <i class="fa fa-star-o" aria-hidden="true"></i>
+      </span>
       <p>Platforme:</p>
         <div id="supportedgame">
-          <img src="../../../../../assets/platforms/windows.png" alt="PC" *ngIf="item.platform.name === 'PC'"/>
-          <img src="../../../../../assets/platforms/playstation.png" alt="PS" *ngIf="item.platform.name === 'PS'"/>
-          <img src="../../../../../assets/platforms/xbox.png" alt="Xbox" *ngIf="item.platform.name === 'Xbox'"/>
+          <img src="../../../../../../assets/platforms/windows.png" alt="PC" *ngIf="item.platform.name === 'PC'"/>
+          <img src="../../../../../../assets/platforms/playstation.png" alt="PS" *ngIf="item.platform.name === 'PS'"/>
+          <img src="../../../../../../assets/platforms/xbox.png" alt="Xbox" *ngIf="item.platform.name === 'Xbox'"/>
         </div>
       </div>
   </div>

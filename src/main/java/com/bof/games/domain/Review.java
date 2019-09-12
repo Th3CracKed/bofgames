@@ -1,9 +1,9 @@
 package com.bof.games.domain;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 
 /**
@@ -29,11 +29,11 @@ public class Review implements Serializable {
     private String comment;
 
     @ManyToOne
-    @JsonIgnoreProperties("reviews")
+    @JsonIgnore
     private Game game;
 
     @ManyToOne
-    @JsonIgnoreProperties("reviews")
+    @JsonIgnore
     private Client client;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

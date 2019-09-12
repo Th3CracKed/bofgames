@@ -34,7 +34,8 @@ public class Game implements Serializable {
                mappedBy = "game")
     private Set<Media> media = new HashSet<>();
 
-    @OneToMany(mappedBy = "game")
+    @OneToMany(fetch = FetchType.EAGER,
+        mappedBy = "game")
     private Set<Review> reviews = new HashSet<>();
 
     @OneToMany(mappedBy = "game")

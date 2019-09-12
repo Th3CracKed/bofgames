@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { errorRoute, navbarRoute } from './layouts';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { TestComponent } from './test';
-import { ItemDetailComponent } from './item-detail/item-detail.component';
+import { ItemDetailComponent } from './component/item-detail/item-detail.component';
 import { ItemListComponent } from './component/item-list/item-list.component';
 const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
 
