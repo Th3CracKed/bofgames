@@ -1,6 +1,7 @@
 package com.bof.games.web.rest;
 
 import com.bof.games.domain.Item;
+import com.bof.games.domain.Media;
 import com.bof.games.repository.ItemRepository;
 import com.bof.games.repository.search.ItemSearchRepository;
 import com.bof.games.web.rest.errors.BadRequestAlertException;
@@ -106,6 +107,33 @@ public class ItemResource {
         }
         log.debug("REST request to get all Items");
         return itemRepository.findAll();
+    }
+
+    /**
+     * {@code GET  /itemsList} : get all the items.
+     *
+     * @param filter the filter of the request.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of items in body.
+     */
+    @GetMapping("/itemsList")
+    public List<Item> getAllItemsList(@RequestParam(required = false) String filter) {
+        if ("cartline-is-null".equals(filter)) {
+            log.debug("REST request to get all Items where cartLine is null");
+            return StreamSupport
+                .stream(itemRepository.findAll().spliterator(), false)
+                .filter(item -> item.getCartLine() == null)
+                .collect(Collectors.toList());
+        }
+        log.debug("REST request to get all Items");
+
+        List<Item> items = itemRepository.findAll(); 
+        for(Item item : items ){   
+            for (Media m : item.getGame().getMedia()) {
+                m.setGame(null);
+            }
+        }
+
+        return items;
     }
 
     /**
