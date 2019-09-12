@@ -172,22 +172,22 @@ public class ClientResource {
      * or with status {@code 500 (Internal Server Error)} if the client couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PutMapping("/clients")
-    public ResponseEntity<Cart> addToCard(@RequestBody Data data) throws URISyntaxException {
-        log.debug("REST request to add an Item into an user card whit data {}",data);
+    // @PutMapping("/clients")
+    // public ResponseEntity<Client> addToCard(@RequestBody Data data) throws URISyntaxException {
+    //     log.debug("REST request to add an Item into an user card whit data {}",data);
 
-        Optional<Client> client = clientRepository.findById(data.idClient);
+    //     Optional<Client> client = clientRepository.findById(data.idClient);
 
-        if (client == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "client not found");
-        }
+    //     if (client == null) {
+    //         throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "client not found");
+    //     }
 
-        client.get();
+    //     client.get();
 
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.getId().toString()))
-            .body("");
-    }
+    //     return ResponseEntity.ok()
+    //         .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.get().getId().toString()))
+    //         .body("");
+    // }
 
 
 }
