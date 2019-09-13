@@ -27,7 +27,7 @@ public class Cart implements Serializable {
     @Column(name = "expired")
     private Boolean expired;
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cart", cascade = CascadeType.ALL)
     private Set<CartLine> cartLines = new HashSet<>();
 
     @ManyToOne

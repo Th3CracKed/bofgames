@@ -34,7 +34,6 @@ public class CartLine implements Serializable {
     private Boolean expired;
 
     @OneToOne
-    @JoinColumn(unique = true)
     private Item item;
 
     @OneToMany(mappedBy = "cartLine")

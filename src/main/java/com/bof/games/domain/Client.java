@@ -40,7 +40,7 @@ public class Client implements Serializable {
     @OneToMany(mappedBy = "client")
     private Set<Review> reviews = new HashSet<>();
 
-    @OneToMany(mappedBy = "driver")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "driver", cascade = CascadeType.ALL)
     private Set<Cart> carts = new HashSet<>();
 
     @OneToOne
