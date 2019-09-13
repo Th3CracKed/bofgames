@@ -1,29 +1,41 @@
 <div class="container mb-4">
+<div class="row">
+  <div class="col-12">
+  <button type="button" class="btn btn-secondary" [routerLink]="['/games']"><i class="fa fa-chevron-left"
+        aria-hidden="true"></i> Retour</button>
+  </div>
+  </div>
+</div>
+
+<div class="container mb-4">
   <div class="row">
     <div class="col-12">
-      <div class="table-responsive">
+      <div class="table-responsive table-wrapper-scroll-y shoppingCardTable ">
         <table class="table table-striped">
           <thead>
+            <!-- Titre du panier -->
             <tr>
-              <th scope="col"> </th>
-              <th scope="col">Product</th>
-              <th scope="col">Available</th>
-              <th scope="col" class="text-center">Quantity</th>
-              <th scope="col" class="text-right">Price</th>
-              <th> </th>
+              <th class="d-none d-md-block" scope="col"> </th>
+              <th scope="col">Produit</th>
+              <th scope="col">Disponible</th>
+              <th scope="col" class="text-center">Quantité</th>
+              <th scope="col" class="text-right">Prix</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
+            <!-- Start for here for each iteams-->
             <tr>
-              <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+              <td class="d-none d-md-block"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
               <td>Product Name Dada</td>
               <td>In stock</td>
               <td><input class="form-control" type="text" value="1" /></td>
               <td class="text-right">124,90 €</td>
               <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
             </tr>
+            <!-- end for -->
             <tr>
-              <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+              <td class="d-none d-md-block"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
               <td>Product Name Toto</td>
               <td>In stock</td>
               <td><input class="form-control" type="text" value="1" /></td>
@@ -31,7 +43,7 @@
               <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
             </tr>
             <tr>
-              <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+              <td class="d-none d-md-block"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
               <td>Product Name Titi</td>
               <td>In stock</td>
               <td><input class="form-control" type="text" value="1" /></td>
@@ -39,23 +51,8 @@
               <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>Sub-Total</td>
-              <td class="text-right">255,90 €</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>Shipping</td>
-              <td class="text-right">6,90 €</td>
-            </tr>
-            <tr>
-              <td></td>
+              <!-- Empty colomns don't delete-->
+              <td class="d-none d-md-block"></td>
               <td></td>
               <td></td>
               <td></td>
@@ -68,11 +65,11 @@
     </div>
     <div class="col mb-2">
       <div class="row">
-        <div class="col-sm-12  col-md-6">
-          <button class="btn btn-block btn-light">Continue Shopping</button>
+        <div id="seeShoppingCart" class="col-sm-12">
+          <button class="btn btn-lg btn-block btn-outline-secondary">Voir panier</button>
         </div>
-        <div class="col-sm-12 col-md-6 text-right">
-          <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+        <div class="col-sm-12 col-md-12 text-right">
+          <button class="btn btn-lg btn-block btn-success text-uppercase"><i class="fa fa-credit-card"></i> <span> Commander</span> </button>
         </div>
       </div>
     </div>
