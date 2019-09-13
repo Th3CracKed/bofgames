@@ -1,12 +1,74 @@
-article {
-  display: inline-block;
+// article {
+//   display: inline-block;
+// }
+
+// img {
+//   width: 260px;
+//   height: 260px;
+// }
+// div:not(:last-child) {
+//   margin-bottom: 10px;
+//   border-bottom: 1px solid #7b877e;
+// }
+
+a {
+  text-decoration-color: orangered;
+}
+#gameTitle {
+  h2 {
+    color: orangered;
+    font-weight: bold;
+  }
 }
 
-img {
-  width: 260px;
-  height: 260px;
+#game_cover {
+  padding-left: 0px;
 }
-div:not(:last-child) {
+
+h5 {
+  font-weight: bold;
+}
+
+/* [1] The container */
+.img-hover-zoom {
+  background-color: lightgray;
+  text-align: center;
+  height: 200px;
+  // height: 300px; /* [1.1] Set it as per your need */
+  overflow: hidden; /* [1.2] Hide the overflowing of child elements */
+}
+
+/* [2] Transition property for smooth transformation of images */
+.img-hover-zoom img {
+  height: 200px;
+  transition: transform 0.5s ease;
+}
+
+/* [3] Finally, transforming the image when container gets hovered */
+.img-hover-zoom:hover img {
+  transform: scale(1.5);
+}
+
+.toolbar {
+  height: 45px;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  button {
+    width: 100px;
+    position: absolute;
+    right: 5px;
+  }
+}
+
+.rating {
+  line-height: 20px;
+}
+
+.gameItem {
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   margin-bottom: 10px;
-  border-bottom: 1px solid #7b877e;
 }

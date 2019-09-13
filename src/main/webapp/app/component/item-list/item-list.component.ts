@@ -9,6 +9,7 @@ import { Item } from 'app/shared/model/item.model';
 })
 export class ItemListComponent implements OnInit {
   items: Item[] = [];
+  mark = 0;
 
   constructor(private itemListService: ItemListService) {}
 
@@ -16,6 +17,19 @@ export class ItemListComponent implements OnInit {
     this.itemListService.GetItems().subscribe(items => {
       this.items = items;
       console.log(' mon resultat   est : ' + JSON.stringify(this.items));
+      for (let index = 0; index < items.length; index++) {
+        this.calculateMark(items[index]);
+      }
     });
+  }
+
+  private calculateMark(item: Item) {
+    let markTotal = 0;
+    item.game.reviews.forEach(review => (markTotal += review.mark || 0));
+    console.log(`markTotal = ${markTotal}`);
+    if (item.game.reviews && item.game.reviews.length !== 0) {
+      this.mark = Math.floor(markTotal / item.game.reviews.length);
+    }
+    console.log(`this.mark = ${this.mark}`);
   }
 }

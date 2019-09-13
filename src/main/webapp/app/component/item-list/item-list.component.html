@@ -1,15 +1,46 @@
-<div *ngFor="let item of items;">
-  <article>
-    <a href="/games/{{item.id}}">
-        <img *ngIf="item.game.media[0]" src="{{item.game.media[0].url}}" alt="{{item.game.media[0].alt}}" />
-        <img *ngIf="!item.game.media[0]" src="https://www.kasterencultuur.nl/editor/placeholder.jpg" alt="Image not found"/>
-    </a>
-  </article>
-  <article>
-      <a href="/games/{{item.id}}"> {{item.game.name}} </a>
-      <p> Prix : {{item.price}} € </p>
-      <p> Plateforme : {{item.platform.name}} </p>
-  </article>
-</div>
-
 <div *ngIf="items.length==0;">Aucun jeu présent dans le catalogue</div>
+
+
+
+<div class="container">
+  <div *ngFor="let item of items;" class="row gameItem">
+    <a href="/games/{{item.id}}" class="col col-xs-3 col-md-3" id="game_cover">
+    <div class="img-hover-zoom">
+        <img src="{{item.game.media[0].url}}" alt="{{item.game.media[0].alt}}">
+        <img *ngIf="!item.game.media[0]" src="https://www.kasterencultuur.nl/editor/placeholder.jpg" alt="Image not found" />
+    </div>
+    </a>
+    <div class="col col-md-9">
+      <div class="row">
+        <a id="gameTitle" href="/games/{{item.id}}">
+          <h2> {{item.game.name}} </h2>
+        </a>
+      </div>
+      
+      <div class="row rating">
+
+        <h6>Note : </h6>
+        <span *ngFor="let m of mark | fill">
+          <i class="fa fa-star" aria-hidden="true"></i>
+        </span>
+        <span *ngFor="let m of (5 - mark) | fill">
+          <i class="fa fa-star-o" aria-hidden="true"></i>
+        </span>
+
+
+      </div>
+      <div class="row">
+        <p> Plateforme : {{item.platform.name}} </p>
+      </div>
+
+      <div class="row">
+        <h5 id="game_price"> Prix : {{item.price}} € </h5>
+      </div>
+
+      <div class="row toolbar">
+        <button type="button" class="btn btn-primary"  [routerLink]="['/games', item.id]">Voir <i class="fa fa-eye" aria-hidden="true"></i></button>
+      </div>
+
+    </div>
+  </div>
+</div>
