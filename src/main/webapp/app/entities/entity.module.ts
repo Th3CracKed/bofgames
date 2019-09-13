@@ -1,51 +1,53 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+const PATH = 'admin/panel';
+
 @NgModule({
   imports: [
     RouterModule.forChild([
       {
-        path: 'client',
+        path: `${PATH}/client`,
         loadChildren: () => import('./client/client.module').then(m => m.BofgamesClientModule)
       },
       {
-        path: 'key',
+        path: `${PATH}/key`,
         loadChildren: () => import('./key/key.module').then(m => m.BofgamesKeyModule)
       },
       {
-        path: 'review',
+        path: `${PATH}/review`,
         loadChildren: () => import('./review/review.module').then(m => m.BofgamesReviewModule)
       },
       {
-        path: 'cart',
+        path: `${PATH}/cart`,
         loadChildren: () => import('./cart/cart.module').then(m => m.BofgamesCartModule)
       },
       {
-        path: 'item',
+        path: `${PATH}/item`,
         loadChildren: () => import('./item/item.module').then(m => m.BofgamesItemModule)
       },
       {
-        path: 'game',
+        path: `${PATH}/game`,
         loadChildren: () => import('./game/game.module').then(m => m.BofgamesGameModule)
       },
       {
-        path: 'media',
+        path: `${PATH}/media`,
         loadChildren: () => import('./media/media.module').then(m => m.BofgamesMediaModule)
       },
       {
-        path: 'promo',
+        path: `${PATH}/promo`,
         loadChildren: () => import('./promo/promo.module').then(m => m.BofgamesPromoModule)
       },
       {
-        path: 'platform',
+        path: `${PATH}/platform`,
         loadChildren: () => import('./platform/platform.module').then(m => m.BofgamesPlatformModule)
       },
       {
-        path: 'tag',
+        path: `${PATH}/tag`,
         loadChildren: () => import('./tag/tag.module').then(m => m.BofgamesTagModule)
       },
       {
-        path: 'cart-line',
+        path: `${PATH}/cart-line`,
         loadChildren: () => import('./cart-line/cart-line.module').then(m => m.BofgamesCartLineModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */

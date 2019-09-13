@@ -15,6 +15,7 @@ import { BofgamesSharedModule } from 'app/shared';
 import { BofgamesCoreModule } from 'app/core';
 import { BofgamesAppRoutingModule } from './app-routing.module';
 import { BofgamesHomeModule } from './home/home.module';
+import { BofgamesJHomeModule } from './jhipster_home/jhome.module';
 import { BofgamesAccountModule } from './account/account.module';
 import { BofgamesEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
@@ -39,6 +40,7 @@ import { FillPipe } from './pipes/fill.pipe';
     BofgamesSharedModule.forRoot(),
     BofgamesCoreModule,
     BofgamesHomeModule,
+    BofgamesJHomeModule,
     BofgamesAccountModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     BofgamesEntityModule,
