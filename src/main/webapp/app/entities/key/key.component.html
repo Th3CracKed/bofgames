@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="bofgamesApp.key.home.title">Keys</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-key" [routerLink]="['/key/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-key" [routerLink]="['/admin/key/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down"  jhiTranslate="bofgamesApp.key.home.createLabel">
             Create a new Key
@@ -42,7 +42,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let key of keys ;trackBy: trackId">
-                <td><a [routerLink]="['/key', key.id, 'view' ]">{{key.id}}</a></td>
+                <td><a [routerLink]="['/admin/key', key.id, 'view' ]">{{key.id}}</a></td>
                 <td>{{key.value}}</td>
                 <td jhiTranslate="{{'bofgamesApp.KEYSTATUS.' + key.status}}">{{key.status}}</td>
                 <td>
@@ -58,19 +58,19 @@
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
-                                [routerLink]="['/key', key.id, 'view' ]"
+                                [routerLink]="['/admin/key', key.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/key', key.id, 'edit']"
+                                [routerLink]="['/admin/key', key.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/key', { outlets: { popup: key.id + '/delete'} }]"
+                                [routerLink]="['/admin/key', { outlets: { popup: key.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

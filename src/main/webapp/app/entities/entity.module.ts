@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-const PATH = 'admin/panel';
+const PATH = 'admin';
 
 @NgModule({
   imports: [

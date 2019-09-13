@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="bofgamesApp.platform.home.title">Platforms</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-platform" [routerLink]="['/platform/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-platform" [routerLink]="['/admin/platform/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down"  jhiTranslate="bofgamesApp.platform.home.createLabel">
             Create a new Platform
@@ -39,24 +39,24 @@
             </thead>
             <tbody>
             <tr *ngFor="let platform of platforms ;trackBy: trackId">
-                <td><a [routerLink]="['/platform', platform.id, 'view' ]">{{platform.id}}</a></td>
+                <td><a [routerLink]="['/admin/platform', platform.id, 'view' ]">{{platform.id}}</a></td>
                 <td>{{platform.name}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
-                                [routerLink]="['/platform', platform.id, 'view' ]"
+                                [routerLink]="['/admin/platform', platform.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/platform', platform.id, 'edit']"
+                                [routerLink]="['/admin/platform', platform.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/platform', { outlets: { popup: platform.id + '/delete'} }]"
+                                [routerLink]="['/admin/platform', { outlets: { popup: platform.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

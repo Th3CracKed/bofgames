@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="bofgamesApp.item.home.title">Items</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-item" [routerLink]="['/item/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-item" [routerLink]="['/admin/item/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down"  jhiTranslate="bofgamesApp.item.home.createLabel">
             Create a new Item
@@ -42,7 +42,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let item of items ;trackBy: trackId">
-                <td><a [routerLink]="['/item', item.id, 'view' ]">{{item.id}}</a></td>
+                <td><a [routerLink]="['/admin/item', item.id, 'view' ]">{{item.id}}</a></td>
                 <td>{{item.price}}</td>
                 <td>{{item.isBuyable}}</td>
                 <td>
@@ -58,19 +58,19 @@
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
-                                [routerLink]="['/item', item.id, 'view' ]"
+                                [routerLink]="['/admin/item', item.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/item', item.id, 'edit']"
+                                [routerLink]="['/admin/item', item.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/item', { outlets: { popup: item.id + '/delete'} }]"
+                                [routerLink]="['/admin/item', { outlets: { popup: item.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

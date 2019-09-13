@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="bofgamesApp.review.home.title">Reviews</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-review" [routerLink]="['/review/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-review" [routerLink]="['/admin/admin/review/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down"  jhiTranslate="bofgamesApp.review.home.createLabel">
             Create a new Review
@@ -42,7 +42,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let review of reviews ;trackBy: trackId">
-                <td><a [routerLink]="['/review', review.id, 'view' ]">{{review.id}}</a></td>
+                <td><a [routerLink]="['/admin/admin/review', review.id, 'view' ]">{{review.id}}</a></td>
                 <td>{{review.mark}}</td>
                 <td>{{review.comment}}</td>
                 <td>
@@ -58,19 +58,19 @@
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
-                                [routerLink]="['/review', review.id, 'view' ]"
+                                [routerLink]="['/admin/admin/review', review.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/review', review.id, 'edit']"
+                                [routerLink]="['/admin/admin/review', review.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/review', { outlets: { popup: review.id + '/delete'} }]"
+                                [routerLink]="['/admin/admin/review', { outlets: { popup: review.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

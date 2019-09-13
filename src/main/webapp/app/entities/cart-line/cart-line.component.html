@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="bofgamesApp.cartLine.home.title">Cart Lines</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cart-line" [routerLink]="['/cart-line/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cart-line" [routerLink]="['/admin/cart-line/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down"  jhiTranslate="bofgamesApp.cartLine.home.createLabel">
             Create a new Cart Line
@@ -43,7 +43,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let cartLine of cartLines ;trackBy: trackId">
-                <td><a [routerLink]="['/cart-line', cartLine.id, 'view' ]">{{cartLine.id}}</a></td>
+                <td><a [routerLink]="['/admin/cart-line', cartLine.id, 'view' ]">{{cartLine.id}}</a></td>
                 <td>{{cartLine.quantity}}</td>
                 <td>{{cartLine.unitPrice}}</td>
                 <td>{{cartLine.expired}}</td>
@@ -60,19 +60,19 @@
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
-                                [routerLink]="['/cart-line', cartLine.id, 'view' ]"
+                                [routerLink]="['/admin/cart-line', cartLine.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/cart-line', cartLine.id, 'edit']"
+                                [routerLink]="['/admin/cart-line', cartLine.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/cart-line', { outlets: { popup: cartLine.id + '/delete'} }]"
+                                [routerLink]="['/admin/cart-line', { outlets: { popup: cartLine.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
