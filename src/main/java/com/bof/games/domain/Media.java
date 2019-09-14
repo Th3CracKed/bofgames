@@ -1,11 +1,12 @@
 package com.bof.games.domain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
+
+import com.bof.games.domain.enumeration.MEDIATYPE;
 
 /**
  * A Media.
@@ -26,11 +27,15 @@ public class Media implements Serializable {
     @Column(name = "url")
     private String url;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private MEDIATYPE type;
+
     @Column(name = "alt")
     private String alt;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonIgnoreProperties("media")
     private Game game;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -53,6 +58,19 @@ public class Media implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public MEDIATYPE getType() {
+        return type;
+    }
+
+    public Media type(MEDIATYPE type) {
+        this.type = type;
+        return this;
+    }
+
+    public void setType(MEDIATYPE type) {
+        this.type = type;
     }
 
     public String getAlt() {
@@ -103,6 +121,7 @@ public class Media implements Serializable {
         return "Media{" +
             "id=" + getId() +
             ", url='" + getUrl() + "'" +
+            ", type='" + getType() + "'" +
             ", alt='" + getAlt() + "'" +
             "}";
     }

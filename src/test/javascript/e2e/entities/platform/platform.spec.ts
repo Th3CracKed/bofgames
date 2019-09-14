@@ -39,8 +39,9 @@ describe('Platform e2e test', () => {
     const nbButtonsBeforeCreate = await platformComponentsPage.countDeleteButtons();
 
     await platformComponentsPage.clickOnCreateButton();
-    await promise.all([platformUpdatePage.setNameInput('name')]);
+    await promise.all([platformUpdatePage.setNameInput('name'), platformUpdatePage.setUrlInput('url')]);
     expect(await platformUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+    expect(await platformUpdatePage.getUrlInput()).to.eq('url', 'Expected Url value to be equals to url');
     await platformUpdatePage.save();
     expect(await platformUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

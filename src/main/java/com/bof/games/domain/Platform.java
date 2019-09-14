@@ -26,6 +26,9 @@ public class Platform implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "url")
+    private String url;
+
     @OneToMany(mappedBy = "platform")
     private Set<Item> items = new HashSet<>();
 
@@ -49,6 +52,19 @@ public class Platform implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public Platform url(String url) {
+        this.url = url;
+        return this;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Set<Item> getItems() {
@@ -98,6 +114,7 @@ public class Platform implements Serializable {
         return "Platform{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", url='" + getUrl() + "'" +
             "}";
     }
 }

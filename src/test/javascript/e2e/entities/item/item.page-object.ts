@@ -30,6 +30,7 @@ export class ItemUpdatePage {
   isBuyableInput = element(by.id('field_isBuyable'));
   gameSelect = element(by.id('field_game'));
   platformSelect = element(by.id('field_platform'));
+  cartLineSelect = element(by.id('field_cartLine'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -83,6 +84,25 @@ export class ItemUpdatePage {
 
   async getPlatformSelectedOption() {
     return await this.platformSelect.element(by.css('option:checked')).getText();
+  }
+
+  async cartLineSelectLastOption(timeout?: number) {
+    await this.cartLineSelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
+  }
+
+  async cartLineSelectOption(option) {
+    await this.cartLineSelect.sendKeys(option);
+  }
+
+  getCartLineSelect(): ElementFinder {
+    return this.cartLineSelect;
+  }
+
+  async getCartLineSelectedOption() {
+    return await this.cartLineSelect.element(by.css('option:checked')).getText();
   }
 
   async save(timeout?: number) {

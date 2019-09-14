@@ -20,8 +20,8 @@
       "quantity": "Quantity",
       "unitPrice": "Unit Price",
       "expired": "Expired",
-      "item": "Item",
       "key": "Key",
+      "item": "Item",
       "cart": "Cart"
     }
   }

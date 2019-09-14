@@ -1,0 +1,10 @@
+{
+  "bofgamesApp": {
+    "MEDIATYPE": {
+      "null": "",
+      "THUMBNAIL": "THUMBNAIL",
+      "IMAGE": "IMAGE",
+      "VIDEO": "VIDEO"
+    }
+  }
+}

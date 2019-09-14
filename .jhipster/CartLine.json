@@ -16,18 +16,16 @@
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "item",
-            "otherEntityRelationshipName": "cartLine",
-            "relationshipName": "item",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
             "relationshipType": "one-to-many",
             "otherEntityName": "key",
             "otherEntityRelationshipName": "cartLine",
             "relationshipName": "key"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "item",
+            "otherEntityRelationshipName": "cartLine",
+            "relationshipName": "item"
         },
         {
             "relationshipType": "many-to-one",

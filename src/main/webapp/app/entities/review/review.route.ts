@@ -33,7 +33,7 @@ export const reviewRoute: Routes = [
     path: '',
     component: ReviewComponent,
     data: {
-      authorities: ['ROLE_ADMIN'],
+      authorities: ['ROLE_USER'],
       pageTitle: 'bofgamesApp.review.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const reviewRoute: Routes = [
       review: ReviewResolve
     },
     data: {
-      authorities: ['ROLE_ADMIN'],
+      authorities: ['ROLE_USER'],
       pageTitle: 'bofgamesApp.review.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const reviewRoute: Routes = [
       review: ReviewResolve
     },
     data: {
-      authorities: ['ROLE_ADMIN'],
+      authorities: ['ROLE_USER'],
       pageTitle: 'bofgamesApp.review.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const reviewRoute: Routes = [
       review: ReviewResolve
     },
     data: {
-      authorities: ['ROLE_ADMIN'],
+      authorities: ['ROLE_USER'],
       pageTitle: 'bofgamesApp.review.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const reviewPopupRoute: Routes = [
       review: ReviewResolve
     },
     data: {
-      authorities: ['ROLE_ADMIN'],
+      authorities: ['ROLE_USER'],
       pageTitle: 'bofgamesApp.review.home.title'
     },
     canActivate: [UserRouteAccessService],

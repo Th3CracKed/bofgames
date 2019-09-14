@@ -18,6 +18,7 @@
         "title": "Platform"
       },
       "name": "Name",
+      "url": "Url",
       "item": "Item"
     }
   }

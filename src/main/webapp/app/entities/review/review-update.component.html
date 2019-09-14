@@ -13,6 +13,20 @@
                     <label class="form-control-label" jhiTranslate="bofgamesApp.review.mark" for="field_mark">Mark</label>
                     <input type="number" class="form-control" name="mark" id="field_mark"
                            formControlName="mark"/>
+                    <div *ngIf="editForm.get('mark').invalid && (editForm.get('mark').dirty || editForm.get('mark').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('mark').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('mark').errors.max" jhiTranslate="entity.validation.max" [translateValues]="{ max: 5 }">
+                            This field cannot be more than 5.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('mark')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="bofgamesApp.review.comment" for="field_comment">Comment</label>

@@ -17,12 +17,6 @@
                 <dd>
                     <span>{{cartLine.expired}}</span>
                 </dd>
-                <dt><span jhiTranslate="bofgamesApp.cartLine.item">Item</span></dt>
-                <dd>
-                    <div *ngIf="cartLine.item">
-                        <a [routerLink]="['/item', cartLine.item?.id, 'view']">{{cartLine.item?.id}}</a>
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="bofgamesApp.cartLine.cart">Cart</span></dt>
                 <dd>
                     <div *ngIf="cartLine.cart">

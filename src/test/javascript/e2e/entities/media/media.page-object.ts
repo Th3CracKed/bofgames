@@ -27,6 +27,7 @@ export class MediaUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
   urlInput = element(by.id('field_url'));
+  typeSelect = element(by.id('field_type'));
   altInput = element(by.id('field_alt'));
   gameSelect = element(by.id('field_game'));
 
@@ -40,6 +41,21 @@ export class MediaUpdatePage {
 
   async getUrlInput() {
     return await this.urlInput.getAttribute('value');
+  }
+
+  async setTypeSelect(type) {
+    await this.typeSelect.sendKeys(type);
+  }
+
+  async getTypeSelect() {
+    return await this.typeSelect.element(by.css('option:checked')).getText();
+  }
+
+  async typeSelectLastOption(timeout?: number) {
+    await this.typeSelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
   }
 
   async setAltInput(alt) {

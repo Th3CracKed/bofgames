@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="bofgamesApp.promo.home.title">Promos</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-promo" [routerLink]="['/admin/promo/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-promo" [routerLink]="['/promo/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down"  jhiTranslate="bofgamesApp.promo.home.createLabel">
             Create a new Promo
@@ -42,7 +42,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let promo of promos ;trackBy: trackId">
-                <td><a [routerLink]="['/admin/promo', promo.id, 'view' ]">{{promo.id}}</a></td>
+                <td><a [routerLink]="['/promo', promo.id, 'view' ]">{{promo.id}}</a></td>
                 <td>{{promo.sale}}</td>
                 <td>{{promo.start | date:'mediumDate'}}</td>
                 <td>{{promo.end | date:'mediumDate'}}</td>
@@ -54,19 +54,19 @@
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
-                                [routerLink]="['/admin/promo', promo.id, 'view' ]"
+                                [routerLink]="['/promo', promo.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/admin/promo', promo.id, 'edit']"
+                                [routerLink]="['/promo', promo.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/admin/promo', { outlets: { popup: promo.id + '/delete'} }]"
+                                [routerLink]="['/promo', { outlets: { popup: promo.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

@@ -9,6 +9,10 @@ entity Client {
 enum KEYSTATUS {
 	AVAILABLE, RESERVED, BUYED
 }
+
+enum MEDIATYPE {
+	THUMBNAIL, IMAGE, VIDEO
+}
  
 entity Key {
     value String,
@@ -16,7 +20,7 @@ entity Key {
 }
 
 entity Review {
-	mark Integer,
+	mark Integer min(0) max(5),
 	comment String
 }
 
@@ -36,6 +40,7 @@ entity Game {
 
 entity Media {
 	url String,
+    type MEDIATYPE,
     alt String
 }
 
@@ -46,7 +51,8 @@ entity Promo {
 }
 
 entity Platform {
-    name String
+    name String,
+    url String
 }
 
 entity Tag {
@@ -71,14 +77,11 @@ relationship OneToMany {
     Item to Promo,
 	Client{cart} to Cart{driver},
     CartLine to Key,
+    CartLine to Item,
     Cart{cartLine} to CartLine{cart}
 }
 
 relationship ManyToOne {
     Review to Game,
-    Media to Game,
-}
-
-relationship OneToOne {
-    CartLine to Item
+    Media to Game
 }

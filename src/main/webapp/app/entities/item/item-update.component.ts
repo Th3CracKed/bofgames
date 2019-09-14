@@ -7,12 +7,12 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IItem, Item } from 'app/shared/model/item.model';
 import { ItemService } from './item.service';
-import { ICartLine } from 'app/shared/model/cart-line.model';
-import { CartLineService } from 'app/entities/cart-line';
 import { IGame } from 'app/shared/model/game.model';
 import { GameService } from 'app/entities/game';
 import { IPlatform } from 'app/shared/model/platform.model';
 import { PlatformService } from 'app/entities/platform';
+import { ICartLine } from 'app/shared/model/cart-line.model';
+import { CartLineService } from 'app/entities/cart-line';
 
 @Component({
   selector: 'jhi-item-update',
@@ -21,26 +21,27 @@ import { PlatformService } from 'app/entities/platform';
 export class ItemUpdateComponent implements OnInit {
   isSaving: boolean;
 
-  cartlines: ICartLine[];
-
   games: IGame[];
 
   platforms: IPlatform[];
+
+  cartlines: ICartLine[];
 
   editForm = this.fb.group({
     id: [],
     price: [],
     isBuyable: [],
     game: [],
-    platform: []
+    platform: [],
+    cartLine: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected itemService: ItemService,
-    protected cartLineService: CartLineService,
     protected gameService: GameService,
     protected platformService: PlatformService,
+    protected cartLineService: CartLineService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -50,13 +51,6 @@ export class ItemUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ item }) => {
       this.updateForm(item);
     });
-    this.cartLineService
-      .query()
-      .pipe(
-        filter((mayBeOk: HttpResponse<ICartLine[]>) => mayBeOk.ok),
-        map((response: HttpResponse<ICartLine[]>) => response.body)
-      )
-      .subscribe((res: ICartLine[]) => (this.cartlines = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.gameService
       .query()
       .pipe(
@@ -71,6 +65,13 @@ export class ItemUpdateComponent implements OnInit {
         map((response: HttpResponse<IPlatform[]>) => response.body)
       )
       .subscribe((res: IPlatform[]) => (this.platforms = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.cartLineService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<ICartLine[]>) => mayBeOk.ok),
+        map((response: HttpResponse<ICartLine[]>) => response.body)
+      )
+      .subscribe((res: ICartLine[]) => (this.cartlines = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(item: IItem) {
@@ -79,7 +80,8 @@ export class ItemUpdateComponent implements OnInit {
       price: item.price,
       isBuyable: item.isBuyable,
       game: item.game,
-      platform: item.platform
+      platform: item.platform,
+      cartLine: item.cartLine
     });
   }
 
@@ -104,7 +106,8 @@ export class ItemUpdateComponent implements OnInit {
       price: this.editForm.get(['price']).value,
       isBuyable: this.editForm.get(['isBuyable']).value,
       game: this.editForm.get(['game']).value,
-      platform: this.editForm.get(['platform']).value
+      platform: this.editForm.get(['platform']).value,
+      cartLine: this.editForm.get(['cartLine']).value
     };
   }
 
@@ -124,15 +127,15 @@ export class ItemUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  trackCartLineById(index: number, item: ICartLine) {
-    return item.id;
-  }
-
   trackGameById(index: number, item: IGame) {
     return item.id;
   }
 
   trackPlatformById(index: number, item: IPlatform) {
+    return item.id;
+  }
+
+  trackCartLineById(index: number, item: ICartLine) {
     return item.id;
   }
 }

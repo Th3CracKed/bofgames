@@ -29,7 +29,6 @@ export class CartLineUpdatePage {
   quantityInput = element(by.id('field_quantity'));
   unitPriceInput = element(by.id('field_unitPrice'));
   expiredInput = element(by.id('field_expired'));
-  itemSelect = element(by.id('field_item'));
   cartSelect = element(by.id('field_cart'));
 
   async getPageTitle() {
@@ -54,25 +53,6 @@ export class CartLineUpdatePage {
 
   getExpiredInput(timeout?: number) {
     return this.expiredInput;
-  }
-
-  async itemSelectLastOption(timeout?: number) {
-    await this.itemSelect
-      .all(by.tagName('option'))
-      .last()
-      .click();
-  }
-
-  async itemSelectOption(option) {
-    await this.itemSelect.sendKeys(option);
-  }
-
-  getItemSelect(): ElementFinder {
-    return this.itemSelect;
-  }
-
-  async getItemSelectedOption() {
-    return await this.itemSelect.element(by.css('option:checked')).getText();
   }
 
   async cartSelectLastOption(timeout?: number) {

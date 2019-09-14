@@ -5,7 +5,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import { MediaService } from 'app/entities/media/media.service';
-import { IMedia, Media } from 'app/shared/model/media.model';
+import { IMedia, Media, MEDIATYPE } from 'app/shared/model/media.model';
 
 describe('Service Tests', () => {
   describe('Media Service', () => {
@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(MediaService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Media(0, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Media(0, 'AAAAAAA', MEDIATYPE.THUMBNAIL, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -60,6 +60,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             url: 'BBBBBB',
+            type: 'BBBBBB',
             alt: 'BBBBBB'
           },
           elemDefault
@@ -79,6 +80,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             url: 'BBBBBB',
+            type: 'BBBBBB',
             alt: 'BBBBBB'
           },
           elemDefault

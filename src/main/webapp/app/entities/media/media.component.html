@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="bofgamesApp.media.home.title">Media</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-media" [routerLink]="['/admin/media/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-media" [routerLink]="['/media/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down"  jhiTranslate="bofgamesApp.media.home.createLabel">
             Create a new Media
@@ -34,6 +34,7 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="bofgamesApp.media.url">Url</span></th>
+            <th><span jhiTranslate="bofgamesApp.media.type">Type</span></th>
             <th><span jhiTranslate="bofgamesApp.media.alt">Alt</span></th>
             <th><span jhiTranslate="bofgamesApp.media.game">Game</span></th>
             <th></th>
@@ -41,8 +42,9 @@
             </thead>
             <tbody>
             <tr *ngFor="let media of media ;trackBy: trackId">
-                <td><a [routerLink]="['/admin/media', media.id, 'view' ]">{{media.id}}</a></td>
+                <td><a [routerLink]="['/media', media.id, 'view' ]">{{media.id}}</a></td>
                 <td>{{media.url}}</td>
+                <td jhiTranslate="{{'bofgamesApp.MEDIATYPE.' + media.type}}">{{media.type}}</td>
                 <td>{{media.alt}}</td>
                 <td>
                     <div *ngIf="media.game">
@@ -52,19 +54,19 @@
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
-                                [routerLink]="['/admin/media', media.id, 'view' ]"
+                                [routerLink]="['/media', media.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/admin/media', media.id, 'edit']"
+                                [routerLink]="['/media', media.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/admin/media', { outlets: { popup: media.id + '/delete'} }]"
+                                [routerLink]="['/media', { outlets: { popup: media.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

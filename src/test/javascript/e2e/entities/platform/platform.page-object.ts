@@ -27,6 +27,7 @@ export class PlatformUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
   nameInput = element(by.id('field_name'));
+  urlInput = element(by.id('field_url'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -38,6 +39,14 @@ export class PlatformUpdatePage {
 
   async getNameInput() {
     return await this.nameInput.getAttribute('value');
+  }
+
+  async setUrlInput(url) {
+    await this.urlInput.sendKeys(url);
+  }
+
+  async getUrlInput() {
+    return await this.urlInput.getAttribute('value');
   }
 
   async save(timeout?: number) {

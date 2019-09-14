@@ -31,6 +31,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.bof.games.domain.enumeration.MEDIATYPE;
 /**
  * Integration tests for the {@link MediaResource} REST controller.
  */
@@ -39,6 +40,9 @@ public class MediaResourceIT {
 
     private static final String DEFAULT_URL = "AAAAAAAAAA";
     private static final String UPDATED_URL = "BBBBBBBBBB";
+
+    private static final MEDIATYPE DEFAULT_TYPE = MEDIATYPE.THUMBNAIL;
+    private static final MEDIATYPE UPDATED_TYPE = MEDIATYPE.IMAGE;
 
     private static final String DEFAULT_ALT = "AAAAAAAAAA";
     private static final String UPDATED_ALT = "BBBBBBBBBB";
@@ -94,6 +98,7 @@ public class MediaResourceIT {
     public static Media createEntity(EntityManager em) {
         Media media = new Media()
             .url(DEFAULT_URL)
+            .type(DEFAULT_TYPE)
             .alt(DEFAULT_ALT);
         return media;
     }
@@ -106,6 +111,7 @@ public class MediaResourceIT {
     public static Media createUpdatedEntity(EntityManager em) {
         Media media = new Media()
             .url(UPDATED_URL)
+            .type(UPDATED_TYPE)
             .alt(UPDATED_ALT);
         return media;
     }
@@ -131,6 +137,7 @@ public class MediaResourceIT {
         assertThat(mediaList).hasSize(databaseSizeBeforeCreate + 1);
         Media testMedia = mediaList.get(mediaList.size() - 1);
         assertThat(testMedia.getUrl()).isEqualTo(DEFAULT_URL);
+        assertThat(testMedia.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testMedia.getAlt()).isEqualTo(DEFAULT_ALT);
 
         // Validate the Media in Elasticsearch
@@ -172,6 +179,7 @@ public class MediaResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(media.getId().intValue())))
             .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].alt").value(hasItem(DEFAULT_ALT.toString())));
     }
     
@@ -187,6 +195,7 @@ public class MediaResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(media.getId().intValue()))
             .andExpect(jsonPath("$.url").value(DEFAULT_URL.toString()))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.alt").value(DEFAULT_ALT.toString()));
     }
 
@@ -212,6 +221,7 @@ public class MediaResourceIT {
         em.detach(updatedMedia);
         updatedMedia
             .url(UPDATED_URL)
+            .type(UPDATED_TYPE)
             .alt(UPDATED_ALT);
 
         restMediaMockMvc.perform(put("/api/media")
@@ -224,6 +234,7 @@ public class MediaResourceIT {
         assertThat(mediaList).hasSize(databaseSizeBeforeUpdate);
         Media testMedia = mediaList.get(mediaList.size() - 1);
         assertThat(testMedia.getUrl()).isEqualTo(UPDATED_URL);
+        assertThat(testMedia.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testMedia.getAlt()).isEqualTo(UPDATED_ALT);
 
         // Validate the Media in Elasticsearch
@@ -285,6 +296,7 @@ public class MediaResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(media.getId().intValue())))
             .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].alt").value(hasItem(DEFAULT_ALT)));
     }
 

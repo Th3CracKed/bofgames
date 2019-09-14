@@ -39,7 +39,12 @@ describe('Media e2e test', () => {
     const nbButtonsBeforeCreate = await mediaComponentsPage.countDeleteButtons();
 
     await mediaComponentsPage.clickOnCreateButton();
-    await promise.all([mediaUpdatePage.setUrlInput('url'), mediaUpdatePage.setAltInput('alt'), mediaUpdatePage.gameSelectLastOption()]);
+    await promise.all([
+      mediaUpdatePage.setUrlInput('url'),
+      mediaUpdatePage.typeSelectLastOption(),
+      mediaUpdatePage.setAltInput('alt'),
+      mediaUpdatePage.gameSelectLastOption()
+    ]);
     expect(await mediaUpdatePage.getUrlInput()).to.eq('url', 'Expected Url value to be equals to url');
     expect(await mediaUpdatePage.getAltInput()).to.eq('alt', 'Expected Alt value to be equals to alt');
     await mediaUpdatePage.save();

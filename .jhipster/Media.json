@@ -6,6 +6,11 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "type",
+            "fieldType": "MEDIATYPE",
+            "fieldValues": "THUMBNAIL,IMAGE,VIDEO"
+        },
+        {
             "fieldName": "alt",
             "fieldType": "String"
         }

@@ -3,7 +3,13 @@
     "fields": [
         {
             "fieldName": "mark",
-            "fieldType": "Integer"
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": 5
         },
         {
             "fieldName": "comment",

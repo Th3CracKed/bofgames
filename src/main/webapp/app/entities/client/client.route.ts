@@ -33,7 +33,7 @@ export const clientRoute: Routes = [
     path: '',
     component: ClientComponent,
     data: {
-      authorities: ['ROLE_ADMIN'],
+      authorities: ['ROLE_USER'],
       pageTitle: 'bofgamesApp.client.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const clientRoute: Routes = [
       client: ClientResolve
     },
     data: {
-      authorities: ['ROLE_ADMIN'],
+      authorities: ['ROLE_USER'],
       pageTitle: 'bofgamesApp.client.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const clientRoute: Routes = [
       client: ClientResolve
     },
     data: {
-      authorities: ['ROLE_ADMIN'],
+      authorities: ['ROLE_USER'],
       pageTitle: 'bofgamesApp.client.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const clientRoute: Routes = [
       client: ClientResolve
     },
     data: {
-      authorities: ['ROLE_ADMIN'],
+      authorities: ['ROLE_USER'],
       pageTitle: 'bofgamesApp.client.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const clientPopupRoute: Routes = [
       client: ClientResolve
     },
     data: {
-      authorities: ['ROLE_ADMIN'],
+      authorities: ['ROLE_USER'],
       pageTitle: 'bofgamesApp.client.home.title'
     },
     canActivate: [UserRouteAccessService],

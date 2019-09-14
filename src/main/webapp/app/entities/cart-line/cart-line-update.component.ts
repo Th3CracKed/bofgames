@@ -7,8 +7,6 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { ICartLine, CartLine } from 'app/shared/model/cart-line.model';
 import { CartLineService } from './cart-line.service';
-import { IItem } from 'app/shared/model/item.model';
-import { ItemService } from 'app/entities/item';
 import { ICart } from 'app/shared/model/cart.model';
 import { CartService } from 'app/entities/cart';
 
@@ -19,8 +17,6 @@ import { CartService } from 'app/entities/cart';
 export class CartLineUpdateComponent implements OnInit {
   isSaving: boolean;
 
-  items: IItem[];
-
   carts: ICart[];
 
   editForm = this.fb.group({
@@ -28,14 +24,12 @@ export class CartLineUpdateComponent implements OnInit {
     quantity: [],
     unitPrice: [],
     expired: [],
-    item: [],
     cart: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected cartLineService: CartLineService,
-    protected itemService: ItemService,
     protected cartService: CartService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -46,31 +40,6 @@ export class CartLineUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ cartLine }) => {
       this.updateForm(cartLine);
     });
-    this.itemService
-      .query({ filter: 'cartline-is-null' })
-      .pipe(
-        filter((mayBeOk: HttpResponse<IItem[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IItem[]>) => response.body)
-      )
-      .subscribe(
-        (res: IItem[]) => {
-          if (!this.editForm.get('item').value || !this.editForm.get('item').value.id) {
-            this.items = res;
-          } else {
-            this.itemService
-              .find(this.editForm.get('item').value.id)
-              .pipe(
-                filter((subResMayBeOk: HttpResponse<IItem>) => subResMayBeOk.ok),
-                map((subResponse: HttpResponse<IItem>) => subResponse.body)
-              )
-              .subscribe(
-                (subRes: IItem) => (this.items = [subRes].concat(res)),
-                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-              );
-          }
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
     this.cartService
       .query()
       .pipe(
@@ -86,7 +55,6 @@ export class CartLineUpdateComponent implements OnInit {
       quantity: cartLine.quantity,
       unitPrice: cartLine.unitPrice,
       expired: cartLine.expired,
-      item: cartLine.item,
       cart: cartLine.cart
     });
   }
@@ -112,7 +80,6 @@ export class CartLineUpdateComponent implements OnInit {
       quantity: this.editForm.get(['quantity']).value,
       unitPrice: this.editForm.get(['unitPrice']).value,
       expired: this.editForm.get(['expired']).value,
-      item: this.editForm.get(['item']).value,
       cart: this.editForm.get(['cart']).value
     };
   }
@@ -131,10 +98,6 @@ export class CartLineUpdateComponent implements OnInit {
   }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
-  }
-
-  trackItemById(index: number, item: IItem) {
-    return item.id;
   }
 
   trackCartById(index: number, item: ICart) {

@@ -22,6 +22,7 @@ export class MediaUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     url: [],
+    type: [],
     alt: [],
     game: []
   });
@@ -52,6 +53,7 @@ export class MediaUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: media.id,
       url: media.url,
+      type: media.type,
       alt: media.alt,
       game: media.game
     });
@@ -76,6 +78,7 @@ export class MediaUpdateComponent implements OnInit {
       ...new Media(),
       id: this.editForm.get(['id']).value,
       url: this.editForm.get(['url']).value,
+      type: this.editForm.get(['type']).value,
       alt: this.editForm.get(['alt']).value,
       game: this.editForm.get(['game']).value
     };

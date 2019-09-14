@@ -73,6 +73,7 @@ class MediaGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "url":"SAMPLE_TEXT"
+                , "type":"THUMBNAIL"
                 , "alt":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))

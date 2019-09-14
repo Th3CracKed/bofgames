@@ -18,6 +18,7 @@
         "title": "Media"
       },
       "url": "Url",
+      "type": "Type",
       "alt": "Alt",
       "game": "Game"
     }

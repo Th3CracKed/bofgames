@@ -21,9 +21,9 @@
       "isBuyable": "Is Buyable",
       "key": "Key",
       "promo": "Promo",
-      "cartLine": "Cart Line",
       "game": "Game",
-      "platform": "Platform"
+      "platform": "Platform",
+      "cartLine": "Cart Line"
     }
   }
 }

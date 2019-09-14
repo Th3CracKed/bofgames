@@ -1,5 +1,4 @@
 package com.bof.games.domain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -37,10 +36,6 @@ public class Item implements Serializable {
     @OneToMany(mappedBy = "item")
     private Set<Promo> promos = new HashSet<>();
 
-    @OneToOne(mappedBy = "item")
-    @JsonIgnore
-    private CartLine cartLine;
-
     @ManyToOne
     @JsonIgnoreProperties("items")
     private Game game;
@@ -48,6 +43,10 @@ public class Item implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("items")
     private Platform platform;
+
+    @ManyToOne
+    @JsonIgnoreProperties("items")
+    private CartLine cartLine;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -134,19 +133,6 @@ public class Item implements Serializable {
         this.promos = promos;
     }
 
-    public CartLine getCartLine() {
-        return cartLine;
-    }
-
-    public Item cartLine(CartLine cartLine) {
-        this.cartLine = cartLine;
-        return this;
-    }
-
-    public void setCartLine(CartLine cartLine) {
-        this.cartLine = cartLine;
-    }
-
     public Game getGame() {
         return game;
     }
@@ -171,6 +157,19 @@ public class Item implements Serializable {
 
     public void setPlatform(Platform platform) {
         this.platform = platform;
+    }
+
+    public CartLine getCartLine() {
+        return cartLine;
+    }
+
+    public Item cartLine(CartLine cartLine) {
+        this.cartLine = cartLine;
+        return this;
+    }
+
+    public void setCartLine(CartLine cartLine) {
+        this.cartLine = cartLine;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

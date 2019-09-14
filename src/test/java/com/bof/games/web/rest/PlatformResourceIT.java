@@ -40,6 +40,9 @@ public class PlatformResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_URL = "AAAAAAAAAA";
+    private static final String UPDATED_URL = "BBBBBBBBBB";
+
     @Autowired
     private PlatformRepository platformRepository;
 
@@ -90,7 +93,8 @@ public class PlatformResourceIT {
      */
     public static Platform createEntity(EntityManager em) {
         Platform platform = new Platform()
-            .name(DEFAULT_NAME);
+            .name(DEFAULT_NAME)
+            .url(DEFAULT_URL);
         return platform;
     }
     /**
@@ -101,7 +105,8 @@ public class PlatformResourceIT {
      */
     public static Platform createUpdatedEntity(EntityManager em) {
         Platform platform = new Platform()
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .url(UPDATED_URL);
         return platform;
     }
 
@@ -126,6 +131,7 @@ public class PlatformResourceIT {
         assertThat(platformList).hasSize(databaseSizeBeforeCreate + 1);
         Platform testPlatform = platformList.get(platformList.size() - 1);
         assertThat(testPlatform.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testPlatform.getUrl()).isEqualTo(DEFAULT_URL);
 
         // Validate the Platform in Elasticsearch
         verify(mockPlatformSearchRepository, times(1)).save(testPlatform);
@@ -165,7 +171,8 @@ public class PlatformResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(platform.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())));
     }
     
     @Test
@@ -179,7 +186,8 @@ public class PlatformResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(platform.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.url").value(DEFAULT_URL.toString()));
     }
 
     @Test
@@ -203,7 +211,8 @@ public class PlatformResourceIT {
         // Disconnect from session so that the updates on updatedPlatform are not directly saved in db
         em.detach(updatedPlatform);
         updatedPlatform
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .url(UPDATED_URL);
 
         restPlatformMockMvc.perform(put("/api/platforms")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -215,6 +224,7 @@ public class PlatformResourceIT {
         assertThat(platformList).hasSize(databaseSizeBeforeUpdate);
         Platform testPlatform = platformList.get(platformList.size() - 1);
         assertThat(testPlatform.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testPlatform.getUrl()).isEqualTo(UPDATED_URL);
 
         // Validate the Platform in Elasticsearch
         verify(mockPlatformSearchRepository, times(1)).save(testPlatform);
@@ -274,7 +284,8 @@ public class PlatformResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(platform.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL)));
     }
 
     @Test

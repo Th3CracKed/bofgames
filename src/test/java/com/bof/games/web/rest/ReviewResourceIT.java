@@ -37,9 +37,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = BofgamesApp.class)
 public class ReviewResourceIT {
 
-    private static final Integer DEFAULT_MARK = 1;
-    private static final Integer UPDATED_MARK = 2;
-    private static final Integer SMALLER_MARK = 1 - 1;
+    private static final Integer DEFAULT_MARK = 0;
+    private static final Integer UPDATED_MARK = 1;
+    private static final Integer SMALLER_MARK = 0 - 1;
 
     private static final String DEFAULT_COMMENT = "AAAAAAAAAA";
     private static final String UPDATED_COMMENT = "BBBBBBBBBB";

@@ -15,6 +15,14 @@
                            formControlName="url"/>
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="bofgamesApp.media.type" for="field_type">Type</label>
+                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                        <option value="THUMBNAIL">{{'bofgamesApp.MEDIATYPE.THUMBNAIL' | translate}}</option>
+                        <option value="IMAGE">{{'bofgamesApp.MEDIATYPE.IMAGE' | translate}}</option>
+                        <option value="VIDEO">{{'bofgamesApp.MEDIATYPE.VIDEO' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="bofgamesApp.media.alt" for="field_alt">Alt</label>
                     <input type="text" class="form-control" name="alt" id="field_alt"
                            formControlName="alt"/>

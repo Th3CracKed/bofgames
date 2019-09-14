@@ -15,7 +15,8 @@ export class PlatformUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    name: []
+    name: [],
+    url: []
   });
 
   constructor(protected platformService: PlatformService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -30,7 +31,8 @@ export class PlatformUpdateComponent implements OnInit {
   updateForm(platform: IPlatform) {
     this.editForm.patchValue({
       id: platform.id,
-      name: platform.name
+      name: platform.name,
+      url: platform.url
     });
   }
 
@@ -52,7 +54,8 @@ export class PlatformUpdateComponent implements OnInit {
     return {
       ...new Platform(),
       id: this.editForm.get(['id']).value,
-      name: this.editForm.get(['name']).value
+      name: this.editForm.get(['name']).value,
+      url: this.editForm.get(['url']).value
     };
   }
 

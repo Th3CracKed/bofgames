@@ -1,8 +1,8 @@
 package com.bof.games.domain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
@@ -23,6 +23,8 @@ public class Review implements Serializable {
     @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
+    @Min(value = 0)
+    @Max(value = 5)
     @Column(name = "mark")
     private Integer mark;
 
@@ -30,11 +32,11 @@ public class Review implements Serializable {
     private String comment;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonIgnoreProperties("reviews")
     private Game game;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonIgnoreProperties("reviews")
     private Client client;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

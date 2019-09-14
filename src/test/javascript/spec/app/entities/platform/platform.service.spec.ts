@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(PlatformService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Platform(0, 'AAAAAAA');
+      elemDefault = new Platform(0, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -59,7 +59,8 @@ describe('Service Tests', () => {
       it('should update a Platform', async () => {
         const returnedFromService = Object.assign(
           {
-            name: 'BBBBBB'
+            name: 'BBBBBB',
+            url: 'BBBBBB'
           },
           elemDefault
         );
@@ -77,7 +78,8 @@ describe('Service Tests', () => {
       it('should return a list of Platform', async () => {
         const returnedFromService = Object.assign(
           {
-            name: 'BBBBBB'
+            name: 'BBBBBB',
+            url: 'BBBBBB'
           },
           elemDefault
         );

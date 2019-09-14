@@ -25,7 +25,7 @@ export class ReviewUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    mark: [],
+    mark: [null, [Validators.min(0), Validators.max(5)]],
     comment: [],
     game: [],
     client: []

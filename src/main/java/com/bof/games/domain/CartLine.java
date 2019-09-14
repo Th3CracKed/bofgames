@@ -33,12 +33,11 @@ public class CartLine implements Serializable {
     @Column(name = "expired")
     private Boolean expired;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Item item;
-
     @OneToMany(mappedBy = "cartLine")
     private Set<Key> keys = new HashSet<>();
+
+    @OneToMany(mappedBy = "cartLine")
+    private Set<Item> items = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("cartLines")
@@ -92,19 +91,6 @@ public class CartLine implements Serializable {
         this.expired = expired;
     }
 
-    public Item getItem() {
-        return item;
-    }
-
-    public CartLine item(Item item) {
-        this.item = item;
-        return this;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
     public Set<Key> getKeys() {
         return keys;
     }
@@ -128,6 +114,31 @@ public class CartLine implements Serializable {
 
     public void setKeys(Set<Key> keys) {
         this.keys = keys;
+    }
+
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public CartLine items(Set<Item> items) {
+        this.items = items;
+        return this;
+    }
+
+    public CartLine addItem(Item item) {
+        this.items.add(item);
+        item.setCartLine(this);
+        return this;
+    }
+
+    public CartLine removeItem(Item item) {
+        this.items.remove(item);
+        item.setCartLine(null);
+        return this;
+    }
+
+    public void setItems(Set<Item> items) {
+        this.items = items;
     }
 
     public Cart getCart() {
