@@ -5,6 +5,8 @@ import { Item } from 'app/shared/model/item.model';
 import { CookieService } from 'ngx-cookie';
 import { AccountService } from 'app/core';
 import { Client } from 'app/shared/model/client.model';
+import { Cart } from 'app/shared/model/cart.model';
+import { CartLine } from 'app/shared/model/cart-line.model';
 
 @Component({
   selector: 'jhi-detail',
@@ -54,6 +56,30 @@ export class ItemDetailComponent implements OnInit {
       });
     } else {
       console.log('not auth');
+      let panier: Cart;
+      panier = this.coockies.getObject('panier');
+      console.log(panier);
+      if (panier === undefined) {
+        // cookie not present
+        panier = new Cart(0, false, null, null);
+        const cartLine: CartLine = new CartLine(null, 1, this.item.price, false, this.item, null, null);
+        panier.cartLines = [cartLine];
+        this.coockies.putObject('panier', panier);
+      } else {
+        // cookie present
+        let itemPresent = false;
+        panier.cartLines.forEach(element => {
+          if (element.item.id === this.item.id) {
+            element.quantity++;
+            itemPresent = true;
+          }
+        });
+        if (!itemPresent) {
+          const cartLine: CartLine = new CartLine(null, 1, this.item.price, false, this.item, null, null);
+          panier.cartLines.push(cartLine);
+        }
+        this.coockies.putObject('panier', panier);
+      }
     }
   }
 
