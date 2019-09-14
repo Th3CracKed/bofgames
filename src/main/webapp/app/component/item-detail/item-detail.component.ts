@@ -46,7 +46,11 @@ export class ItemDetailComponent implements OnInit {
     if (this.isAuthenticated()) {
       console.log('auth');
       this.accountService.identity().then(account => {
-        this.itemDetailService.addToCart((<Client>(<any>account)).id, this.item.id);
+        if (this.itemDetailService.addToCart((<Client>(<any>account)).id, this.item.id)) {
+          document.getElementById('panier').setAttribute('disabled', 'false');
+        } else {
+          alert("Erreur pendant l'ajout au panier ou l'augmentation de la quantité");
+        }
       });
     } else {
       console.log('not auth');
