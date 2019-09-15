@@ -25,6 +25,8 @@ import { ItemListComponent } from './component/item-list/item-list.component';
 import { ItemDetailComponent } from './component/item-detail/item-detail.component';
 import { FillPipe } from './pipes/fill.pipe';
 import { UserProfilComponent } from './component/user-profil/user-profil.component';
+import { CartComponent } from './component/cart/cart.component';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 
 @NgModule({
   imports: [
@@ -56,7 +58,9 @@ import { UserProfilComponent } from './component/user-profil/user-profil.compone
     ItemListComponent,
     ItemDetailComponent,
     FillPipe,
-    UserProfilComponent
+    UserProfilComponent,
+    CartComponent,
+    SidebarComponent
   ],
   providers: [
     {

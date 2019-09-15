@@ -9,17 +9,19 @@ import { Item } from 'app/shared/model/item.model';
 })
 export class ItemListComponent implements OnInit {
   items: Item[] = [];
-  mark = 0;
+  marks: number[] = [];
 
   constructor(private itemListService: ItemListService) {}
 
   ngOnInit() {
     this.itemListService.GetItems().subscribe(items => {
       this.items = items;
-      console.log(' mon resultat   est : ' + JSON.stringify(this.items));
+      //console.log(' mon resultat   est : ' + JSON.stringify(this.items));
       for (let index = 0; index < items.length; index++) {
         this.calculateMark(items[index]);
+        console.log();
       }
+      // this.calculateMark(items[0]);
     });
   }
 
@@ -28,8 +30,11 @@ export class ItemListComponent implements OnInit {
     item.game.reviews.forEach(review => (markTotal += review.mark || 0));
     console.log(`markTotal = ${markTotal}`);
     if (item.game.reviews && item.game.reviews.length !== 0) {
-      this.mark = Math.floor(markTotal / item.game.reviews.length);
+      this.marks[item.game.id] = Math.floor(markTotal / item.game.reviews.length);
+    } else {
+      this.marks[item.game.id] = 0;
     }
-    console.log(`this.mark = ${this.mark}`);
+    console.log(`game id = ${item.game.id}`);
+    console.log(`note = ${this.marks[item.game.id]}`);
   }
 }

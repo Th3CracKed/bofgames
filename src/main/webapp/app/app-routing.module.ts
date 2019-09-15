@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { errorRoute, navbarRoute } from './layouts';
+import { errorRoute, navbarRoute, sidebarRoute } from './layouts';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { TestComponent } from './test';
 import { ItemDetailComponent } from './component/item-detail/item-detail.component';
 import { ItemListComponent } from './component/item-list/item-list.component';
 import { UserProfilComponent } from './component/user-profil/user-profil.component';
-const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
-
+import { CartComponent } from './component/cart/cart.component';
+const LAYOUT_ROUTES = [navbarRoute, sidebarRoute, ...errorRoute];
 @NgModule({
   imports: [
     RouterModule.forRoot(
@@ -19,6 +19,10 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         {
           path: 'profil',
           component: UserProfilComponent
+        },
+        {
+          path: 'shopingCart',
+          component: CartComponent
         },
         {
           path: 'games/:id',

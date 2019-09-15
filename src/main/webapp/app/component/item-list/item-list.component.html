@@ -6,8 +6,8 @@
   <div *ngFor="let item of items;" class="row gameItem">
     <a href="/games/{{item.id}}" class="col col-xs-3 col-md-3" id="game_cover">
     <div class="img-hover-zoom">
-        <img src="{{item.game.media[0].url}}" alt="{{item.game.media[0].alt}}">
         <img *ngIf="!item.game.media[0]" src="https://www.kasterencultuur.nl/editor/placeholder.jpg" alt="Image not found" />
+        <img *ngIf="item.game.media[0]" src="{{item.game.media[0].url}}" alt="{{item.game.media[0].alt}}">
     </div>
     </a>
     <div class="col col-md-9">
@@ -20,10 +20,10 @@
       <div class="row rating">
 
         <h6>Note : </h6>
-        <span *ngFor="let m of mark | fill">
+        <span *ngFor="let m of marks[item.game.id] | fill">
           <i class="fa fa-star" aria-hidden="true"></i>
         </span>
-        <span *ngFor="let m of (5 - mark) | fill">
+        <span *ngFor="let m of (5 - marks[item.game.id]) | fill">
           <i class="fa fa-star-o" aria-hidden="true"></i>
         </span>
 
