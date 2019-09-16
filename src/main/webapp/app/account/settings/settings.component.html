@@ -8,9 +8,12 @@
             </div>
 
             <jhi-alert-error></jhi-alert-error>
+            <div class="alert alert-warning" *ngIf="!hasClient" jhiTranslate="settings.form.noClient">
+                This user is not attached to client
+            </div>
 
             <form name="form" role="form" (ngSubmit)="save()" [formGroup]="settingsForm" *ngIf="settingsForm.get('login').value" novalidate>
-
+                
                 <div class="form-group">
                     <label class="form-control-label" for="firstName" jhiTranslate="settings.form.firstname">First Name</label>
                     <input type="text" class="form-control" id="firstName" name="firstName" placeholder="{{'settings.form.firstname.placeholder' | translate}}"
@@ -72,12 +75,54 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group" *ngIf="languages && languages.length > 0">
+                <!--<div class="form-group" *ngIf="languages && languages.length > 0">
                     <label for="langKey" jhiTranslate="settings.form.language">Language</label>
                     <select class="form-control" id="langKey" name="langKey" formControlName="langKey">
                         <option *ngFor="let language of languages" [value]="language">{{language | findLanguageFromKey}}</option>
                     </select>
+                </div>-->
+            <div *ngIf="hasClient">
+                <div class="form-group" [hidden]="true">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                                readonly />
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="settings.form.street" for="street">Street</label>
+                    <input type="text" class="form-control" name="street" id="street"
+                           formControlName="street"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="settings.form.postCode" for="postCode">Post Code</label>
+                    <input type="text" class="form-control" name="postCode" id="postCode"
+                           formControlName="postCode"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="settings.form.city" for="city">City</label>
+                    <input type="text" class="form-control" name="city" id="city"
+                           formControlName="city"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="settings.form.country" for="country">Country</label>
+                    <input type="text" class="form-control" name="country" id="country"
+                           formControlName="country"/>
+                </div>
+                <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="bofgamesApp.client.birthdate" for="field_birthdate">Birthdate</label>
+                        <div class="input-group">
+                            <input id="field_birthdate" type="text" class="form-control" name="birthdate" ngbDatepicker  #birthdateDp="ngbDatepicker" formControlName="birthdate"/>
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-secondary" (click)="birthdateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                            </span>
+                        </div>
+                </div>
+                
+                <div class="form-group" [hidden]="true">
+                        <label class="form-control-label" jhiTranslate="settings.form.user" for="user">User</label>
+                        <input type="text" class="form-control" name="user" id="user"
+                           formControlName="user" readonly/>
+                    </div>
+            </div>
                 <button type="submit" [disabled]="settingsForm.invalid" class="btn btn-primary" jhiTranslate="settings.form.button">Save</button>
             </form>
         </div>

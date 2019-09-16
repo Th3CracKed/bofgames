@@ -2,12 +2,19 @@
   "settings": {
     "title": "Profil de l'utilisateur [<strong>{{username}}</strong>]",
     "form": {
+      "noClient": "Cet utilisateur n'est attaché à aucun client",
       "firstname": "Prénom",
       "firstname.placeholder": "Votre prénom",
       "lastname": "Nom",
       "lastname.placeholder": "Votre nom",
       "language": "Langue",
-      "button": "Sauvegarder"
+      "button": "Sauvegarder",
+      "street": "Rue",
+      "postCode": "Code postale",
+      "city": "Ville",
+      "country": "Pays",
+      "birthdate": "Date de naissance",
+      "user": "Utilisateur"
     },
     "messages": {
       "error": {
