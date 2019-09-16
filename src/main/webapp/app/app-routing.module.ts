@@ -7,6 +7,8 @@ import { ItemDetailComponent } from './component/item-detail/item-detail.compone
 import { ItemListComponent } from './component/item-list/item-list.component';
 import { UserProfilComponent } from './component/user-profil/user-profil.component';
 import { CartComponent } from './component/cart/cart.component';
+import { OrderHistoryComponent } from './component/order-history/order-history.component';
+import { GridTestComponent } from './component/grid-test/grid-test.component';
 const LAYOUT_ROUTES = [navbarRoute, sidebarRoute, ...errorRoute];
 @NgModule({
   imports: [
@@ -23,6 +25,14 @@ const LAYOUT_ROUTES = [navbarRoute, sidebarRoute, ...errorRoute];
         {
           path: 'shopingCart',
           component: CartComponent
+        },
+        {
+          path: 'gridViewTest',
+          component: GridTestComponent
+        },
+        {
+          path: 'orderHistory',
+          component: OrderHistoryComponent
         },
         {
           path: 'games/:id',
