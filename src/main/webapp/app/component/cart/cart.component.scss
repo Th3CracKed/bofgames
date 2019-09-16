@@ -2,11 +2,27 @@
   margin-bottom: 5px;
 }
 
-.shoppingCardTable {
-  position: relative;
-  height: 400px;
-  overflow: auto;
+html,
+body {
+  height: 100%;
+  margin: 0;
 }
-.table-wrapper-scroll-y {
-  display: block;
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#headerCard {
+  padding-top: 70px; //todo
+  transition: 0.5s;
+}
+
+.footerCard {
+  padding-top: 5px;
+}
+
+.content {
+  flex: 1;
+  overflow: auto;
 }

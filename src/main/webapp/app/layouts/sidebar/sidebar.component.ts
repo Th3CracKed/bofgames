@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShoppingService } from 'app/service/shopping-view.service';
 
 @Component({
   selector: 'jhi-sidebar',
@@ -6,19 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  constructor() {}
+  // constructor() {}
+
+  constructor(private shopservice: ShoppingService) {}
 
   ngOnInit() {}
 
   openNav() {
-    document.getElementById('mySidenav').style.width = '550px';
-    //document.getElementById('mainPage').style.marginRight = '250px';
-    document.getElementById('openSideBarShop').style.display = 'none';
+    this.shopservice.openNav();
   }
 
   closeNav() {
-    document.getElementById('mySidenav').style.width = '0';
-    document.getElementById('openSideBarShop').style.display = 'block';
-    //document.getElementById('mainPage').style.marginRight = '0';
+    this.shopservice.closeNav();
   }
 }
