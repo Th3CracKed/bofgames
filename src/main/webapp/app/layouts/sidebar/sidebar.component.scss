@@ -1,17 +1,28 @@
 .sidenav {
-  height: 70%;
+  height: 100%;
   width: 0;
-  margin-top: 10%;
   position: fixed;
-  z-index: 99;
+  z-index: 0;
   top: 0;
   right: 0;
   background-color: #dddddd;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-radius: 3px;
+}
+
+@media only screen and (min-width: 1000px) {
+  .showShopping {
+    width: 500px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .showShopping {
+    width: 100%;
+    z-index: 49;
+  }
 }
 
 .sidenav a {
@@ -53,7 +64,7 @@
   position: fixed;
   right: 20px;
   top: 15%;
-  z-index: 20;
+  z-index: 2;
   width: 100px;
   text-align: center;
 }

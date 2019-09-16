@@ -3,11 +3,11 @@
     <router-outlet name="navbar"></router-outlet>
 </div>
 <div class="container-fluid">
-        <router-outlet name="sidebar"></router-outlet>
-    <div class="card jh-card" id="mainPage">
-        <router-outlet></router-outlet>
-        <router-outlet name="popup"></router-outlet>
-        
-    </div>
+    <router-outlet name="sidebar"></router-outlet>
+        <div class="card jh-card" id="mainPage" (wheel)="onMouseWheel($event)">
+            <router-outlet></router-outlet>
+            <router-outlet name="popup"></router-outlet>
+        </div>
+    
     <jhi-footer></jhi-footer>
 </div>
