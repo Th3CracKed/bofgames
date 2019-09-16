@@ -26,6 +26,13 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="bofgamesApp.cartLine.item" for="field_item">Item</label>
+                    <select class="form-control" id="field_item" name="item" formControlName="item">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="itemOption.id === editForm.get('item').value?.id ? editForm.get('item').value : itemOption" *ngFor="let itemOption of items; trackBy: trackItemById">{{itemOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="bofgamesApp.cartLine.cart" for="field_cart">Cart</label>
                     <select class="form-control" id="field_cart" name="cart" formControlName="cart">
                         <option [ngValue]="null"></option>

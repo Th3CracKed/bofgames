@@ -42,8 +42,7 @@ describe('Item e2e test', () => {
     await promise.all([
       itemUpdatePage.setPriceInput('5'),
       itemUpdatePage.gameSelectLastOption(),
-      itemUpdatePage.platformSelectLastOption(),
-      itemUpdatePage.cartLineSelectLastOption()
+      itemUpdatePage.platformSelectLastOption()
     ]);
     expect(await itemUpdatePage.getPriceInput()).to.eq('5', 'Expected price value to be equals to 5');
     const selectedIsBuyable = itemUpdatePage.getIsBuyableInput();

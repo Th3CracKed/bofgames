@@ -22,10 +22,11 @@
             "relationshipName": "key"
         },
         {
-            "relationshipType": "one-to-many",
+            "relationshipType": "many-to-one",
             "otherEntityName": "item",
             "otherEntityRelationshipName": "cartLine",
-            "relationshipName": "item"
+            "relationshipName": "item",
+            "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",

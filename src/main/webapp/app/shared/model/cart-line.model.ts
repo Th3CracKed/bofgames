@@ -8,7 +8,7 @@ export interface ICartLine {
   unitPrice?: number;
   expired?: boolean;
   keys?: IKey[];
-  items?: IItem[];
+  item?: IItem;
   cart?: ICart;
 }
 
@@ -19,7 +19,7 @@ export class CartLine implements ICartLine {
     public unitPrice?: number,
     public expired?: boolean,
     public keys?: IKey[],
-    public items?: IItem[],
+    public item?: IItem,
     public cart?: ICart
   ) {
     this.expired = this.expired || false;

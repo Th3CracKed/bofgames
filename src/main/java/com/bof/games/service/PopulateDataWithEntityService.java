@@ -21,8 +21,10 @@ public class PopulateDataWithEntityService {
     private final TagRepository tagRepository;
     private final KeyRepository keyRepository;
     private final MediaRepository mediaRepository;
+    private final CartLineRepository cartLineRepository;
+    private final CartRepository cartRepository;
 
-    public PopulateDataWithEntityService(PlatformRepository platformRepository, GameRepository gameRepository, ItemRepository itemRepository, UserRepository userRepository, ClientRepository clientRepository, TagRepository tagRepository, KeyRepository keyRepository, MediaRepository mediaRepository) {
+    public PopulateDataWithEntityService(PlatformRepository platformRepository, GameRepository gameRepository, ItemRepository itemRepository, UserRepository userRepository, ClientRepository clientRepository, TagRepository tagRepository, KeyRepository keyRepository, MediaRepository mediaRepository, CartLineRepository cartLineRepository, CartRepository cartRepository) {
         this.platformRepository = platformRepository;
         this.gameRepository = gameRepository;
         this.itemRepository = itemRepository;
@@ -31,20 +33,25 @@ public class PopulateDataWithEntityService {
         this.tagRepository = tagRepository;
         this.keyRepository = keyRepository;
         this.mediaRepository = mediaRepository;
+        this.cartLineRepository = cartLineRepository;
+        this.cartRepository = cartRepository;
     }
 
 
     @PostConstruct
     public void initEntities() {
-        // clean database
-        mediaRepository.deleteAll();
-        keyRepository.deleteAll();
-        itemRepository.deleteAll();
-        platformRepository.deleteAll();
-        gameRepository.deleteAll();
-        clientRepository.deleteAll();
-        tagRepository.deleteAll();
-
+        try {
+            // clean database
+            mediaRepository.deleteAll();
+            keyRepository.deleteAll();
+            itemRepository.deleteAll();
+            platformRepository.deleteAll();
+            tagRepository.deleteAll();
+            gameRepository.deleteAll();
+            cartLineRepository.deleteAll();
+            cartRepository.deleteAll();
+            clientRepository.deleteAll();
+        }catch (Exception ignored){}
         platformRepository.save(new Platform().name("PS"));
         platformRepository.save(new Platform().name("PC"));
         platformRepository.save(new Platform().name("Xbox"));
@@ -80,23 +87,19 @@ public class PopulateDataWithEntityService {
         mediaRepository.save(new Media().url("http://image.jeuxvideo.com/medias-sm/151627/1516269237-1224-jaquette-avant.jpg").alt("Greedfall logo").game(games.get(1)));
         mediaRepository.save(new Media().url("http://image.jeuxvideo.com/medias-sm/155724/1557239235-3469-jaquette-avant.jpg").alt("Borderlands 3").game(games.get(2)));
         // Create users
-        if(!userRepository.findOneByLogin("user1").isPresent()) {
-            userRepository.saveAndFlush(CreateUser("user1","dollie.guerra@mail.com","Dollie","Guerra"));
-        }
-        if(!userRepository.findOneByLogin("user2").isPresent()) {
-            userRepository.saveAndFlush(CreateUser("user2","Cristiano.Rosales@mail.com","Cristiano","Rosales"));
-        }
-        if(!userRepository.findOneByLogin("user3").isPresent()) {
-            userRepository.saveAndFlush(CreateUser("user3", "Kitty.Solis@mail.com", "Kitty", "Solis"));
-        }
+        CreateAndSaveUser("user1","dollie.guerra@mail.com","Dollie","Guerra");
+        CreateAndSaveUser("user2","Cristiano.Rosales@mail.com","Cristiano","Rosales");
+        CreateAndSaveUser("user3", "Kitty.Solis@mail.com", "Kitty", "Solis");
 
         // create client with theirs users
         /*for (User user : userRepository.findAll()) {
-            clientRepository.save(new Client());
+            Client client = new Client();
+            client.setUser(user);
+            clientRepository.save(client);
         }*/
     }
 
-    private User CreateUser(String login, String email, String first_name, String last_name){
+    private void CreateAndSaveUser(String login, String email, String first_name, String last_name){
         User user = new User();
         user.setLogin(login);
         user.setEmail(email);
@@ -110,7 +113,9 @@ public class PopulateDataWithEntityService {
         user.setAuthorities(authorities);
         user.setPassword("$2a$10$krj23Ztki8Mn/BrPyURTgOMQTD0TyWeuCurUEvf/.a.Fo3Rw6v2oq");
         user.setCreatedBy("auto_generated");
-        return user;
+        if(!userRepository.findOneByLogin(login).isPresent()) {
+            userRepository.saveAndFlush(user);
+        }
     }
 
 }

@@ -42,6 +42,7 @@ describe('CartLine e2e test', () => {
     await promise.all([
       cartLineUpdatePage.setQuantityInput('5'),
       cartLineUpdatePage.setUnitPriceInput('5'),
+      cartLineUpdatePage.itemSelectLastOption(),
       cartLineUpdatePage.cartSelectLastOption()
     ]);
     expect(await cartLineUpdatePage.getQuantityInput()).to.eq('5', 'Expected quantity value to be equals to 5');

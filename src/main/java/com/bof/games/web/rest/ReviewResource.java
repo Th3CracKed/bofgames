@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -54,7 +55,7 @@ public class ReviewResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/reviews")
-    public ResponseEntity<Review> createReview(@RequestBody Review review) throws URISyntaxException {
+    public ResponseEntity<Review> createReview(@Valid @RequestBody Review review) throws URISyntaxException {
         log.debug("REST request to save Review : {}", review);
         if (review.getId() != null) {
             throw new BadRequestAlertException("A new review cannot already have an ID", ENTITY_NAME, "idexists");
@@ -76,7 +77,7 @@ public class ReviewResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/reviews")
-    public ResponseEntity<Review> updateReview(@RequestBody Review review) throws URISyntaxException {
+    public ResponseEntity<Review> updateReview(@Valid @RequestBody Review review) throws URISyntaxException {
         log.debug("REST request to update Review : {}", review);
         if (review.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

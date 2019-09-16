@@ -27,6 +27,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="item_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <column name="cart_id" type="bigint">
                 <constraints nullable="true" />
             </column>

@@ -15,6 +15,12 @@
             "relationshipName": "promo"
         },
         {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "cartLine",
+            "otherEntityRelationshipName": "item",
+            "relationshipName": "cartLine"
+        },
+        {
             "relationshipType": "many-to-one",
             "otherEntityName": "game",
             "otherEntityRelationshipName": "item",
@@ -26,13 +32,6 @@
             "otherEntityName": "platform",
             "otherEntityRelationshipName": "item",
             "relationshipName": "platform",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "cartLine",
-            "otherEntityRelationshipName": "item",
-            "relationshipName": "cartLine",
             "otherEntityField": "id"
         }
     ],

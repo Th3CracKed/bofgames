@@ -93,18 +93,10 @@ public class ItemResource {
      * {@code GET  /items} : get all the items.
      *
 
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of items in body.
      */
     @GetMapping("/items")
-    public List<Item> getAllItems(@RequestParam(required = false) String filter) {
-        if ("cartline-is-null".equals(filter)) {
-            log.debug("REST request to get all Items where cartLine is null");
-            return StreamSupport
-                .stream(itemRepository.findAll().spliterator(), false)
-                .filter(item -> item.getCartLine() == null)
-                .collect(Collectors.toList());
-        }
+    public List<Item> getAllItems() {
         log.debug("REST request to get all Items");
         return itemRepository.findAll();
     }
@@ -112,19 +104,10 @@ public class ItemResource {
     /**
      * {@code GET  /itemsList} : get all the items.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of items in body.
      */
     @GetMapping("/itemsList")
-    public List<Item> getAllItemsList(@RequestParam(required = false) String filter) {
-        if ("cartline-is-null".equals(filter)) {
-            log.debug("REST request to get all Items where cartLine is null");
-            return StreamSupport
-                .stream(itemRepository.findAll().spliterator(), false)
-                .filter(item -> item.getCartLine() == null)
-                .collect(Collectors.toList());
-        }
-        log.debug("REST request to get all Items");
+    public List<Item> getAllItemsList() {
 
         List<Item> items = itemRepository.findAll();
         for(Item item : items ){

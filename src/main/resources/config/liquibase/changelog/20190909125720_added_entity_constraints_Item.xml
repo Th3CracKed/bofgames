@@ -20,11 +20,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="platform"/>
 
-        <addForeignKeyConstraint baseColumnNames="cart_line_id"
-                                 baseTableName="item"
-                                 constraintName="fk_item_cart_line_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="cart_line"/>
-
     </changeSet>
 </databaseChangeLog>

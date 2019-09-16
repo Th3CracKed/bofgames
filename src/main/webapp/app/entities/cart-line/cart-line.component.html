@@ -36,6 +36,7 @@
             <th><span jhiTranslate="bofgamesApp.cartLine.quantity">Quantity</span></th>
             <th><span jhiTranslate="bofgamesApp.cartLine.unitPrice">Unit Price</span></th>
             <th><span jhiTranslate="bofgamesApp.cartLine.expired">Expired</span></th>
+            <th><span jhiTranslate="bofgamesApp.cartLine.item">Item</span></th>
             <th><span jhiTranslate="bofgamesApp.cartLine.cart">Cart</span></th>
             <th></th>
             </tr>
@@ -46,6 +47,11 @@
                 <td>{{cartLine.quantity}}</td>
                 <td>{{cartLine.unitPrice}}</td>
                 <td>{{cartLine.expired}}</td>
+                <td>
+                    <div *ngIf="cartLine.item">
+                        <a [routerLink]="['/item', cartLine.item?.id, 'view' ]" >{{cartLine.item?.id}}</a>
+                    </div>
+                </td>
                 <td>
                     <div *ngIf="cartLine.cart">
                         <a [routerLink]="['/cart', cartLine.cart?.id, 'view' ]" >{{cartLine.cart?.id}}</a>

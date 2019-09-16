@@ -36,8 +36,9 @@ public class CartLine implements Serializable {
     @OneToMany(mappedBy = "cartLine")
     private Set<Key> keys = new HashSet<>();
 
-    @OneToMany(mappedBy = "cartLine")
-    private Set<Item> items = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties("cartLines")
+    private Item item;
 
     @ManyToOne
     @JsonIgnoreProperties("cartLines")
@@ -116,29 +117,17 @@ public class CartLine implements Serializable {
         this.keys = keys;
     }
 
-    public Set<Item> getItems() {
-        return items;
+    public Item getItem() {
+        return item;
     }
 
-    public CartLine items(Set<Item> items) {
-        this.items = items;
+    public CartLine item(Item item) {
+        this.item = item;
         return this;
     }
 
-    public CartLine addItem(Item item) {
-        this.items.add(item);
-        item.setCartLine(this);
-        return this;
-    }
-
-    public CartLine removeItem(Item item) {
-        this.items.remove(item);
-        item.setCartLine(null);
-        return this;
-    }
-
-    public void setItems(Set<Item> items) {
-        this.items = items;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public Cart getCart() {

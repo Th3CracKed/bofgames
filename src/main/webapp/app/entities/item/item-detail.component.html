@@ -25,12 +25,6 @@
                         <a [routerLink]="['/platform', item.platform?.id, 'view']">{{item.platform?.id}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="bofgamesApp.item.cartLine">Cart Line</span></dt>
-                <dd>
-                    <div *ngIf="item.cartLine">
-                        <a [routerLink]="['/cart-line', item.cartLine?.id, 'view']">{{item.cartLine?.id}}</a>
-                    </div>
-                </dd>
             </dl>
 
             <button type="submit"

@@ -11,8 +11,6 @@ import { IGame } from 'app/shared/model/game.model';
 import { GameService } from 'app/entities/game';
 import { IPlatform } from 'app/shared/model/platform.model';
 import { PlatformService } from 'app/entities/platform';
-import { ICartLine } from 'app/shared/model/cart-line.model';
-import { CartLineService } from 'app/entities/cart-line';
 
 @Component({
   selector: 'jhi-item-update',
@@ -25,15 +23,12 @@ export class ItemUpdateComponent implements OnInit {
 
   platforms: IPlatform[];
 
-  cartlines: ICartLine[];
-
   editForm = this.fb.group({
     id: [],
     price: [],
     isBuyable: [],
     game: [],
-    platform: [],
-    cartLine: []
+    platform: []
   });
 
   constructor(
@@ -41,7 +36,6 @@ export class ItemUpdateComponent implements OnInit {
     protected itemService: ItemService,
     protected gameService: GameService,
     protected platformService: PlatformService,
-    protected cartLineService: CartLineService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -65,13 +59,6 @@ export class ItemUpdateComponent implements OnInit {
         map((response: HttpResponse<IPlatform[]>) => response.body)
       )
       .subscribe((res: IPlatform[]) => (this.platforms = res), (res: HttpErrorResponse) => this.onError(res.message));
-    this.cartLineService
-      .query()
-      .pipe(
-        filter((mayBeOk: HttpResponse<ICartLine[]>) => mayBeOk.ok),
-        map((response: HttpResponse<ICartLine[]>) => response.body)
-      )
-      .subscribe((res: ICartLine[]) => (this.cartlines = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(item: IItem) {
@@ -80,8 +67,7 @@ export class ItemUpdateComponent implements OnInit {
       price: item.price,
       isBuyable: item.isBuyable,
       game: item.game,
-      platform: item.platform,
-      cartLine: item.cartLine
+      platform: item.platform
     });
   }
 
@@ -106,8 +92,7 @@ export class ItemUpdateComponent implements OnInit {
       price: this.editForm.get(['price']).value,
       isBuyable: this.editForm.get(['isBuyable']).value,
       game: this.editForm.get(['game']).value,
-      platform: this.editForm.get(['platform']).value,
-      cartLine: this.editForm.get(['cartLine']).value
+      platform: this.editForm.get(['platform']).value
     };
   }
 
@@ -132,10 +117,6 @@ export class ItemUpdateComponent implements OnInit {
   }
 
   trackPlatformById(index: number, item: IPlatform) {
-    return item.id;
-  }
-
-  trackCartLineById(index: number, item: ICartLine) {
     return item.id;
   }
 }

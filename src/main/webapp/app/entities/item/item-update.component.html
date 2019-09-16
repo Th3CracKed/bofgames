@@ -34,13 +34,6 @@
                         <option [ngValue]="platformOption.id === editForm.get('platform').value?.id ? editForm.get('platform').value : platformOption" *ngFor="let platformOption of platforms; trackBy: trackPlatformById">{{platformOption.id}}</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="bofgamesApp.item.cartLine" for="field_cartLine">Cart Line</label>
-                    <select class="form-control" id="field_cartLine" name="cartLine" formControlName="cartLine">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="cartLineOption.id === editForm.get('cartLine').value?.id ? editForm.get('cartLine').value : cartLineOption" *ngFor="let cartLineOption of cartlines; trackBy: trackCartLineById">{{cartLineOption.id}}</option>
-                    </select>
-                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

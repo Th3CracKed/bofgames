@@ -36,6 +36,9 @@ public class Item implements Serializable {
     @OneToMany(mappedBy = "item")
     private Set<Promo> promos = new HashSet<>();
 
+    @OneToMany(mappedBy = "item")
+    private Set<CartLine> cartLines = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties("items")
     private Game game;
@@ -43,10 +46,6 @@ public class Item implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("items")
     private Platform platform;
-
-    @ManyToOne
-    @JsonIgnoreProperties("items")
-    private CartLine cartLine;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -133,6 +132,31 @@ public class Item implements Serializable {
         this.promos = promos;
     }
 
+    public Set<CartLine> getCartLines() {
+        return cartLines;
+    }
+
+    public Item cartLines(Set<CartLine> cartLines) {
+        this.cartLines = cartLines;
+        return this;
+    }
+
+    public Item addCartLine(CartLine cartLine) {
+        this.cartLines.add(cartLine);
+        cartLine.setItem(this);
+        return this;
+    }
+
+    public Item removeCartLine(CartLine cartLine) {
+        this.cartLines.remove(cartLine);
+        cartLine.setItem(null);
+        return this;
+    }
+
+    public void setCartLines(Set<CartLine> cartLines) {
+        this.cartLines = cartLines;
+    }
+
     public Game getGame() {
         return game;
     }
@@ -157,19 +181,6 @@ public class Item implements Serializable {
 
     public void setPlatform(Platform platform) {
         this.platform = platform;
-    }
-
-    public CartLine getCartLine() {
-        return cartLine;
-    }
-
-    public Item cartLine(CartLine cartLine) {
-        this.cartLine = cartLine;
-        return this;
-    }
-
-    public void setCartLine(CartLine cartLine) {
-        this.cartLine = cartLine;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

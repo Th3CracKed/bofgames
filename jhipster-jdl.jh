@@ -13,7 +13,7 @@ enum KEYSTATUS {
 enum MEDIATYPE {
 	THUMBNAIL, IMAGE, VIDEO
 }
- 
+
 entity Key {
     value String,
     status KEYSTATUS
@@ -77,7 +77,7 @@ relationship OneToMany {
     Item to Promo,
 	Client{cart} to Cart{driver},
     CartLine to Key,
-    CartLine to Item,
+    Item to CartLine,
     Cart{cartLine} to CartLine{cart}
 }
 

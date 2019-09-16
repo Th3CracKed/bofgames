@@ -37,7 +37,6 @@
             <th><span jhiTranslate="bofgamesApp.item.isBuyable">Is Buyable</span></th>
             <th><span jhiTranslate="bofgamesApp.item.game">Game</span></th>
             <th><span jhiTranslate="bofgamesApp.item.platform">Platform</span></th>
-            <th><span jhiTranslate="bofgamesApp.item.cartLine">Cart Line</span></th>
             <th></th>
             </tr>
             </thead>
@@ -54,11 +53,6 @@
                 <td>
                     <div *ngIf="item.platform">
                         <a [routerLink]="['/platform', item.platform?.id, 'view' ]" >{{item.platform?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="item.cartLine">
-                        <a [routerLink]="['/cart-line', item.cartLine?.id, 'view' ]" >{{item.cartLine?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">
