@@ -20,4 +20,12 @@ export class SidebarComponent implements OnInit {
   closeNav() {
     this.shopservice.closeNav();
   }
+
+  onMouseWheelshop(evt) {
+    if (window.scrollY > 10) {
+      document.getElementById('headerCard').style.paddingTop = '10px';
+    } else {
+      document.getElementById('headerCard').style.paddingTop = '70px';
+    }
+  }
 }

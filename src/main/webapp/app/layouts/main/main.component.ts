@@ -30,9 +30,7 @@ export class JhiMainComponent implements OnInit {
   }
 
   onMouseWheel(evt) {
-    var y = window.scrollY;
-    if (y > 10) {
-      console.log('pos:' + y);
+    if (window.scrollY > 10) {
       document.getElementById('headerCard').style.paddingTop = '10px';
     } else {
       document.getElementById('headerCard').style.paddingTop = '70px';

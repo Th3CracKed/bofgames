@@ -1,5 +1,7 @@
-<button id="openSideBarShop" type="button" class="btn btn-secondary" (click)="openNav()">
-  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Voir panier</button>
-<div id="mySidenav" class="sidenav">
+<div id="openSideBarShop" class="d-none d-md-block">
+  
+  <button  type="button" class="btn btn-warning" (click)="openNav()"> <i class="fa fa-shopping-cart" aria-hidden="true"></i>12 articles </button>
+</div>
+<div id="mySidenav" class="sidenav" (wheel)="onMouseWheelshop($e)">
   <jhi-cart></jhi-cart>
 </div>

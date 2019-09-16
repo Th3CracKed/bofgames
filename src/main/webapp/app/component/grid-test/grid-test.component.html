@@ -51,7 +51,7 @@
                 {{item.price}} €</p>
             </div>
             <div class="col-xs-12 col-md-6 toolbar">
-              <button type="button" class="btn btn-primary">Voir <i class="fa fa-eye" aria-hidden="true"></i></button>
+              <button type="button" class="btn btn-primary" [routerLink]="['/games', item.id]">Voir <i class="fa fa-eye" aria-hidden="true"></i></button>
             </div>
           </div>
         </div>

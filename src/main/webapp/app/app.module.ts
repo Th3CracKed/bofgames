@@ -28,6 +28,8 @@ import { FillPipe } from './pipes/fill.pipe';
 import { UserProfilComponent } from './component/user-profil/user-profil.component';
 import { CartComponent } from './component/cart/cart.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
+import { OrderHistoryComponent } from './component/order-history/order-history.component';
+import { GridTestComponent } from './component/grid-test/grid-test.component';
 
 @NgModule({
   imports: [
@@ -62,7 +64,9 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
     FillPipe,
     UserProfilComponent,
     CartComponent,
-    SidebarComponent
+    SidebarComponent,
+    OrderHistoryComponent,
+    GridTestComponent
   ],
   providers: [
     {
