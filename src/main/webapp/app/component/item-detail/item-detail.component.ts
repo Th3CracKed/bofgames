@@ -61,7 +61,7 @@ export class ItemDetailComponent implements OnInit {
       console.log(panier);
       if (panier === undefined) {
         // cookie not present
-        panier = new Cart(0, false, null, null);
+        panier = new Cart(null, false, null, null);
         const cartLine: CartLine = new CartLine(null, 1, this.item.price, false, this.item, null, null);
         panier.cartLines = [cartLine];
         this.coockies.putObject('panier', panier);

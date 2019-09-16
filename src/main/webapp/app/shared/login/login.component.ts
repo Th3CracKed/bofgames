@@ -6,6 +6,11 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { LoginService } from 'app/core/login/login.service';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
+import { AccountService } from 'app/core';
+import { Cart } from '../model/cart.model';
+import { CookieService } from 'ngx-cookie';
+import { Client } from '../model/client.model';
+import { CartService } from 'app/service/cart.service';
 
 @Component({
   selector: 'jhi-login-modal',
@@ -28,7 +33,10 @@ export class JhiLoginModalComponent implements AfterViewInit {
     private renderer: Renderer,
     private router: Router,
     public activeModal: NgbActiveModal,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private accountService: AccountService,
+    private cookies: CookieService,
+    private cartService: CartService
   ) {}
 
   ngAfterViewInit() {
@@ -61,6 +69,14 @@ export class JhiLoginModalComponent implements AfterViewInit {
         this.eventManager.broadcast({
           name: 'authenticationSuccess',
           content: 'Sending Authentication Success'
+        });
+
+        this.accountService.identity().then(account => {
+          const c: Cart = this.cookies.getObject('panier');
+          c.driver = <Client>(<any>account);
+          c.id = null;
+          console.log(this.cartService.setCart(c));
+          this.cookies.remove('panier');
         });
 
         // previousState was set in the authExpiredInterceptor before being redirected to login modal.

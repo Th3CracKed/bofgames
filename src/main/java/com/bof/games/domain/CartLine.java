@@ -36,7 +36,7 @@ public class CartLine implements Serializable {
     @OneToOne
     private Item item;
 
-    @OneToMany(mappedBy = "cartLine")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cartLine",cascade = CascadeType.ALL)
     private Set<Key> keys = new HashSet<>();
 
     @ManyToOne

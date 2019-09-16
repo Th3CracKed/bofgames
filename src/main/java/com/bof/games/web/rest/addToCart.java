@@ -4,14 +4,18 @@ import com.bof.games.domain.Cart;
 import com.bof.games.domain.CartLine;
 import com.bof.games.domain.Client;
 import com.bof.games.domain.Item;
+import com.bof.games.domain.Key;
+import com.bof.games.domain.enumeration.KEYSTATUS;
 import com.bof.games.repository.ClientRepository;
 import com.bof.games.repository.ItemRepository;
 import com.bof.games.repository.UserRepository;
 import com.bof.games.repository.search.ClientSearchRepository;
 import com.bof.games.web.rest.errors.BadRequestAlertException;
+import com.sun.mail.iap.Response;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.searchbox.core.Cat;
 
 import org.elasticsearch.index.mapper.SourceToParse;
 import org.slf4j.Logger;
@@ -19,7 +23,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -31,6 +38,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import javax.persistence.LockModeType;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -74,19 +83,22 @@ public class addToCart {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/client/cart/add/")
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
     public ResponseEntity<String> addToCard(@RequestParam(name = "idClient") long idClient,@RequestParam(name = "idItem") long idItem) throws URISyntaxException {
         System.out.println("\n\n" + idClient + "\n\n\n");
         log.debug("REST request to add an Item into an user card whit data {}");
 
-        
 
-        
 
         Optional<Client> client = clientRepository.findById(idClient);
-
         if (client == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "client not found");
         }
+        Optional<Item> item = this.itemRepository.findById(idItem);
+        if (item == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "item not found");
+        }
+
 
         Cart cart = null;
         Set<Cart> carts =  client.get().getCarts();
@@ -136,8 +148,8 @@ public class addToCart {
 
             cartLine = new CartLine();
             cartLine.setCart(cart);
-            cartLine.setItem( this.itemRepository.findById(idItem).get());
-            cartLine.setQuantity(0);            
+            cartLine.setItem(item.get());
+            cartLine.setQuantity(0);
 
             cartLines.add(cartLine);
 
@@ -156,25 +168,124 @@ public class addToCart {
 
                 cartLine = new CartLine();
                 cartLine.setCart(cart);
-                cartLine.setItem( this.itemRepository.findById(idItem).get());
+                cartLine.setItem( item.get() );
                // cartLine.quantity(0);
                 cartLine.setQuantity(0);
                 cartLines.add(cartLine);
             }
         }
-        
-        
+
+
         cartLine.setExpired(false);
 
-        System.out.println("\n\n " + cartLine.getQuantity() + "\n\n");
         cartLine.setQuantity(cartLine.getQuantity()+1);
         System.out.println("\n \n "+cart.toString() + "\n\n" );
+
+
+        for (Key k : item.get().getKeys()) {
+            if (k.getStatus() == KEYSTATUS.AVAILABLE) {
+                k.setStatus(KEYSTATUS.RESERVED);
+                cartLine.addKey(k);
+                break;
+            }
+        }
+
         clientRepository.save(client.get());
         // Client result = clientSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.get().getId().toString()))
             .body("");
     }
-    
 
+
+    /**
+     * {@code POST  /client/cart} : attach a cookie cart to a client.
+     *
+     * @param cartCookie  the cart to attach.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new cart, or with status {@code 400 (Bad Request)} if the cart has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/client/cart")
+    public ResponseEntity<String> setCart(@RequestBody Cart cartCookie) throws URISyntaxException {
+        log.debug("REST request to attach a Cart to a client : {}", cartCookie);
+        if (cartCookie.getId() != null) {
+            throw new BadRequestAlertException("A new cart cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+
+        Client client = clientRepository.findById(cartCookie.getDriver().getId()).get();
+
+        for(Cart c : client.getCarts()){
+            if( !c.isExpired()){
+                c.setExpired(true);
+                for(CartLine cl : c.getCartLines()){
+                    cl.setExpired(true);
+                    for(Key key : cl.getKeys()){
+                        key.status(KEYSTATUS.AVAILABLE);
+                    }
+                }
+            }
+        }
+        this.clientRepository.save(client);
+
+        Cart cart = null;
+        cart = new Cart();
+        cart.setDriver(client);
+        cart.setExpired(false);
+
+        if(client.getCarts() == null){
+            client.setCarts(new HashSet<Cart>());
+        }
+        client.addCart(cart);
+        cart.setCartLines(new HashSet<CartLine>());
+
+        Boolean cartError = false;
+
+        for (CartLine cartline : cartCookie.getCartLines()) {
+            cartline.setCart(cart);
+            cart.addCartLine(cartline);
+            cartline.setExpired(false);
+
+            if (cartline.getKeys() == null) {
+                cartline.setKeys(new HashSet<Key>());
+            }
+
+            HashSet<Key> keys = new HashSet<Key>(this.itemRepository.findById(cartline.getItem().getId()).get().getKeys());
+
+            for(int i = 0; i < cartline.getQuantity();i++){
+                System.out.println("\n\n je quantifie \n\n");
+                Key keyReserved = null;
+                for (Key k : keys) {
+                    if (k.getStatus() == KEYSTATUS.AVAILABLE) {
+                        System.out.println("\n\n j'ai une petite clé  \n\n");
+                        k.setStatus(KEYSTATUS.RESERVED);
+                        cartline.addKey(k);
+                        keyReserved = k;
+                        break;
+                    }
+                }
+
+                if(keyReserved == null){
+                    System.out.println("\n\n oups je n'ai pas trouvé de clé \n\n");
+
+                    cartline.setQuantity(i+1);
+                    cartError  = true;
+                    break;
+                }
+
+            }
+        }
+
+        clientRepository.save(client);
+
+
+        if(!cartError){
+            return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.getId().toString()))
+            .body("");
+        }else{
+            return ResponseEntity.status(206)
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.getId().toString()))
+            .body("");
+        }
+    }
 }
