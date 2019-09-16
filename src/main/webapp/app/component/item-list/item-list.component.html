@@ -4,13 +4,13 @@
 
 <div class="container">
   <div *ngFor="let item of items;" class="row gameItem">
-    <a href="/games/{{item.id}}" class="col col-xs-3 col-md-3" id="game_cover">
+    <a href="/games/{{item.id}}" class="col col-sm-12 col-md-3" id="game_cover">
     <div class="img-hover-zoom">
         <img *ngIf="!item.game.media[0]" src="https://www.kasterencultuur.nl/editor/placeholder.jpg" alt="Image not found" />
         <img *ngIf="item.game.media[0]" src="{{item.game.media[0].url}}" alt="{{item.game.media[0].alt}}">
     </div>
     </a>
-    <div class="col col-md-9">
+    <div class="col col-sm-12 col-md-9">
       <div class="row">
         <a id="gameTitle" href="/games/{{item.id}}">
           <h2> {{item.game.name}} </h2>
