@@ -111,6 +111,7 @@ public class ItemResource {
 
         List<Item> items = itemRepository.findAll();
         for(Item item : items ){
+            item.setKeys(null);
             for (Media m : item.getGame().getMedia()) {
                 m.setGame(null);
             }
@@ -129,6 +130,7 @@ public class ItemResource {
     public ResponseEntity<Item> getItem(@PathVariable Long id) {
         log.debug("REST request to get Item : {}", id);
         Optional<Item> item = itemRepository.findById(id);
+        item.get().setKeys(null);
         return ResponseUtil.wrapOrNotFound(item);
     }
 
