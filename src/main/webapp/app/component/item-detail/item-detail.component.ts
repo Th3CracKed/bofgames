@@ -59,10 +59,14 @@ export class ItemDetailComponent implements OnInit {
       let panier: Cart;
       panier = this.coockies.getObject('panier');
       console.log(panier);
+      const item2ad: Item = this.item;
+      item2ad.game.reviews = null;
+      item2ad.game.media = null;
+      item2ad.keys = null;
       if (panier === undefined) {
         // cookie not present
-        panier = new Cart(null, false, null, null);
-        const cartLine: CartLine = new CartLine(null, 1, this.item.price, false, this.item, null, null);
+        panier = new Cart(null, false, false, null, null);
+        const cartLine: CartLine = new CartLine(null, 1, this.item.price, false, null, item2ad, null);
         panier.cartLines = [cartLine];
         this.coockies.putObject('panier', panier);
       } else {
@@ -75,7 +79,7 @@ export class ItemDetailComponent implements OnInit {
           }
         });
         if (!itemPresent) {
-          const cartLine: CartLine = new CartLine(null, 1, this.item.price, false, this.item, null, null);
+          const cartLine: CartLine = new CartLine(null, 1, this.item.price, false, null, item2ad, null);
           panier.cartLines.push(cartLine);
         }
         this.coockies.putObject('panier', panier);

@@ -33,7 +33,7 @@ public class CartLine implements Serializable {
     @Column(name = "expired")
     private Boolean expired;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cartLine",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cartLine",cascade = CascadeType.MERGE)
     private Set<Key> keys = new HashSet<>();
 
     @ManyToOne
