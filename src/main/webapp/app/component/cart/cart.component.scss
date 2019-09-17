@@ -26,3 +26,23 @@ body {
   flex: 1;
   overflow: auto;
 }
+
+.my-btn-success,
+.my-btn-success:visited {
+  background-color: #282c37;
+  color: #fff;
+}
+
+.my-btn-success:hover,
+.my-btn-success:active {
+  background-color: #3f434d;
+  color: #fff;
+}
+
+.my-btn-danger,
+.my-btn-danger:hover,
+.my-btn-danger:active,
+.my-btn-danger:visited {
+  background-color: #f4511e;
+  color: #fff;
+}

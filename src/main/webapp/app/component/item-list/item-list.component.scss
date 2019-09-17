@@ -14,6 +14,10 @@
   border-radius: 0px;
 }
 
+.item.list-group-item .thumbnail {
+  width: 100%;
+}
+
 .item.list-group-item {
   float: none;
   width: 100%;
@@ -68,4 +72,26 @@
     // width: 100px;
     // position: absolute;
   }
+}
+
+.my-btn-info,
+.my-btn-info:hover,
+.my-btn-info:active,
+.my-btn-info:visited {
+  background-color: #d9e1e8 !important;
+}
+
+.my-btn-danger,
+.my-btn-danger:hover,
+.my-btn-danger:active,
+.my-btn-danger:visited {
+  background-color: #d9e1e8 !important;
+}
+
+.my-btn-info-shop,
+.my-btn-info-shop:hover,
+.my-btn-info-shop:active,
+.my-btn-info-shop:visited {
+  background-color: #2b90d9;
+  color: #fff;
 }
