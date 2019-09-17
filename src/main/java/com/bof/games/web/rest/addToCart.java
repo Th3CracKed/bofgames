@@ -138,6 +138,8 @@ public class addToCart {
 
             cartLines = new HashSet<CartLine>();
             cartLine = new CartLine();
+            cartLine.setQuantity(0);
+            cartLine.setUnitPrice(item.get().getPrice());
             cartLine.setCart(cart);
             cartLines.add(cartLine);
             cart.setCartLines(cartLines);
@@ -150,6 +152,7 @@ public class addToCart {
             cartLine.setCart(cart);
             cartLine.setItem(item.get());
             cartLine.setQuantity(0);
+            cartLine.setUnitPrice(item.get().getPrice());
 
             cartLines.add(cartLine);
 
@@ -171,6 +174,7 @@ public class addToCart {
                 cartLine.setItem( item.get() );
                // cartLine.quantity(0);
                 cartLine.setQuantity(0);
+                cartLine.setUnitPrice(item.get().getPrice());
                 cartLines.add(cartLine);
             }
         }
@@ -181,20 +185,26 @@ public class addToCart {
         cartLine.setQuantity(cartLine.getQuantity()+1);
         System.out.println("\n \n "+cart.toString() + "\n\n" );
 
-
+        boolean cartError = true;
         for (Key k : item.get().getKeys()) {
             if (k.getStatus() == KEYSTATUS.AVAILABLE) {
                 k.setStatus(KEYSTATUS.RESERVED);
                 cartLine.addKey(k);
+                cartError = false;
                 break;
             }
         }
 
-        clientRepository.save(client.get());
-        // Client result = clientSearchRepository.save(result);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.get().getId().toString()))
-            .body("");
+        if (!cartError) {
+            clientRepository.save(client.get());
+            return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.get().getId().toString()))
+                .body("");
+        } else {
+            return ResponseEntity.status(406)
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.get().getId().toString()))
+                .body("");
+        }
     }
 
 
