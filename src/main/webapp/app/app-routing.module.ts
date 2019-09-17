@@ -5,7 +5,6 @@ import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { TestComponent } from './test';
 import { ItemDetailComponent } from './component/item-detail/item-detail.component';
 import { ItemListComponent } from './component/item-list/item-list.component';
-import { UserProfilComponent } from './component/user-profil/user-profil.component';
 const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
 
 @NgModule({
@@ -15,10 +14,6 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         {
           path: 'test',
           component: TestComponent
-        },
-        {
-          path: 'profil',
-          component: UserProfilComponent
         },
         {
           path: 'games/:id',
