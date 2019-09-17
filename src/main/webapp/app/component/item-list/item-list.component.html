@@ -24,9 +24,9 @@
     <div *ngFor="let item of items;" class="item col-xs-4 col-lg-4">
       <div class="thumbnail">
         <div class="img-event" >
-            <div *ngIf="!item.game.media[0]" class="coverImg" [ngStyle]="{'background-image':'url( https://www.kasterencultuur.nl/editor/placeholder.jpg)'}"></div>
+            <div [routerLink]="['/games', item.id]" *ngIf="!item.game.media[0]" class="coverImg" [ngStyle]="{'background-image':'url( https://www.kasterencultuur.nl/editor/placeholder.jpg)'}"></div>
 
-            <div *ngIf="item.game.media[0]" class="coverImg" [ngStyle]="{'background-image':'url(' + item.game.media[0].url + ')'}"></div>
+            <div [routerLink]="['/games', item.id]" *ngIf="item.game.media[0]" class="coverImg" [ngStyle]="{'background-image':'url(' + item.game.media[0].url + ')'}"></div>
         </div>
         <div class="caption card-body">
           <h4 class="group card-title inner list-group-item-heading">

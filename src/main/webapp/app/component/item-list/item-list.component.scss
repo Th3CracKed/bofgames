@@ -24,6 +24,7 @@
 .thumbnail:hover .coverImg,
 .thumbnail:focus .coverImg {
   transform: scale(1.1);
+  cursor: pointer;
 }
 
 .item.list-group-item .thumbnail {
