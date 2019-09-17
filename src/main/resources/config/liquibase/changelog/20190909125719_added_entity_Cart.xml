@@ -19,6 +19,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="ordered" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
             <column name="driver_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -48,6 +52,7 @@
                   tableName="cart">
             <column name="id" type="numeric"/>
             <column name="expired" type="boolean"/>
+            <column name="ordered" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

@@ -48,6 +48,14 @@ describe('Cart e2e test', () => {
       await cartUpdatePage.getExpiredInput().click();
       expect(await cartUpdatePage.getExpiredInput().isSelected(), 'Expected expired to be selected').to.be.true;
     }
+    const selectedOrdered = cartUpdatePage.getOrderedInput();
+    if (await selectedOrdered.isSelected()) {
+      await cartUpdatePage.getOrderedInput().click();
+      expect(await cartUpdatePage.getOrderedInput().isSelected(), 'Expected ordered not to be selected').to.be.false;
+    } else {
+      await cartUpdatePage.getOrderedInput().click();
+      expect(await cartUpdatePage.getOrderedInput().isSelected(), 'Expected ordered to be selected').to.be.true;
+    }
     await cartUpdatePage.save();
     expect(await cartUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

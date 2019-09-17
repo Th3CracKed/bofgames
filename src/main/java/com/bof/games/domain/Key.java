@@ -1,4 +1,5 @@
 package com.bof.games.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -33,10 +34,12 @@ public class Key implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("keys")
+    @JsonIgnore
     private Item item;
 
     @ManyToOne
     @JsonIgnoreProperties("keys")
+    @JsonIgnore
     private CartLine cartLine;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

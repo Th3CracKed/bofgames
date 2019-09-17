@@ -22,6 +22,7 @@ export class CartUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     expired: [],
+    ordered: [],
     driver: []
   });
 
@@ -51,6 +52,7 @@ export class CartUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: cart.id,
       expired: cart.expired,
+      ordered: cart.ordered,
       driver: cart.driver
     });
   }
@@ -74,6 +76,7 @@ export class CartUpdateComponent implements OnInit {
       ...new Cart(),
       id: this.editForm.get(['id']).value,
       expired: this.editForm.get(['expired']).value,
+      ordered: this.editForm.get(['ordered']).value,
       driver: this.editForm.get(['driver']).value
     };
   }

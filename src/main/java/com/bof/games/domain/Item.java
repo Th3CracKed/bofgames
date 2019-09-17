@@ -30,7 +30,7 @@ public class Item implements Serializable {
     @Column(name = "is_buyable")
     private Boolean isBuyable;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "item")
     private Set<Key> keys = new HashSet<>();
 
     @OneToMany(mappedBy = "item")

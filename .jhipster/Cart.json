@@ -1,11 +1,6 @@
 {
-    "name": "Cart",
-    "fields": [
-        {
-            "fieldName": "expired",
-            "fieldType": "Boolean"
-        }
-    ],
+    "fluentMethods": true,
+    "clientRootFolder": "",
     "relationships": [
         {
             "relationshipType": "one-to-many",
@@ -21,13 +16,22 @@
             "otherEntityField": "id"
         }
     ],
+    "fields": [
+        {
+            "fieldName": "expired",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "ordered",
+            "fieldType": "Boolean"
+        }
+    ],
     "changelogDate": "20190909125719",
-    "entityTableName": "cart",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": "elasticsearch",
     "service": "no",
+    "entityTableName": "cart",
+    "databaseType": "sql",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }
