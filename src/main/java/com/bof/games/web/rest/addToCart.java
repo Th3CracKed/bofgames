@@ -91,11 +91,11 @@ public class addToCart {
 
 
         Optional<Client> client = clientRepository.findById(idClient);
-        if (client == null) {
+        if (client.get() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "client not found");
         }
         Optional<Item> item = this.itemRepository.findById(idItem);
-        if (item == null) {
+        if (item.get() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "item not found");
         }
 
