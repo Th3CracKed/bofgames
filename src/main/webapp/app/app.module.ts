@@ -29,6 +29,7 @@ import { UserProfilComponent } from './component/user-profil/user-profil.compone
 import { CartComponent } from './component/cart/cart.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { OrderHistoryComponent } from './component/order-history/order-history.component';
+import { SearchComponent } from './search/search.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -63,7 +64,8 @@ import { OrderHistoryComponent } from './component/order-history/order-history.c
     UserProfilComponent,
     CartComponent,
     SidebarComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    SearchComponent
   ],
   providers: [
     {

@@ -36,48 +36,65 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Start for here for each iteams-->
+                <!-- Start for here for each iteams -->
                 <tr>
                   <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                   <td>Product Name Dada</td>
                   <td>In stock</td>
-                  <td><input class="form-control" type="text" value="1" /></td>
-                  <td class="text-right">124,90 €</td>
-                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                </tr>
-                <tr>
-                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                  <td>Product Name Dada</td>
-                  <td>In stock</td>
-                  <td><input class="form-control" type="text" value="1" /></td>
-                  <td class="text-right">124,90 €</td>
-                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                </tr>
-                <tr>
-                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                  <td>Product Name Dada</td>
-                  <td>In stock</td>
-                  <td><input class="form-control" type="text" value="1" /></td>
-                  <td class="text-right">124,90 €</td>
-                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                </tr>
-                <tr>
-                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                  <td>Product Name Dada</td>
-                  <td>In stock</td>
-                  <td><input class="form-control" type="text" value="1" /></td>
-                  <td class="text-right">124,90 €</td>
-                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                </tr>
-                <tr>
-                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                  <td>Product Name Dada</td>
-                  <td>In stock</td>
-                  <td><input class="form-control" type="text" value="1" /></td>
-                  <td class="text-right">124,90 €</td>
+                  <td>
+                    <!-- input plus minus -->
+                      <div class="numberCard">
+                        <span class="noselect minus">-</span>
+                        <input disabled class="counterCard" type="text" value="1" />
+                        <span class="noselect plus">+</span>
+                      </div>
+                    <!--  -->
+                  </td>
+                  <td class="text-right">124,90€</td>
                   <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
                 </tr>
                 <!-- end for -->
+                <tr>
+                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td>Product Name Dada</td>
+                  <td>In stock</td>
+                  <td>
+                    <!-- input plus minus -->
+                    <div class="numberCard">
+                      <span class="minus">-</span>
+                      <input disabled class="counterCard" type="text" value="1" />
+                      <span class="plus">+</span>
+                    </div>
+                    <!--  -->
+                  </td>
+                  <td class="text-right">124,90€</td>
+                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                </tr>
+                <tr>
+                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td>Product Name Dada</td>
+                  <td>In stock</td>
+                  <td><input class="form-control" type="text" value="1" /></td>
+                  <td class="text-right">124,90 €</td>
+                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                </tr>
+                <tr>
+                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td>Product Name Dada</td>
+                  <td>In stock</td>
+                  <td><input class="form-control" type="text" value="1" /></td>
+                  <td class="text-right">124,90 €</td>
+                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                </tr>
+                <tr>
+                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td>Product Name Dada</td>
+                  <td>In stock</td>
+                  <td><input class="form-control" type="text" value="1" /></td>
+                  <td class="text-right">124,90 €</td>
+                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                </tr>
+                
                 <tr>
                   <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                   <td>Product Name Toto</td>
@@ -90,7 +107,15 @@
                   <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                   <td>Product Name Titi</td>
                   <td>In stock</td>
-                  <td><input class="form-control" type="text" value="1" /></td>
+                  <td>
+                    <!-- input plus minus -->
+                    <div class="numberCard">
+                      <span class="minus">-</span>
+                      <input class="counterCard" type="text" value="1" />
+                      <span class="plus">+</span>
+                    </div>
+                    <!--  -->
+                  </td>
                   <td class="text-right">70,00 €</td>
                   <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
                 </tr>

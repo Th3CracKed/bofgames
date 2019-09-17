@@ -4,7 +4,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-lg-12 my-3">
       <div class="pull-right">
@@ -21,7 +21,7 @@
   </div>
   <div id="products" class="row view-group">
 
-    <div *ngFor="let item of items;" class="item col-xs-4 col-lg-4">
+    <div *ngFor="let item of items;" class="item col-xs-4 col-md-4 col-lg-3">
       <div class="thumbnail">
         <div class="img-event" >
             <div [routerLink]="['/games', item.id]" *ngIf="!item.game.media[0]" class="coverImg" [ngStyle]="{'background-image':'url( https://www.kasterencultuur.nl/editor/placeholder.jpg)'}"></div>
@@ -36,7 +36,7 @@
               <p>Note: *****</p>
             </div>
             <div class="col-xs-12 col-md-6">
-              <p>Platforme: {{item.platform.name}}</p>
+              <p>Platforme : {{item.platform.name}}</p>
             </div>
           </div>
           <p class="group inner list-group-item-text text-justify">
