@@ -19,7 +19,7 @@ export class ItemListComponent implements OnInit {
       //console.log(' mon resultat   est : ' + JSON.stringify(this.items));
       for (let index = 0; index < items.length; index++) {
         this.calculateMark(items[index]);
-        console.log();
+        console.log('test');
       }
       // this.calculateMark(items[0]);
     });
@@ -36,5 +36,22 @@ export class ItemListComponent implements OnInit {
     }
     console.log(`game id = ${item.game.id}`);
     console.log(`note = ${this.marks[item.game.id]}`);
+  }
+
+  displayList() {
+    const els = document.getElementsByClassName('item');
+    for (let index = 0; index < els.length; index++) {
+      const element = els[index];
+      element.classList.add('list-group-item');
+    }
+  }
+
+  displayGrid() {
+    const els = document.getElementsByClassName('item');
+    for (let index = 0; index < els.length; index++) {
+      const element = els[index];
+      element.classList.remove('list-group-item');
+      element.classList.add('grid-group-item');
+    }
   }
 }

@@ -29,8 +29,6 @@ import { UserProfilComponent } from './component/user-profil/user-profil.compone
 import { CartComponent } from './component/cart/cart.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { OrderHistoryComponent } from './component/order-history/order-history.component';
-import { GridTestComponent } from './component/grid-test/grid-test.component';
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -65,8 +63,7 @@ import { GridTestComponent } from './component/grid-test/grid-test.component';
     UserProfilComponent,
     CartComponent,
     SidebarComponent,
-    OrderHistoryComponent,
-    GridTestComponent
+    OrderHistoryComponent
   ],
   providers: [
     {
