@@ -6,8 +6,11 @@ import com.bof.games.domain.Client;
 import com.bof.games.domain.Item;
 import com.bof.games.domain.Key;
 import com.bof.games.domain.enumeration.KEYSTATUS;
+import com.bof.games.repository.CartLineRepository;
+import com.bof.games.repository.CartRepository;
 import com.bof.games.repository.ClientRepository;
 import com.bof.games.repository.ItemRepository;
+import com.bof.games.repository.KeyRepository;
 import com.bof.games.repository.UserRepository;
 import com.bof.games.repository.search.ClientSearchRepository;
 import com.bof.games.web.rest.errors.BadRequestAlertException;
@@ -40,12 +43,13 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import javax.persistence.LockModeType;
+import javax.swing.event.CaretListener;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 @RestController
 @RequestMapping("/api")
-public class addToCart {
+public class CartMana {
 
     private final Logger log = LoggerFactory.getLogger(ClientResource.class);
 
@@ -62,12 +66,22 @@ public class addToCart {
 
     private final ItemRepository itemRepository;
 
-    public addToCart(ClientRepository clientRepository, ClientSearchRepository clientSearchRepository,
-            UserRepository userRepository, ItemRepository itemRepository) {
+    private final CartRepository cartRepository;
+
+    private final KeyRepository keyRepository;
+
+    private final CartLineRepository cartLineRepository;
+
+    public CartMana(ClientRepository clientRepository, ClientSearchRepository clientSearchRepository,
+            UserRepository userRepository, ItemRepository itemRepository, CartRepository cartRepository,
+            KeyRepository keyRepository, CartLineRepository cartLineRepository) {
         this.clientRepository = clientRepository;
         this.clientSearchRepository = clientSearchRepository;
         this.userRepository = userRepository;
         this.itemRepository = itemRepository;
+        this.cartRepository = cartRepository;
+        this.keyRepository = keyRepository;
+        this.cartLineRepository = cartLineRepository;
     }
 
     /**
@@ -301,5 +315,118 @@ public class addToCart {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.getId().toString()))
             .body("");
         }
+    }
+
+    /**
+     * {@code PUT  /client/cart/remove/} : adding an item to a client's cart.
+     *
+     * @param idClient the client to update.
+     * @param idCart the Cart to update
+     * @param idItem the Item to remove
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated client, or with status {@code 400 (Bad Request)} if the
+     *         client is not valid, or with status
+     *         {@code 500 (Internal Server Error)} if the client couldn't be
+     *         updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PutMapping("/client/cart/remove/")
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    public ResponseEntity<String> removeToCard(@RequestParam(name = "idClient") long idClient,@RequestParam(name = "idCart") long idCart, @RequestParam(name = "idItem") long idItem) throws URISyntaxException {
+        System.out.println("\n\n" + idClient + "\n\n\n");
+        log.debug("REST request to remove one Item of an user card whit data {}");
+
+        Optional<Client> client = clientRepository.findById(idClient);
+        if (client.get() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "client not found");
+        }
+
+        Optional<Cart> cart = this.cartRepository.findById(idCart);
+        if (cart.get() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "cart not found");
+        }
+        
+        CartLine cartlineToDecrease = null;
+        for (CartLine cl : cart.get().getCartLines()) {
+            if (cl.getItem().getId() == idItem) {
+                cartlineToDecrease  = cl;
+                break;
+            }
+        }
+        
+        if(cartlineToDecrease != null){
+            int qty  =  cartlineToDecrease.getQuantity();
+            if(qty == 1){//delete cartline
+                cart.get().getCartLines().remove(cartlineToDecrease);
+                cartlineToDecrease.expired(true);
+                cartlineToDecrease.setCart(null);
+                cartLineRepository.save(cartlineToDecrease);
+            }else{ // decrease quantity
+                cartlineToDecrease.setQuantity(qty-1);
+            }
+            Key key = cartlineToDecrease.getKeys().iterator().next();
+            cartlineToDecrease.getKeys().remove(key);
+            key.setStatus(KEYSTATUS.AVAILABLE);
+            key.setCartLine(null);
+            keyRepository.save(key);
+        }
+
+
+        cartRepository.save(cart.get());
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.get().getId().toString()))
+            .body("");
+        
+    }
+
+     /**
+     * {@code DELETE  /client/cart/delete} : delete an item in cart.
+     *
+     * @param idClient the client to update.
+     * @param idCart the Cart to update
+     * @param iItem the Item to delete
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @DeleteMapping("/client/cart/delete")
+    public ResponseEntity<Void> deleteItem(@RequestParam(name = "idClient") long idClient,@RequestParam(name = "idCart") long idCart, @RequestParam(name = "idItem") long idItem) {
+        log.debug("REST request to delete Item from cart");
+        
+        
+        Optional<Client> client = clientRepository.findById(idClient);
+        if (client.get() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "client not found");
+        }
+
+        Optional<Cart> cart = this.cartRepository.findById(idCart);
+        if (cart.get() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "cart not found");
+        }
+
+        CartLine cartlineToDel = null;
+        for (CartLine cl : cart.get().getCartLines()) {
+            if (cl.getItem().getId() == idItem) {
+                cartlineToDel  = cl;
+                break;
+            }
+        }
+
+        for (Key k : cartlineToDel.getKeys()) {
+            k.setStatus(KEYSTATUS.AVAILABLE);
+            k.setCartLine(null);
+            keyRepository.save(k);
+        }
+
+        cartlineToDel.setKeys(null);
+        cartlineToDel.setExpired(true);
+        cartlineToDel.setCart(null);
+
+
+        cart.get().getCartLines().remove(cartlineToDel);
+
+        cartLineRepository.save(cartlineToDel);
+
+        cartRepository.save(cart.get());
+
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, "")).build();
     }
 }
