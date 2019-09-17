@@ -36,4 +36,9 @@ export class JhiMainComponent implements OnInit {
       document.getElementById('headerCard').style.paddingTop = '70px';
     }
   }
+
+  showCardClass() {
+    console.log('yo je suis un string');
+    return !(this.router.url === '/games');
+  }
 }

@@ -22,12 +22,11 @@
   <div id="products" class="row view-group">
 
     <div *ngFor="let item of items;" class="item col-xs-4 col-lg-4">
-      <div class="thumbnail card">
-        <div class="img-event">
-          <img class="group list-group-image img-fluid" *ngIf="!item.game.media[0]"
-            src="https://www.kasterencultuur.nl/editor/placeholder.jpg" alt="Image not found" />
-          <img class="group list-group-image img-fluid" *ngIf="item.game.media[0]" src="{{item.game.media[0].url}}"
-            alt="{{item.game.media[0].alt}}">
+      <div class="thumbnail">
+        <div class="img-event" >
+            <div *ngIf="!item.game.media[0]" class="coverImg" [ngStyle]="{'background-image':'url( https://www.kasterencultuur.nl/editor/placeholder.jpg)'}"></div>
+
+            <div *ngIf="item.game.media[0]" class="coverImg" [ngStyle]="{'background-image':'url(' + item.game.media[0].url + ')'}"></div>
         </div>
         <div class="caption card-body">
           <h4 class="group card-title inner list-group-item-heading">
@@ -41,7 +40,7 @@
             </div>
           </div>
           <p class="group inner list-group-item-text text-justify">
-            {{(item.game.description | slice:0:255)+'...'}}</p>
+            {{(item.game.description | slice:0:110)+'...'}}</p>
           <div class="row">
             <div class="col-xs-12 col-md-6">
               <p class="lead">

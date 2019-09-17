@@ -7,11 +7,23 @@
   margin-bottom: 0;
 }
 .thumbnail {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   margin-bottom: 30px;
   padding: 0px;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  background-color: #fff;
+}
+
+.thumbnail:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.thumbnail:hover .coverImg,
+.thumbnail:focus .coverImg {
+  transform: scale(1.1);
 }
 
 .item.list-group-item .thumbnail {
@@ -35,8 +47,26 @@
   background-color: #dddddd;
 }
 
-.img-event img {
+.img-event {
+  overflow: hidden;
+}
+
+.img-event .coverImg {
   background-color: #dddddd;
+  width: 100%;
+  height: 280px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  float: left;
+
+  background-repeat: no-repeat;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  -o-transition: all 0.6s;
+  transition: all 0.6s;
 }
 
 .item.list-group-item .list-group-image {
@@ -46,6 +76,7 @@
   margin-bottom: 0px;
   display: inline-block;
 }
+
 .item.list-group-item .caption {
   float: left;
   width: 70%;
