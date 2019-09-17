@@ -108,6 +108,7 @@ public class addToCart {
             cart = new Cart();
             cart.setDriver(client.get());
             cart.setExpired(false);
+            cart.setOrdered(false);
             carts.add(cart);
             client.get().setCarts(carts);
 
@@ -115,6 +116,7 @@ public class addToCart {
             cart = new Cart();
             cart.setDriver(client.get());
             cart.setExpired(false);
+            cart.setOrdered(false);
             carts.add(cart);
 
         } else {
@@ -127,6 +129,7 @@ public class addToCart {
                 cart = new Cart();
                 cart.setDriver(client.get());
                 cart.setExpired(false);
+                cart.setOrdered(false);
                 carts.add(cart);
             }
         }
@@ -241,6 +244,7 @@ public class addToCart {
         cart = new Cart();
         cart.setDriver(client);
         cart.setExpired(false);
+        cart.setOrdered(false);
 
         if(client.getCarts() == null){
             client.setCarts(new HashSet<Cart>());

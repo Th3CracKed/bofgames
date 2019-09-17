@@ -73,6 +73,7 @@ class CartGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "expired":null
+                , "ordered":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_cart_url"))).exitHereIfFailed

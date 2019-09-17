@@ -40,6 +40,9 @@ public class CartResourceIT {
     private static final Boolean DEFAULT_EXPIRED = false;
     private static final Boolean UPDATED_EXPIRED = true;
 
+    private static final Boolean DEFAULT_ORDERED = false;
+    private static final Boolean UPDATED_ORDERED = true;
+
     @Autowired
     private CartRepository cartRepository;
 
@@ -90,7 +93,8 @@ public class CartResourceIT {
      */
     public static Cart createEntity(EntityManager em) {
         Cart cart = new Cart()
-            .expired(DEFAULT_EXPIRED);
+            .expired(DEFAULT_EXPIRED)
+            .ordered(DEFAULT_ORDERED);
         return cart;
     }
     /**
@@ -101,7 +105,8 @@ public class CartResourceIT {
      */
     public static Cart createUpdatedEntity(EntityManager em) {
         Cart cart = new Cart()
-            .expired(UPDATED_EXPIRED);
+            .expired(UPDATED_EXPIRED)
+            .ordered(UPDATED_ORDERED);
         return cart;
     }
 
@@ -126,6 +131,7 @@ public class CartResourceIT {
         assertThat(cartList).hasSize(databaseSizeBeforeCreate + 1);
         Cart testCart = cartList.get(cartList.size() - 1);
         assertThat(testCart.isExpired()).isEqualTo(DEFAULT_EXPIRED);
+        assertThat(testCart.isOrdered()).isEqualTo(DEFAULT_ORDERED);
 
         // Validate the Cart in Elasticsearch
         verify(mockCartSearchRepository, times(1)).save(testCart);
@@ -165,7 +171,8 @@ public class CartResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cart.getId().intValue())))
-            .andExpect(jsonPath("$.[*].expired").value(hasItem(DEFAULT_EXPIRED.booleanValue())));
+            .andExpect(jsonPath("$.[*].expired").value(hasItem(DEFAULT_EXPIRED.booleanValue())))
+            .andExpect(jsonPath("$.[*].ordered").value(hasItem(DEFAULT_ORDERED.booleanValue())));
     }
     
     @Test
@@ -179,7 +186,8 @@ public class CartResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(cart.getId().intValue()))
-            .andExpect(jsonPath("$.expired").value(DEFAULT_EXPIRED.booleanValue()));
+            .andExpect(jsonPath("$.expired").value(DEFAULT_EXPIRED.booleanValue()))
+            .andExpect(jsonPath("$.ordered").value(DEFAULT_ORDERED.booleanValue()));
     }
 
     @Test
@@ -203,7 +211,8 @@ public class CartResourceIT {
         // Disconnect from session so that the updates on updatedCart are not directly saved in db
         em.detach(updatedCart);
         updatedCart
-            .expired(UPDATED_EXPIRED);
+            .expired(UPDATED_EXPIRED)
+            .ordered(UPDATED_ORDERED);
 
         restCartMockMvc.perform(put("/api/carts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -215,6 +224,7 @@ public class CartResourceIT {
         assertThat(cartList).hasSize(databaseSizeBeforeUpdate);
         Cart testCart = cartList.get(cartList.size() - 1);
         assertThat(testCart.isExpired()).isEqualTo(UPDATED_EXPIRED);
+        assertThat(testCart.isOrdered()).isEqualTo(UPDATED_ORDERED);
 
         // Validate the Cart in Elasticsearch
         verify(mockCartSearchRepository, times(1)).save(testCart);
@@ -274,7 +284,8 @@ public class CartResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cart.getId().intValue())))
-            .andExpect(jsonPath("$.[*].expired").value(hasItem(DEFAULT_EXPIRED.booleanValue())));
+            .andExpect(jsonPath("$.[*].expired").value(hasItem(DEFAULT_EXPIRED.booleanValue())))
+            .andExpect(jsonPath("$.[*].ordered").value(hasItem(DEFAULT_ORDERED.booleanValue())));
     }
 
     @Test

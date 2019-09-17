@@ -18,6 +18,7 @@
         "title": "Cart"
       },
       "expired": "Expired",
+      "ordered": "Ordered",
       "cartLine": "Cart Line",
       "driver": "Driver"
     }

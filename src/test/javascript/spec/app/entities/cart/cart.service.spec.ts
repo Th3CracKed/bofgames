@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(CartService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Cart(0, false);
+      elemDefault = new Cart(0, false, false);
     });
 
     describe('Service methods', () => {
@@ -59,7 +59,8 @@ describe('Service Tests', () => {
       it('should update a Cart', async () => {
         const returnedFromService = Object.assign(
           {
-            expired: true
+            expired: true,
+            ordered: true
           },
           elemDefault
         );
@@ -77,7 +78,8 @@ describe('Service Tests', () => {
       it('should return a list of Cart', async () => {
         const returnedFromService = Object.assign(
           {
-            expired: true
+            expired: true,
+            ordered: true
           },
           elemDefault
         );

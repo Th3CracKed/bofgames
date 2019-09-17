@@ -27,7 +27,10 @@ public class Cart implements Serializable {
     @Column(name = "expired")
     private Boolean expired;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cart", cascade = CascadeType.ALL)
+    @Column(name = "ordered")
+    private Boolean ordered;
+
+    @OneToMany(mappedBy = "cart")
     private Set<CartLine> cartLines = new HashSet<>();
 
     @ManyToOne
@@ -54,6 +57,19 @@ public class Cart implements Serializable {
 
     public void setExpired(Boolean expired) {
         this.expired = expired;
+    }
+
+    public Boolean isOrdered() {
+        return ordered;
+    }
+
+    public Cart ordered(Boolean ordered) {
+        this.ordered = ordered;
+        return this;
+    }
+
+    public void setOrdered(Boolean ordered) {
+        this.ordered = ordered;
     }
 
     public Set<CartLine> getCartLines() {
@@ -116,6 +132,7 @@ public class Cart implements Serializable {
         return "Cart{" +
             "id=" + getId() +
             ", expired='" + isExpired() + "'" +
+            ", ordered='" + isOrdered() + "'" +
             "}";
     }
 }

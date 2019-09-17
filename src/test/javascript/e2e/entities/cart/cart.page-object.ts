@@ -27,6 +27,7 @@ export class CartUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
   expiredInput = element(by.id('field_expired'));
+  orderedInput = element(by.id('field_ordered'));
   driverSelect = element(by.id('field_driver'));
 
   async getPageTitle() {
@@ -35,6 +36,9 @@ export class CartUpdatePage {
 
   getExpiredInput(timeout?: number) {
     return this.expiredInput;
+  }
+  getOrderedInput(timeout?: number) {
+    return this.orderedInput;
   }
 
   async driverSelectLastOption(timeout?: number) {
