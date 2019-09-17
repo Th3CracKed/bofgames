@@ -12,7 +12,7 @@ front_test:
     - npm test
 
 front_test_e2e:
-  image: node:10
+  image: caltha/protractor:5.4.2
   stage: test
   before_script:
     - npm install
