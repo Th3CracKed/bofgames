@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingService } from 'app/service/shopping-view.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-cart',
@@ -7,13 +8,14 @@ import { ShoppingService } from 'app/service/shopping-view.service';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  // constructor() {}
-
   last_known_scroll_position = 0;
   ticking = false;
+  isFull: boolean;
 
-  constructor(private shopservice: ShoppingService) {}
-  ngOnInit() {}
+  constructor(private shopservice: ShoppingService, private router: Router) {}
+  ngOnInit() {
+    this.customiseView();
+  }
 
   openNav() {
     this.shopservice.openNav();
@@ -21,5 +23,10 @@ export class CartComponent implements OnInit {
 
   closeNav() {
     this.shopservice.closeNav();
+  }
+
+  customiseView() {
+    this.isFull = this.router.url === '/shopingCart';
+    this.router.events.subscribe(() => (this.isFull = this.router.url === '/shopingCart'));
   }
 }

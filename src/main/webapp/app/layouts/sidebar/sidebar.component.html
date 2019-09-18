@@ -1,4 +1,4 @@
-<div id="openSideBarShop" class="d-none d-md-block">
+<div *ngIf="!isShoppingCart" id="openSideBarShop" class="d-none d-md-block">
   
   <button  type="button" class="btn" (click)="openNav()"> <i class="fa fa-shopping-cart" aria-hidden="true"></i>12 articles </button>
 </div>

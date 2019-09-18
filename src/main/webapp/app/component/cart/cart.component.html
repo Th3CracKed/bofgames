@@ -7,7 +7,7 @@
           <button *ngIf="isFull" type="button" class="btn btn-secondary" [routerLink]="['/games']"><i class="fa fa-chevron-left"
               aria-hidden="true"></i> Retour</button>
           <!-- Condition -->
-          <button type="button" class="btn btn-outline-secondary closebtn" (click)="closeNav()">Cacher <i
+          <button *ngIf="!isFull" type="button" class="btn btn-outline-secondary closebtn" (click)="closeNav()">Cacher <i
               class="fa fa-chevron-right" aria-hidden="true"></i></button>
         </div>
       </div>
@@ -146,10 +146,10 @@
         <div class="col mb-2">
           <div class="row">
             <div id="seeShoppingCart" class="col-sm-12">
-              <button class="btn btn-lg btn-block btn-outline-secondary">Voir panier</button>
+              <button *ngIf="!isFull" (click)="closeNav()" class="btn btn-lg btn-block btn-outline-secondary" [routerLink]="['/shopingCart']">Voir panier</button>
             </div>
             <div class="col-sm-12 col-md-12 text-right">
-              <button class="btn btn-lg btn-block my-btn-success text-uppercase"><i class="fa fa-credit-card"></i> <span>
+              <button *ngIf="isFull" class="btn btn-lg btn-block my-btn-success text-uppercase"><i class="fa fa-credit-card"></i> <span>
                   Commander</span> </button>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingService } from 'app/service/shopping-view.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-sidebar',
@@ -8,10 +9,13 @@ import { ShoppingService } from 'app/service/shopping-view.service';
 })
 export class SidebarComponent implements OnInit {
   // constructor() {}
+  isShoppingCart: boolean;
 
-  constructor(private shopservice: ShoppingService) {}
+  constructor(private shopservice: ShoppingService, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.customiseView();
+  }
 
   openNav() {
     this.shopservice.openNav();
@@ -27,5 +31,10 @@ export class SidebarComponent implements OnInit {
     } else {
       document.getElementById('headerCard').style.paddingTop = '70px';
     }
+  }
+
+  customiseView() {
+    this.isShoppingCart = this.router.url === '/shopingCart';
+    this.router.events.subscribe(() => (this.isShoppingCart = this.router.url === '/shopingCart'));
   }
 }
