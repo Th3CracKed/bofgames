@@ -25,6 +25,7 @@ import { TestComponent } from './test/test.component';
 import { ItemListComponent } from './component/item-list/item-list.component';
 import { ItemDetailComponent } from './component/item-detail/item-detail.component';
 import { FillPipe } from './pipes/fill.pipe';
+import { AddressUpdateComponent } from './component/address-update/address-update.component';
 
 @NgModule({
   imports: [
@@ -56,7 +57,8 @@ import { FillPipe } from './pipes/fill.pipe';
     TestComponent,
     ItemListComponent,
     ItemDetailComponent,
-    FillPipe
+    FillPipe,
+    AddressUpdateComponent
   ],
   providers: [
     {
