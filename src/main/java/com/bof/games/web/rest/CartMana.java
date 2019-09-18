@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -429,4 +430,77 @@ public class CartMana {
 
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, "")).build();
     }
+
+    /**
+     * {@code PUT  /client/cart/buy/} : buy a client's cart.
+     *
+     * @param idClient the client to update.
+     * @param idCart the Cart to buy
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated client, or with status {@code 400 (Bad Request)} if the
+     *         client is not valid, or with status
+     *         {@code 500 (Internal Server Error)} if the client couldn't be
+     *         updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PutMapping("/client/cart/buy/")
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    public ResponseEntity<String> BuyCart(@RequestParam(name = "idClient") long idClient,@RequestParam(name = "idCart") long idCart) throws URISyntaxException {
+        System.out.println("\n\n" + idClient + "\n\n\n");
+        log.debug("REST request to remove one Item of an user card whit data {}");
+
+        Optional<Client> client = clientRepository.findById(idClient);
+        if (client.get() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "client not found");
+        }
+
+        Optional<Cart> cart = this.cartRepository.findById(idCart);
+        if (cart.get() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "cart not found");
+        }
+        
+       cart.get().setExpired(true);
+       cart.get().setOrdered(true);
+
+       for (CartLine cl : cart.get().getCartLines()) {
+           cl.setExpired(true);
+           for (Key k : cl.getKeys()) {
+               k.setStatus(KEYSTATUS.BUYED);
+           }
+       }
+
+        cartRepository.save(cart.get());
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.get().getId().toString()))
+            .body("");
+        
+    }
+
+     /**
+     * {@code GET  /items/:id} : get the "id" item.
+     *
+     * @param idClient the id of the client.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the item, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/client/order/{idClient}")
+    public List<Cart> getOrders(@PathVariable Long idClient) {
+        log.debug("REST request to get Order List : {}", idClient);
+        
+        ArrayList<Cart> orders = new ArrayList<Cart>();
+        
+        Optional<Client> client = clientRepository.findById(idClient);
+        if (client.get() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "client not found");
+        }
+
+        for (Cart c : client.get().getCarts()) {
+            if (c.isOrdered()) {
+                orders.add(c);
+            }
+        }
+
+        return orders;
+
+    }
+
 }
