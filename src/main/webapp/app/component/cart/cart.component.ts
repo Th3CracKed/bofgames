@@ -27,6 +27,10 @@ export class CartComponent implements OnInit {
 
   customiseView() {
     this.isFull = this.router.url === '/shopingCart';
-    this.router.events.subscribe(() => (this.isFull = this.router.url === '/shopingCart'));
+    this.router.events.subscribe(() => {
+      setTimeout(() => {
+        this.isFull = this.router.url === '/shopingCart';
+      }, 500);
+    });
   }
 }
