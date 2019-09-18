@@ -503,4 +503,42 @@ public class CartMana {
 
     }
 
+    /**
+     * {@code GET  /client/:idClient/cart} : get the "id" item.
+     *
+     * @param idClient the id of the client.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the item, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/client/{idClient}/cart")
+    public Cart getCart(@PathVariable Long idClient) {
+        log.debug("REST request to get Client's Cart : {}", idClient);
+        
+        
+        Optional<Client> client = clientRepository.findById(idClient);
+        if (client.get() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "client not found");
+        }
+
+
+        Cart cart = null;
+        for (Cart c : client.get().getCarts()) {
+            if (!c.isExpired()) {
+               cart = c;
+               break;
+            }
+        }
+        
+        if(cart == null){
+            cart = new Cart();
+            cart.setExpired(false);
+            cart.setOrdered(false);
+            cart.setDriver(client.get());
+        }
+
+        clientRepository.save(client.get());
+
+        return cart;
+
+    }
+
 }

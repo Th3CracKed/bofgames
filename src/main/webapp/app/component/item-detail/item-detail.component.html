@@ -4,8 +4,8 @@
   </div>
   <div class="row">
     <div class="col col-md-3 game_cover_space">
-      <img *ngIf="item.game.media[0]" src="{{item.game.media[0].url}}" alt="{{item.game.media[0].alt}}" />
-      <img *ngIf="!item.game.media[0]" src="https://www.kasterencultuur.nl/editor/placeholder.jpg" alt="Image not found"/>
+      <img *ngIf="item.game.media != null && item.game.media[0]" src="{{item.game.media[0].url}}" alt="{{item.game.media[0].alt}}" />
+      <img *ngIf="item.game.media == null || !item.game.media[0]" src="https://www.kasterencultuur.nl/editor/placeholder.jpg" alt="Image not found"/>
     </div>
     <div class="col col-md-9">
       <h1>{{item.game.name}}</h1>
