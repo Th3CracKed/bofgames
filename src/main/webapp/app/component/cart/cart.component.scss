@@ -49,10 +49,6 @@ body {
 
 // Plus minus css
 
-span {
-  cursor: pointer;
-}
-
 .numberCard {
   display: inline-block;
   min-width: 70px;
@@ -67,6 +63,25 @@ span {
     display: inline-block;
     vertical-align: middle;
     text-align: center;
+    cursor: pointer;
+  }
+
+  .minus:hover,
+  .plus:hover {
+    background: #adacac;
+  }
+
+  .number_value {
+    width: 20px;
+    background: #f2f2f2;
+    border-radius: 4px;
+    padding: 8px 5px 8px 5px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    color: #282c37;
+    font-weight: bold;
   }
   input {
     display: inline-block;
@@ -87,4 +102,16 @@ span {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
+}
+
+.my-btn-info-shop,
+.my-btn-info-shop:visited {
+  background-color: #2b90d9;
+  color: #fff;
+}
+
+.my-btn-info-shop:hover,
+.my-btn-info-shop:active {
+  background-color: #205e8a;
+  color: #fff;
 }
