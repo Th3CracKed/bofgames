@@ -1,32 +1,30 @@
 stages:
-  - test
-  - build
+  - test/build
   - deploy
 
-front_test:
+test/build:
   image: node:10
-  stage: test
+  stage: test/build
   before_script:
-    - npm install
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script:
-    - npm test
+    - mvn package -Pprod verify jib:dockerBuild
+    - docker push bofgames:latest
 
-front_test_e2e:
-  image: caltha/protractor:5.4.2
-  stage: test
-  before_script:
-    - npm install
+deploy:
+  image: docker:stable
   script:
-    - npm run e2e
+    - echo 'It will work one day'
 
-back_test:
-  image: maven:3.6.2-jdk-11-slim
-  stage: test
-  script:
-    - mvn test
 
-build_image:
-  image: maven:3.6.2-jdk-11-slim
-  stage: build
-  script:
-    - ./mvnw package -Pprod verify jib:dockerBuild
+# variables:
+#   DOCKER_HOST: "tcp://url:2376"
+#   DOCKER_TLS_VERIFY: 1
+#   STACK_NAME: bofgames
+# script:
+#   - mkdir -p ~/.docker
+#   - echo "$STAGING_DOCKER_CA" > ~/.docker/ca.pem
+#   - echo "$STAGING_DOCKER_CERT" > ~/.docker/cert.pem
+#   - echo "$STAGING_DOCKER_KEY" > ~/.docker/key.pem
+#   - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
+#   - docker stack deploy --with-registry-auth -c docker-compose.yml "$STACK_NAME"
