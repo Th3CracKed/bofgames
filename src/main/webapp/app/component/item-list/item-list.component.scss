@@ -1,74 +1,136 @@
-// article {
-//   display: inline-block;
-// }
-
-// img {
-//   width: 260px;
-//   height: 260px;
-// }
-// div:not(:last-child) {
-//   margin-bottom: 10px;
-//   border-bottom: 1px solid #7b877e;
-// }
-
-a {
-  text-decoration-color: orangered;
-}
-#gameTitle {
-  h2 {
-    color: orangered;
-    font-weight: bold;
-  }
+.item {
+  min-width: 300px;
+  // max-width: 300px;
+  // margin-left: auto;
+  // margin-right: auto;
 }
 
-#game_cover {
-  padding-left: 0px;
+.view-group {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.thumbnail {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin-bottom: 30px;
+  padding: 0px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  background-color: #fff;
 }
 
-h5 {
-  font-weight: bold;
+.thumbnail:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-/* [1] The container */
-.img-hover-zoom {
-  background-color: lightgray;
-  text-align: center;
-  height: 200px;
-  // height: 300px; /* [1.1] Set it as per your need */
-  overflow: hidden; /* [1.2] Hide the overflowing of child elements */
+.thumbnail:hover .coverImg,
+.thumbnail:focus .coverImg {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
-/* [2] Transition property for smooth transformation of images */
-.img-hover-zoom img {
-  height: 200px;
-  transition: transform 0.5s ease;
+.item.list-group-item .thumbnail {
+  width: 100%;
 }
 
-/* [3] Finally, transforming the image when container gets hovered */
-.img-hover-zoom:hover img {
-  transform: scale(1.5);
+.item.list-group-item {
+  float: none;
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 30px;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding: 0 1rem;
+  border: 0;
+}
+.item.list-group-item .img-event {
+  float: left;
+  width: 30%;
+  background-color: #dddddd;
+}
+
+.img-event {
+  overflow: hidden;
+}
+
+.img-event .coverImg {
+  background-color: #dddddd;
+  width: 100%;
+  height: 280px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  float: left;
+
+  background-repeat: no-repeat;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  -o-transition: all 0.6s;
+  transition: all 0.6s;
+}
+
+.item.list-group-item .list-group-image {
+  margin-right: 10px;
+}
+.item.list-group-item .thumbnail {
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+.item.list-group-item .caption {
+  float: left;
+  width: 70%;
+  margin: 0;
+}
+
+.item.list-group-item:before,
+.item.list-group-item:after {
+  display: table;
+  content: ' ';
+}
+
+.item.list-group-item:after {
+  clear: both;
 }
 
 .toolbar {
-  height: 45px;
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
+  //   height: 45px;
+  //   position: absolute;
+  //   bottom: 0px;
+  //   right: 0px;
   button {
-    width: 100px;
-    position: absolute;
-    right: 5px;
+    float: right;
+    // width: 100px;
+    // position: absolute;
   }
 }
 
-.rating {
-  line-height: 20px;
+.my-btn-info,
+.my-btn-info:hover,
+.my-btn-info:active,
+.my-btn-info:visited {
+  background-color: #d9e1e8 !important;
 }
 
-.gameItem {
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  margin-bottom: 10px;
+.my-btn-danger,
+.my-btn-danger:hover,
+.my-btn-danger:active,
+.my-btn-danger:visited {
+  background-color: #d9e1e8 !important;
+}
+
+.my-btn-info-shop,
+.my-btn-info-shop:hover,
+.my-btn-info-shop:active,
+.my-btn-info-shop:visited {
+  background-color: #2b90d9;
+  color: #fff;
 }

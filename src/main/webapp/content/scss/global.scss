@@ -15,7 +15,14 @@ h4 {
 }
 
 body {
-  background-color: #d9e1e8;
+  // background-color: #d9e1e8;
+  background-image: url('../../../../../assets/background.png');
+  background-position: center;
+  background-size: cover;
+
+  // opacity: 0.5;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /* Increase contrast of links to get 100% on Lighthouse Accessability Audit. Override this color if you want to change the link color, or use a Bootswatch theme */
@@ -180,3 +187,20 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+#mainPage {
+  transition: 0.5s;
+  margin-right: 0;
+}
+
+@media only screen and (min-width: 1000px) {
+  .pushMainpage {
+    margin-right: 500px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .pushMainpage {
+    display: none;
+  }
+}

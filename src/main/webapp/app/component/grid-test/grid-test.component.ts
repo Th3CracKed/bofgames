@@ -3,11 +3,11 @@ import { ItemListService } from 'app/service/item-list.service';
 import { Item } from 'app/shared/model/item.model';
 
 @Component({
-  selector: 'jhi-item-list',
-  templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.scss']
+  selector: 'jhi-grid-test',
+  templateUrl: './grid-test.component.html',
+  styleUrls: ['./grid-test.component.scss']
 })
-export class ItemListComponent implements OnInit {
+export class GridTestComponent implements OnInit {
   items: Item[] = [];
   marks: number[] = [];
 
@@ -39,7 +39,7 @@ export class ItemListComponent implements OnInit {
   }
 
   displayList() {
-    const els = document.getElementsByClassName('item');
+    let els = document.getElementsByClassName('item');
     for (let index = 0; index < els.length; index++) {
       const element = els[index];
       element.classList.add('list-group-item');
@@ -47,7 +47,7 @@ export class ItemListComponent implements OnInit {
   }
 
   displayGrid() {
-    const els = document.getElementsByClassName('item');
+    let els = document.getElementsByClassName('item');
     for (let index = 0; index < els.length; index++) {
       const element = els[index];
       element.classList.remove('list-group-item');

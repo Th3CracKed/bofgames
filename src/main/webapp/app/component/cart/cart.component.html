@@ -1,0 +1,160 @@
+<div class="wrapper">
+  <!-- HEADER -->
+  <div id="headerCard">
+    <div class="container mb-4">
+      <div class="row">
+        <div class="col-12">
+          <button *ngIf="isFull" type="button" class="btn btn-secondary" [routerLink]="['/games']"><i class="fa fa-chevron-left"
+              aria-hidden="true"></i> Retour</button>
+          <!-- Condition -->
+          <button type="button" class="btn btn-outline-secondary closebtn" (click)="closeNav()">Cacher <i
+              class="fa fa-chevron-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- HEADER -->
+
+
+  <div class="content">
+    <div> 
+      
+      <!-- Content -->
+      <div class="container mb-4">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <!-- Titre du panier -->
+                <tr>
+                  <th *ngIf="condition" scope="col"> </th>
+                  <th scope="col">Produit</th>
+                  <th scope="col">Disponible</th>
+                  <th scope="col" class="text-center">Quantité</th>
+                  <th scope="col" class="text-right">Prix</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Start for here for each iteams -->
+                <tr>
+                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td>Product Name Dada</td>
+                  <td>In stock</td>
+                  <td>
+                    <!-- input plus minus -->
+                      <div class="numberCard">
+                        <span class="noselect minus">-</span>
+                        <input disabled class="counterCard" type="text" value="1" />
+                        <span class="noselect plus">+</span>
+                      </div>
+                    <!--  -->
+                  </td>
+                  <td class="text-right">124,90€</td>
+                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                </tr>
+                <!-- end for -->
+                <tr>
+                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td>Product Name Dada</td>
+                  <td>In stock</td>
+                  <td>
+                    <!-- input plus minus -->
+                    <div class="numberCard">
+                      <span class="minus">-</span>
+                      <input disabled class="counterCard" type="text" value="1" />
+                      <span class="plus">+</span>
+                    </div>
+                    <!--  -->
+                  </td>
+                  <td class="text-right">124,90€</td>
+                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                </tr>
+                <tr>
+                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td>Product Name Dada</td>
+                  <td>In stock</td>
+                  <td><input class="form-control" type="text" value="1" /></td>
+                  <td class="text-right">124,90 €</td>
+                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                </tr>
+                <tr>
+                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td>Product Name Dada</td>
+                  <td>In stock</td>
+                  <td><input class="form-control" type="text" value="1" /></td>
+                  <td class="text-right">124,90 €</td>
+                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                </tr>
+                <tr>
+                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td>Product Name Dada</td>
+                  <td>In stock</td>
+                  <td><input class="form-control" type="text" value="1" /></td>
+                  <td class="text-right">124,90 €</td>
+                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                </tr>
+                
+                <tr>
+                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td>Product Name Toto</td>
+                  <td>In stock</td>
+                  <td><input class="form-control" type="text" value="1" /></td>
+                  <td class="text-right">33,90 €</td>
+                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                </tr>
+                <tr>
+                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td>Product Name Titi</td>
+                  <td>In stock</td>
+                  <td>
+                    <!-- input plus minus -->
+                    <div class="numberCard">
+                      <span class="minus">-</span>
+                      <input class="counterCard" type="text" value="1" />
+                      <span class="plus">+</span>
+                    </div>
+                    <!--  -->
+                  </td>
+                  <td class="text-right">70,00 €</td>
+                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                </tr>
+                <tr>
+                  <!-- Empty colomns don't delete-->
+                  <td *ngIf="condition"></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><strong>Total</strong></td>
+                  <td class="text-right"><strong>346,90 €</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        </div>
+      <!-- Content -->
+
+    </div>
+  </div>
+
+
+
+  <!-- FOOTER -->
+  <div class="footerCard">
+    <div class="container mb-4">
+        <div class="col mb-2">
+          <div class="row">
+            <div id="seeShoppingCart" class="col-sm-12">
+              <button class="btn btn-lg btn-block btn-outline-secondary">Voir panier</button>
+            </div>
+            <div class="col-sm-12 col-md-12 text-right">
+              <button class="btn btn-lg btn-block my-btn-success text-uppercase"><i class="fa fa-credit-card"></i> <span>
+                  Commander</span> </button>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- FOOTER -->
+</div>
