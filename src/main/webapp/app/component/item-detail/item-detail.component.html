@@ -33,7 +33,7 @@
 </div>
   <div class="row" id="item_footer">
       <div id="game-price">
-        <h3>{{item.price}}€</h3> <!-- TODO gerer la virgule -->
+        <h3>{{item.price | number:'1.2-5'}}€</h3> <!-- TODO gerer la virgule -->
       </div>
       <button id="panier" type="button" class="btn btn-primary" (click)="addToCard()"><i class="fa fa-shopping-cart"></i> Ajouter au panier</button>
   </div>
