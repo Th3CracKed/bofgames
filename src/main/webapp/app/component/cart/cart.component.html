@@ -27,7 +27,7 @@
               <thead>
                 <!-- Titre du panier -->
                 <tr>
-                  <th *ngIf="condition" scope="col"> </th>
+                  <th *ngIf="isFull" scope="col"> </th>
                   <th scope="col">Produit</th>
                   <th scope="col">Disponible</th>
                   <th scope="col" class="text-center">Quantité</th>
@@ -38,7 +38,7 @@
               <tbody>
                 <!-- Start for here for each iteams -->
                 <tr>
-                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                   <td>Product Name Dada</td>
                   <td>In stock</td>
                   <td class="text-center">
@@ -55,7 +55,7 @@
                 </tr>
                 <!-- end for -->
                 <tr>
-                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                   <td>Product Name Dada</td>
                   <td>In stock</td>
                   <td>
@@ -71,7 +71,7 @@
                   <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
                 </tr>
                 <tr>
-                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                   <td>Product Name Dada</td>
                   <td>In stock</td>
                   <td><input class="form-control" type="text" value="1" /></td>
@@ -79,7 +79,7 @@
                   <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
                 </tr>
                 <tr>
-                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                   <td>Product Name Dada</td>
                   <td>In stock</td>
                   <td><input class="form-control" type="text" value="1" /></td>
@@ -87,7 +87,7 @@
                   <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
                 </tr>
                 <tr>
-                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                   <td>Product Name Dada</td>
                   <td>In stock</td>
                   <td><input class="form-control" type="text" value="1" /></td>
@@ -96,7 +96,7 @@
                 </tr>
                 
                 <tr>
-                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                   <td>Product Name Toto</td>
                   <td>In stock</td>
                   <td><input class="form-control" type="text" value="1" /></td>
@@ -104,7 +104,7 @@
                   <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
                 </tr>
                 <tr>
-                  <td *ngIf="condition"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                   <td>Product Name Titi</td>
                   <td>In stock</td>
                   <td>
