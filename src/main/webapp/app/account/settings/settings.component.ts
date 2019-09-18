@@ -136,7 +136,6 @@ export class SettingsComponent implements OnInit {
   }
 
   updateFormWithClient(client: IClient): void {
-    console.log(`client.birthdate = ${client.birthdate}`);
     this.settingsForm.patchValue({
       id: client.id,
       street: client.street,
