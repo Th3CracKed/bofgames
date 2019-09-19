@@ -14,6 +14,7 @@ test/build:
 
 deploy:
   image: docker:stable
+  stage: deploy
   script:
     - echo 'It will work one day'
 
