@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingService } from 'app/service/shopping-view.service';
 import { Router } from '@angular/router';
+import { MyModalService } from 'app/service/modal-view.service';
 
 @Component({
   selector: 'jhi-cart',
@@ -11,10 +12,16 @@ export class CartComponent implements OnInit {
   last_known_scroll_position = 0;
   ticking = false;
   isFull: boolean;
+  itemName: String;
 
-  constructor(private shopservice: ShoppingService, private router: Router) {}
+  constructor(private shopservice: ShoppingService, private router: Router, private myModal: MyModalService) {}
   ngOnInit() {
     this.customiseView();
+  }
+
+  open_delete_modal(content: any, value: String) {
+    this.itemName = value;
+    this.myModal.open(content);
   }
 
   openNav() {
@@ -32,5 +39,10 @@ export class CartComponent implements OnInit {
         this.isFull = this.router.url === '/shopingCart';
       }, 500);
     });
+  }
+
+  confirm_delete(e: String) {
+    this.myModal.close();
+    alert(e);
   }
 }
