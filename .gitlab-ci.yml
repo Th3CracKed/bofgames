@@ -6,8 +6,8 @@ test/build:
   image: maven:3.6.2-jdk-11-slim
   stage: test/build
   before_script:
-    - echo "$SETTINGS_SECURITY" > "~/.m2/settings-security.xml"
-    - echo "$SETTINGS" > "~/.m2/settings.xml"
+    - cp "$SETTINGS_SECURITY" ~/.m2/settings-security.xml
+    - cp "$SETTINGS" ~/.m2/settings.xml
     - ls -la ~/.m2
   script:
     - mvn package -Pprod verify jib:build
