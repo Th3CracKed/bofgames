@@ -8,6 +8,7 @@ import { ItemListComponent } from './component/item-list/item-list.component';
 import { UserProfilComponent } from './component/user-profil/user-profil.component';
 import { CartComponent } from './component/cart/cart.component';
 import { OrderHistoryComponent } from './component/order-history/order-history.component';
+import { OrderValidationComponent } from './component/order-validation/order-validation.component';
 const LAYOUT_ROUTES = [navbarRoute, sidebarRoute, ...errorRoute];
 @NgModule({
   imports: [
@@ -22,8 +23,12 @@ const LAYOUT_ROUTES = [navbarRoute, sidebarRoute, ...errorRoute];
           component: UserProfilComponent
         },
         {
-          path: 'shopingCart',
+          path: 'shoppingCart',
           component: CartComponent
+        },
+        {
+          path: 'orderValidation',
+          component: OrderValidationComponent
         },
         {
           path: 'orderHistory',

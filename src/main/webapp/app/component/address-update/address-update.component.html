@@ -3,20 +3,27 @@
 </div>
 
     <jhi-alert-error></jhi-alert-error>
-<div *ngIf="client && !isEditForm">
-  <p>
-    {{client.street}}
-    {{client.postCode}}
-    {{client.city}}
-    {{client.country}}
-  </p>
-  <button class="btn-primary" (click)="toogleEditForm()">Edit</button>
+<div class="userdetails" *ngIf="client && !isEditForm">
+  <div class="container">
+    <div class="col col-xs-12">      
+          <h3>Rue :</h3>
+          <p>{{client.street}}</p>
+          <h3>Code postal :</h3>
+          <p>{{client.postCode}}</p>
+          <h3>Pays :</h3>
+          <p>{{client.city}}</p>
+          <h3>Ville :</h3>
+          <p>{{client.country}}</p>
+    </div>
+</div>
+      
+  <button class="btn btn-primary" (click)="toogleEditForm()"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</button>
 </div>
 <form name="form" role="form" (ngSubmit)="save()" [formGroup]="clientForm" *ngIf="clientForm.get('id').value && isEditForm" novalidate>
- <div class="form-group">
-                            <label for="id" jhiTranslate="global.field.id">ID</label>
-                            <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                                readonly />
+                <div class="form-group" [hidden]="true">
+                <label for="id" jhiTranslate="global.field.id">ID</label>
+                <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                    readonly />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="address.form.street" for="street">Street</label>

@@ -32,6 +32,7 @@ import { OrderHistoryComponent } from './component/order-history/order-history.c
 import { SearchComponent } from './search/search.component';
 import { AddressUpdateComponent } from './component/address-update/address-update.component';
 
+import { OrderValidationComponent } from './component/order-validation/order-validation.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -68,7 +69,8 @@ import { AddressUpdateComponent } from './component/address-update/address-updat
     SidebarComponent,
     OrderHistoryComponent,
     SearchComponent,
-    AddressUpdateComponent
+    AddressUpdateComponent,
+    OrderValidationComponent
   ],
   providers: [
     {

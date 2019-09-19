@@ -34,7 +34,7 @@ export class SidebarComponent implements OnInit {
   }
 
   customiseView() {
-    this.isShoppingCart = this.router.url === '/shopingCart';
-    this.router.events.subscribe(() => (this.isShoppingCart = this.router.url === '/shopingCart'));
+    this.isShoppingCart = this.router.url === '/shoppingCart';
+    this.router.events.subscribe(() => (this.isShoppingCart = this.router.url === '/shoppingCart'));
   }
 }
