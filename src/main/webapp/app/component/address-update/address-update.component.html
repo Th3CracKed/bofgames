@@ -1,0 +1,57 @@
+<div class="alert alert-success" *ngIf="success" jhiTranslate="address.messages.success">
+        <strong>Address saved!</strong>
+</div>
+
+    <jhi-alert-error></jhi-alert-error>
+<div *ngIf="client && !isEditForm">
+  <p>
+    {{client.street}}
+    {{client.postCode}}
+    {{client.city}}
+    {{client.country}}
+  </p>
+  <button class="btn-primary" (click)="toogleEditForm()">Edit</button>
+</div>
+<form name="form" role="form" (ngSubmit)="save()" [formGroup]="clientForm" *ngIf="clientForm.get('id').value && isEditForm" novalidate>
+ <div class="form-group">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                                readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="address.form.street" for="street">Street</label>
+                    <input type="text" class="form-control" name="street" id="street"
+                           formControlName="street"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="address.form.postCode" for="postCode">Post Code</label>
+                    <input type="text" class="form-control" name="postCode" id="postCode"
+                           formControlName="postCode"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="address.form.city" for="city">City</label>
+                    <input type="text" class="form-control" name="city" id="city"
+                           formControlName="city"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="address.form.country" for="country">Country</label>
+                    <input type="text" class="form-control" name="country" id="country"
+                           formControlName="country"/>
+                </div>
+                <div class="form-group" [hidden]="true">
+                        <label class="form-control-label" jhiTranslate="bofgamesApp.client.birthdate" for="field_birthdate">Birthdate</label>
+                        <div class="input-group">
+                            <input id="field_birthdate" type="text" class="form-control" name="birthdate" ngbDatepicker  #birthdateDp="ngbDatepicker" formControlName="birthdate"/>
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-secondary" (click)="birthdateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                            </span>
+                        </div>
+                </div>
+                
+                <div class="form-group" [hidden]="true">
+                        <label class="form-control-label" jhiTranslate="address.form.user" for="user">User</label>
+                        <input type="text" class="form-control" name="user" id="user"
+                           formControlName="user" readonly/>
+                </div>
+                <button type="submit" [disabled]="clientForm.invalid" class="btn btn-primary" jhiTranslate="address.form.button">Save</button>
+</form>
