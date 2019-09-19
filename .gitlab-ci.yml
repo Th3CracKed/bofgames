@@ -3,7 +3,7 @@ stages:
   - deploy
 
 test/build:
-  image: node:10
+  image: maven:3.6.2-jdk-11-slim
   stage: test/build
   before_script:
     - echo "$SETTINGS_SECURITY" > "~/.m2/settings-security.xml"
