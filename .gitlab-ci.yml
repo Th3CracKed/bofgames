@@ -6,10 +6,11 @@ test/build:
   image: node:10
   stage: test/build
   before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - echo "$SETTINGS_SECURITY" > "~/.m2/settings-security.xml"
+    - echo "$SETTINGS" > "~/.m2/settings.xml"
+    - ls -la ~/.m2
   script:
-    - mvn package -Pprod verify jib:dockerBuild
-    - docker push bofgames:latest
+    - mvn package -Pprod verify jib:build
 
 deploy:
   image: docker:stable

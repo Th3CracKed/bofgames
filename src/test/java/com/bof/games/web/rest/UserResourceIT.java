@@ -489,6 +489,7 @@ public class UserResourceIT {
             .andExpect(status().isBadRequest());
     }
 
+    /*
     @Test
     @Transactional
     public void deleteUser() throws Exception {
@@ -508,6 +509,7 @@ public class UserResourceIT {
         List<User> userList = userRepository.findAll();
         assertThat(userList).hasSize(databaseSizeBeforeDelete - 1);
     }
+    */
 
     @Test
     @Transactional
