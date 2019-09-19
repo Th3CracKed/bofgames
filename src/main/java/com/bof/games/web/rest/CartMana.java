@@ -99,7 +99,7 @@ public class CartMana {
      */
     @PutMapping("/client/cart/add/")
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    public ResponseEntity<String> addToCard(@RequestParam(name = "idClient") long idClient,@RequestParam(name = "idItem") long idItem) throws URISyntaxException {
+    public Cart addToCard(@RequestParam(name = "idClient") long idClient,@RequestParam(name = "idItem") long idItem) throws URISyntaxException {
         System.out.println("\n\n" + idClient + "\n\n\n");
         log.debug("REST request to add an Item into an user card whit data {}");
 
@@ -215,13 +215,9 @@ public class CartMana {
 
         if (!cartError) {
             clientRepository.save(client.get());
-            return ResponseEntity.ok()
-                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.get().getId().toString()))
-                .body("");
+            return cart;
         } else {
-            return ResponseEntity.status(406)
-                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.get().getId().toString()))
-                .body("");
+            return null;
         }
     }
 
@@ -234,7 +230,7 @@ public class CartMana {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/client/cart")
-    public ResponseEntity<String> setCart(@RequestBody Cart cartCookie) throws URISyntaxException {
+    public ResponseEntity<Cart> setCart(@RequestBody Cart cartCookie) throws URISyntaxException {
         log.debug("REST request to attach a Cart to a client : {}", cartCookie);
         if (cartCookie.getId() != null) {
             throw new BadRequestAlertException("A new cart cannot already have an ID", ENTITY_NAME, "idexists");
@@ -249,7 +245,9 @@ public class CartMana {
                     cl.setExpired(true);
                     for(Key key : cl.getKeys()){
                         key.status(KEYSTATUS.AVAILABLE);
+                        key.setCartLine(null);
                     }
+                    cl.setKeys(null);
                 }
             }
         }
@@ -310,11 +308,11 @@ public class CartMana {
         if(!cartError){
             return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.getId().toString()))
-            .body("");
+            .body(cart);
         }else{
             return ResponseEntity.status(206)
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.getId().toString()))
-            .body("");
+            .body(cart);
         }
     }
 
@@ -333,7 +331,7 @@ public class CartMana {
      */
     @PutMapping("/client/cart/remove/")
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    public ResponseEntity<String> removeToCard(@RequestParam(name = "idClient") long idClient,@RequestParam(name = "idCart") long idCart, @RequestParam(name = "idItem") long idItem) throws URISyntaxException {
+    public ResponseEntity<Cart> removeToCard(@RequestParam(name = "idClient") long idClient,@RequestParam(name = "idCart") long idCart, @RequestParam(name = "idItem") long idItem) throws URISyntaxException {
         System.out.println("\n\n" + idClient + "\n\n\n");
         log.debug("REST request to remove one Item of an user card whit data {}");
 
@@ -376,7 +374,7 @@ public class CartMana {
         cartRepository.save(cart.get());
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, client.get().getId().toString()))
-            .body("");
+            .body(cart.get());
         
     }
 
@@ -389,7 +387,7 @@ public class CartMana {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/client/cart/delete")
-    public ResponseEntity<Void> deleteItem(@RequestParam(name = "idClient") long idClient,@RequestParam(name = "idCart") long idCart, @RequestParam(name = "idItem") long idItem) {
+    public ResponseEntity<Cart> deleteItem(@RequestParam(name = "idClient") long idClient,@RequestParam(name = "idCart") long idCart, @RequestParam(name = "idItem") long idItem) {
         log.debug("REST request to delete Item from cart");
         
         
@@ -428,7 +426,7 @@ public class CartMana {
 
         cartRepository.save(cart.get());
 
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, "")).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, "")).body(cart.get());
     }
 
     /**

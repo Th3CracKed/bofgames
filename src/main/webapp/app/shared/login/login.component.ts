@@ -73,10 +73,16 @@ export class JhiLoginModalComponent implements AfterViewInit {
 
         this.accountService.identity().then(account => {
           const c: Cart = this.cookies.getObject('panier');
-          c.driver = <Client>(<any>account);
-          c.id = null;
-          console.log(this.cartService.setCart(c));
-          this.cookies.remove('panier');
+          if (c !== undefined) {
+            c.driver = <Client>(<any>account);
+            c.id = null;
+            this.cartService.setCart(c).subscribe(res => {
+              this.cartService.updateCart(res);
+            });
+            this.cookies.remove('panier');
+          } else {
+            this.cartService.reloadCart();
+          }
         });
 
         // previousState was set in the authExpiredInterceptor before being redirected to login modal.
