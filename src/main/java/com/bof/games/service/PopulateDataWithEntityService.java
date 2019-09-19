@@ -3,6 +3,7 @@ package com.bof.games.service;
 import com.bof.games.domain.*;
 import com.bof.games.domain.enumeration.KEYSTATUS;
 import com.bof.games.repository.*;
+import com.bof.games.repository.search.ItemSearchRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +17,7 @@ public class PopulateDataWithEntityService {
     private final PlatformRepository platformRepository;
     private final GameRepository gameRepository;
     private final ItemRepository itemRepository;
+    private final ItemSearchRepository itemSearchRepository;
     private final UserRepository userRepository;
     private final ClientRepository clientRepository;
     private final TagRepository tagRepository;
@@ -24,10 +26,11 @@ public class PopulateDataWithEntityService {
     private final CartLineRepository cartLineRepository;
     private final CartRepository cartRepository;
 
-    public PopulateDataWithEntityService(PlatformRepository platformRepository, GameRepository gameRepository, ItemRepository itemRepository, UserRepository userRepository, ClientRepository clientRepository, TagRepository tagRepository, KeyRepository keyRepository, MediaRepository mediaRepository, CartLineRepository cartLineRepository, CartRepository cartRepository) {
+    public PopulateDataWithEntityService(PlatformRepository platformRepository, GameRepository gameRepository, ItemRepository itemRepository, ItemSearchRepository itemSearchRepository, UserRepository userRepository, ClientRepository clientRepository, TagRepository tagRepository, KeyRepository keyRepository, MediaRepository mediaRepository, CartLineRepository cartLineRepository, CartRepository cartRepository) {
         this.platformRepository = platformRepository;
         this.gameRepository = gameRepository;
         this.itemRepository = itemRepository;
+        this.itemSearchRepository = itemSearchRepository;
         this.userRepository = userRepository;
         this.clientRepository = clientRepository;
         this.tagRepository = tagRepository;
@@ -45,6 +48,7 @@ public class PopulateDataWithEntityService {
             mediaRepository.deleteAll();
             keyRepository.deleteAll();
             itemRepository.deleteAll();
+            itemSearchRepository.deleteAll();
             platformRepository.deleteAll();
             tagRepository.deleteAll();
             gameRepository.deleteAll();
@@ -70,6 +74,7 @@ public class PopulateDataWithEntityService {
                 .game(games.get(i))
                 .platform(platforms.get(i));
             itemRepository.save(item);
+            itemSearchRepository.save(item);
         }
 
         tagRepository.save(new Tag().name("Action"));
