@@ -29,96 +29,31 @@
                 <tr>
                   <th *ngIf="isFull" scope="col"> </th>
                   <th scope="col">Produit</th>
-                  <th scope="col">Disponible</th>
+                  <th scope="col">Plateforme</th>
                   <th scope="col" class="text-center">Quantité</th>
                   <th scope="col" class="text-right">Prix</th>
                   <th></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody *ngIf="this.cart && this.cart.cartLines.length > 0">
                 <!-- Start for here for each iteams -->
-                <tr>
-                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                  <td>Product Name Dada</td>
-                  <td>In stock</td>
+                <tr *ngFor="let cartLine of this.cart.cartLines;">
+                  <td *ngIf="isFull"><img width="20" height="40" src="{{cartLine.item.game.media[0].url}}"/> </td>
+                  <td>{{cartLine.item.game.name}}</td>
+                  <td>{{cartLine.item.platform.name}}</td>
                   <td>
                     <!-- input plus minus -->
                       <div class="numberCard">
-                        <span class="noselect minus">-</span>
-                        <span class="noselect number_value">1</span>
-                        <span class="noselect plus">+</span>
+                        <span (click)="downQty(cartLine.item.id)" class="noselect minus">-</span>
+                        <span class="noselect number_value">{{cartLine.quantity}}</span>
+                        <span (click)="upQty(cartLine.item.id)" class="noselect plus">+</span>
                       </div>
                     <!--  -->
                   </td>
-                  <td class="text-right">{{200 | number:'1.2-5'}}€</td>
-                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                  <td class="text-right">{{cartLine.unitPrice | number:'1.2-5'}}€</td>
+                  <td class="text-right"><button (click)="removeItem(cartLine.item.id)" class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
                 </tr>
                 <!-- end for -->
-                <tr>
-                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                  <td>Product Name Dada</td>
-                  <td>In stock</td>
-                  <td>
-                    <!-- input plus minus -->
-                    <div class="numberCard">
-                      <span class="minus">-</span>
-                      <input disabled class="counterCard" type="text" value="1" />
-                      <span class="plus">+</span>
-                    </div>
-                    <!--  -->
-                  </td>
-                  <td class="text-right">124,90€</td>
-                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                </tr>
-                <tr>
-                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                  <td>Product Name Dada</td>
-                  <td>In stock</td>
-                  <td><input class="form-control" type="text" value="1" /></td>
-                  <td class="text-right">124,90 €</td>
-                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                </tr>
-                <tr>
-                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                  <td>Product Name Dada</td>
-                  <td>In stock</td>
-                  <td><input class="form-control" type="text" value="1" /></td>
-                  <td class="text-right">124,90 €</td>
-                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                </tr>
-                <tr>
-                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                  <td>Product Name Dada</td>
-                  <td>In stock</td>
-                  <td><input class="form-control" type="text" value="1" /></td>
-                  <td class="text-right">124,90 €</td>
-                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                </tr>
-                
-                <tr>
-                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                  <td>Product Name Toto</td>
-                  <td>In stock</td>
-                  <td><input class="form-control" type="text" value="1" /></td>
-                  <td class="text-right">33,90 €</td>
-                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                </tr>
-                <tr>
-                  <td *ngIf="isFull"><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                  <td>Product Name Titi</td>
-                  <td>In stock</td>
-                  <td>
-                    <!-- input plus minus -->
-                    <div class="numberCard">
-                      <span class="minus">-</span>
-                      <input class="counterCard" type="text" value="1" />
-                      <span class="plus">+</span>
-                    </div>
-                    <!--  -->
-                  </td>
-                  <td class="text-right">70,00 €</td>
-                  <td class="text-right"><button class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                </tr>
                 <tr>
                   <!-- Empty colomns don't delete-->
                   <td *ngIf="condition"></td>
@@ -126,9 +61,10 @@
                   <td></td>
                   <td></td>
                   <td><strong>Total</strong></td>
-                  <td class="text-right"><strong>346,90 €</strong></td>
+                  <td class="text-right"><strong>{{getTotal() | number:'1.2-5'}}€</strong></td>
                 </tr>
               </tbody>
+              <tbody *ngIf="!this.cart || this.cart.cartLines == null || this.cart.cartLines.length == 0">Aucun article dans le panier</tbody> 
             </table>
           </div>
         </div>
