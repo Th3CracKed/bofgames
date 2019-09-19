@@ -15,7 +15,27 @@
   </div>
   <!-- HEADER -->
 
+  <!-- <jhi-modal-component></jhi-modal-component> -->
+  <!-- <jhi-modal-delete-component></jhi-modal-delete-component> -->
 
+
+
+  <ng-template #content_delete_modal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Supprimer produit</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Voulez vous supprimer le {{itemName}} du panier</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="d()">Annuler</button>
+      <button type="button" class="btn btn-danger" (click)="confirm_delete()">Supprimer</button>
+    </div>
+  </ng-template>
+  
   <div class="content">
     <div> 
       
@@ -38,10 +58,10 @@
               <tbody *ngIf="this.cart && this.cart.cartLines.length > 0">
                 <!-- Start for here for each iteams -->
                 <tr *ngFor="let cartLine of this.cart.cartLines;">
-                  <td *ngIf="isFull"><img width="20" height="40" src="{{cartLine.item.game.media[0].url}}"/> </td>
+                  <td *ngIf="isFull"><img *ngIf="cartLine.item.game.media" width="20" height="40" src="{{cartLine.item.game.media[0].url}}"/> </td>
                   <td>{{cartLine.item.game.name}}</td>
                   <td>{{cartLine.item.platform.name}}</td>
-                  <td>
+                  <td class="text-center">
                     <!-- input plus minus -->
                       <div class="numberCard">
                         <span (click)="downQty(cartLine.item.id)" class="noselect minus">-</span>
@@ -51,7 +71,7 @@
                     <!--  -->
                   </td>
                   <td class="text-right">{{cartLine.unitPrice | number:'1.2-5'}}€</td>
-                  <td class="text-right"><button (click)="removeItem(cartLine.item.id)" class="btn btn-sm my-btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                  <td class="text-right"><button class="btn btn-sm my-btn-danger" (click)="open_delete_modal(content_delete_modal,cartLine.item.id,cartLine.item.game.name)" ><i class="fa fa-trash"></i> </button> </td>
                 </tr>
                 <!-- end for -->
                 <tr>

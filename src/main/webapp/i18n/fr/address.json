@@ -1,0 +1,19 @@
+{
+  "address": {
+    "form": {
+      "button": "Sauvegarder",
+      "street": "Rue",
+      "postCode": "Code postale",
+      "city": "Ville",
+      "country": "Pays",
+      "birthdate": "Date de naissance",
+      "user": "Utilisateur"
+    },
+    "messages": {
+      "error": {
+        "fail": "<strong>Une erreur est survenue !</strong> Votre adresse n'a pas été sauvegardé."
+      },
+      "success": "<strong>Votre adresse a été sauvegardé !</strong>"
+    }
+  }
+}

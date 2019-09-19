@@ -30,6 +30,8 @@ import { CartComponent } from './component/cart/cart.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { OrderHistoryComponent } from './component/order-history/order-history.component';
 import { SearchComponent } from './search/search.component';
+import { AddressUpdateComponent } from './component/address-update/address-update.component';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { SearchComponent } from './search/search.component';
     CartComponent,
     SidebarComponent,
     OrderHistoryComponent,
-    SearchComponent
+    SearchComponent,
+    AddressUpdateComponent
   ],
   providers: [
     {

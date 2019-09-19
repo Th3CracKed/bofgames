@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie';
 import { AccountService } from 'app/core/auth/account.service';
 import { Client } from 'app/shared/model/client.model';
 import { CartLine } from 'app/shared/model/cart-line.model';
+import { MyModalService } from 'app/service/modal-view.service';
 
 @Component({
   selector: 'jhi-cart',
@@ -17,6 +18,8 @@ export class CartComponent implements OnInit {
   last_known_scroll_position = 0;
   ticking = false;
   isFull: boolean;
+  itemId: number;
+  itemName: String;
 
   cart: Cart;
 
@@ -25,13 +28,20 @@ export class CartComponent implements OnInit {
     private router: Router,
     private cartService: CartService,
     private accountService: AccountService,
-    private coockies: CookieService
+    private coockies: CookieService,
+    private myModal: MyModalService
   ) {}
   ngOnInit() {
     this.customiseView();
     this.cartService.currentCart.subscribe(cart => {
       this.cart = cart;
     });
+  }
+
+  open_delete_modal(content: any, itemId: number, itemName: String) {
+    this.itemId = itemId;
+    this.itemName = itemName;
+    this.myModal.open(content);
   }
 
   openNav() {
@@ -44,7 +54,18 @@ export class CartComponent implements OnInit {
 
   customiseView() {
     this.isFull = this.router.url === '/shopingCart';
-    this.router.events.subscribe(() => (this.isFull = this.router.url === '/shopingCart'));
+    this.router.events.subscribe(() => {
+      setTimeout(() => {
+        this.isFull = this.router.url === '/shopingCart';
+      }, 500);
+    });
+  }
+
+  confirm_delete() {
+    this.myModal.close();
+    this.removeItem(this.itemId);
+    this.itemId = null;
+    this.itemName = '';
   }
 
   getTotal(): Number {
