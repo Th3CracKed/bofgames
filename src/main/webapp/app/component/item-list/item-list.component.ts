@@ -17,8 +17,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
   items: Item[] = [];
   selectedPlatforms: IPlatform[] = [];
   marks: number[] = [];
-  isFirstTime = true;
   platforms: IPlatform[];
+  isList = false;
   dropdownSettings = {
     singleSelection: false,
     idField: 'id',
@@ -79,23 +79,6 @@ export class ItemListComponent implements OnInit, OnDestroy {
       );
   }
 
-  displayList() {
-    const els = document.getElementsByClassName('item');
-    for (let index = 0; index < els.length; index++) {
-      const element = els[index];
-      element.classList.add('list-group-item');
-    }
-  }
-
-  displayGrid() {
-    const els = document.getElementsByClassName('item');
-    for (let index = 0; index < els.length; index++) {
-      const element = els[index];
-      element.classList.remove('list-group-item');
-      element.classList.add('grid-group-item');
-    }
-  }
-
   onItemSelect() {
     this.filterBasedOnPlatforms();
   }
@@ -121,6 +104,18 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
   onSelectAll() {
     this.items = this.itemsBk;
+  }
+
+  sortByPriceAsc() {
+    this.items = this.items.sort((item1, item2) => {
+      return item1.price - item2.price;
+    });
+  }
+
+  sortByPriceDesc() {
+    this.items = this.items.sort((item1, item2) => {
+      return item2.price - item1.price;
+    });
   }
 
   protected onError(errorMessage: string) {
