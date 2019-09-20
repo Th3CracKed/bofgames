@@ -9,18 +9,22 @@
   padding: 0 10px 0 10px;
 }
 #supportedgame {
+  p,
   img {
-    width: 50px;
+    display: inline-block;
+  }
+  img {
+    width: 20px;
   }
 }
 
 .game_cover_space {
-  background-color: lightgray;
   text-align: center;
   padding: 5px;
   border-radius: 3px;
   img {
     width: 100%;
+    border-radius: 3px;
   }
 }
 
@@ -33,5 +37,12 @@
 }
 
 #header_item {
+  margin-bottom: 10px;
+}
+
+#game_content_description {
+  background-color: #d9e1e8;
+  padding: 10px;
+  border-radius: 3px;
   margin-bottom: 10px;
 }

@@ -1,6 +1,6 @@
 <div *ngIf="!isShoppingCart" id="openSideBarShop" class="d-none d-md-block">
   
-  <button  type="button" class="btn" (click)="openNav()"> <i class="fa fa-shopping-cart" aria-hidden="true"></i>{{textArticle}}</button>
+  <button title="Afficher le panier" type="button" class="btn" (click)="openNav()"> <i class="fa fa-shopping-cart" aria-hidden="true"></i>{{textArticle}}</button>
 </div>
 <div id="mySidenav" class="sidenav" (wheel)="onMouseWheelshop($e)">
   <jhi-cart></jhi-cart>

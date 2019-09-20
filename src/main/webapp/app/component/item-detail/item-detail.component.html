@@ -1,41 +1,47 @@
 <div class="container" *ngIf="item">
   <div class="row"  id="header_item">
-    <button type="button" class="btn btn-outline-secondary" [routerLink]="['/games']"><i class="fa fa-chevron-left" aria-hidden="true"></i> Retour</button>
+    <button title="Retourner sur la page principale" type="button" class="btn btn-outline-secondary" [routerLink]="['/games']"><i class="fa fa-chevron-left" aria-hidden="true"></i> Retour</button>
   </div>
-  <div class="row">
+  <div id="game_content_description" class="row">
     <div class="col col-md-3 game_cover_space">
       <img *ngIf="item.game.media != null && item.game.media[0]" src="{{item.game.media[0].url}}" alt="{{item.game.media[0].alt}}" />
       <img *ngIf="item.game.media == null || !item.game.media[0]" src="https://www.kasterencultuur.nl/editor/placeholder.jpg" alt="Image not found"/>
     </div>
     <div class="col col-md-9">
-      <h1>{{item.game.name}}</h1>
-      <h5>Note: </h5>
-      <span *ngFor="let m of mark | fill">
-        <i class="fa fa-star" aria-hidden="true"></i>
-      </span>
-      <span *ngFor="let m of (5 - mark) | fill">
-        <i class="fa fa-star-o" aria-hidden="true"></i>
-      </span>
-      <p>Platforme:</p>
+      <div class="container">
+        <h1>{{item.game.name}}</h1>
+        <h5>Note : 
+
+          <span *ngFor="let m of mark | fill">
+            <i class="fa fa-star" aria-hidden="true"></i>
+          </span>
+          <span *ngFor="let m of (5 - mark) | fill">
+            <i class="fa fa-star-o" aria-hidden="true"></i>
+          </span>
+        </h5>
         <div id="supportedgame">
-          <img src="../../../../../../assets/platforms/windows.png" alt="PC" *ngIf="item.platform.name === 'PC'"/>
-          <img src="../../../../../../assets/platforms/playstation.png" alt="PS" *ngIf="item.platform.name === 'PS'"/>
-          <img src="../../../../../../assets/platforms/xbox.png" alt="Xbox" *ngIf="item.platform.name === 'Xbox'"/>
+          <p>Platforme : </p>
+          <img title="PC" src="../../../../../../assets/platforms/windows.png" alt="PC" *ngIf="item.platform.name === 'PC'" />
+          <img title="PS" src="../../../../../../assets/platforms/playstation.png" alt="PS" *ngIf="item.platform.name === 'PS'" />
+          <img title="Xbox" src="../../../../../../assets/platforms/xbox.png" alt="Xbox" *ngIf="item.platform.name === 'Xbox'" />
         </div>
+        
+          <h4>Description :</h4>
+          <p class=" text-justify">{{item.game.description}}</p>
       </div>
+      
+
+      </div>
+
+
   </div>
 
-  <div class="row text-justify">
-    <h2>Description</h2>
-  </div>
-    <div class="row text-justify">
-  <p>{{item.game.description}}</p>
-</div>
+  
   <div class="row" id="item_footer">
       <div id="game-price">
         <h3>{{item.price | number:'1.2-5'}}€</h3> <!-- TODO gerer la virgule -->
       </div>
-      <button id="panier" type="button" class="btn btn-primary" (click)="addToCard()"><i class="fa fa-shopping-cart"></i> Ajouter au panier</button>
+      <button title="Ajouter cette article dans le panier" id="panier" type="button" class="btn btn-primary" (click)="addToCard()"><i class="fa fa-shopping-cart"></i> Ajouter au panier</button>
   </div>
 </div>
 
