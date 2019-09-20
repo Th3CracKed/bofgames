@@ -3,6 +3,9 @@ package com.bof.games.service;
 import com.bof.games.domain.*;
 import com.bof.games.domain.enumeration.KEYSTATUS;
 import com.bof.games.repository.*;
+import com.bof.games.repository.search.*;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -23,11 +26,22 @@ public class PopulateDataWithEntityService {
     private final MediaRepository mediaRepository;
     private final CartLineRepository cartLineRepository;
     private final CartRepository cartRepository;
+    private final PlatformSearchRepository platformSearchRepository;
+    private final GameSearchRepository gameSearchRepository;
+    private final ItemSearchRepository itemSearchRepository;
+    private final UserSearchRepository userSearchRepository;
+    private final ClientSearchRepository clientSearchRepository;
+    private final TagSearchRepository tagSearchRepository;
+    private final KeySearchRepository keySearchRepository;
+    private final MediaSearchRepository mediaSearchRepository;
+    private final CartLineSearchRepository cartLineSearchRepository;
+    private final CartSearchRepository cartSearchRepository;
 
-    public PopulateDataWithEntityService(PlatformRepository platformRepository, GameRepository gameRepository, ItemRepository itemRepository, UserRepository userRepository, ClientRepository clientRepository, TagRepository tagRepository, KeyRepository keyRepository, MediaRepository mediaRepository, CartLineRepository cartLineRepository, CartRepository cartRepository) {
+    public PopulateDataWithEntityService(PlatformRepository platformRepository, GameRepository gameRepository, ItemRepository itemRepository, ItemSearchRepository itemSearchRepository, UserRepository userRepository, ClientRepository clientRepository, TagRepository tagRepository, KeyRepository keyRepository, MediaRepository mediaRepository, CartLineRepository cartLineRepository, CartRepository cartRepository, PlatformSearchRepository platformSearchRepository, GameSearchRepository gameSearchRepository, UserSearchRepository userSearchRepository, ClientSearchRepository clientSearchRepository, TagSearchRepository tagSearchRepository, KeySearchRepository keySearchRepository, MediaSearchRepository mediaSearchRepository, CartLineSearchRepository cartLineSearchRepository, CartSearchRepository cartSearchRepository) {
         this.platformRepository = platformRepository;
         this.gameRepository = gameRepository;
         this.itemRepository = itemRepository;
+        this.itemSearchRepository = itemSearchRepository;
         this.userRepository = userRepository;
         this.clientRepository = clientRepository;
         this.tagRepository = tagRepository;
@@ -35,6 +49,15 @@ public class PopulateDataWithEntityService {
         this.mediaRepository = mediaRepository;
         this.cartLineRepository = cartLineRepository;
         this.cartRepository = cartRepository;
+        this.platformSearchRepository = platformSearchRepository;
+        this.gameSearchRepository = gameSearchRepository;
+        this.userSearchRepository = userSearchRepository;
+        this.clientSearchRepository = clientSearchRepository;
+        this.tagSearchRepository = tagSearchRepository;
+        this.keySearchRepository = keySearchRepository;
+        this.mediaSearchRepository = mediaSearchRepository;
+        this.cartLineSearchRepository = cartLineSearchRepository;
+        this.cartSearchRepository = cartSearchRepository;
     }
 
 
@@ -43,14 +66,23 @@ public class PopulateDataWithEntityService {
         try {
             // clean database
             mediaRepository.deleteAll();
+            mediaSearchRepository.deleteAll();
             keyRepository.deleteAll();
+            keySearchRepository.deleteAll();
             itemRepository.deleteAll();
+            itemSearchRepository.deleteAll();
             platformRepository.deleteAll();
+            platformSearchRepository.deleteAll();
             tagRepository.deleteAll();
+            tagSearchRepository.deleteAll();
             gameRepository.deleteAll();
+            gameSearchRepository.deleteAll();
             cartLineRepository.deleteAll();
+            cartLineSearchRepository.deleteAll();
             cartRepository.deleteAll();
+            cartSearchRepository.deleteAll();
             clientRepository.deleteAll();
+            clientSearchRepository.deleteAll();
         }catch (Exception ignored){}
         platformRepository.save(new Platform().name("PS"));
         platformRepository.save(new Platform().name("PC"));
@@ -87,9 +119,9 @@ public class PopulateDataWithEntityService {
         mediaRepository.save(new Media().url("http://image.jeuxvideo.com/medias-sm/151627/1516269237-1224-jaquette-avant.jpg").alt("Greedfall logo").game(games.get(1)));
         mediaRepository.save(new Media().url("http://image.jeuxvideo.com/medias-sm/155724/1557239235-3469-jaquette-avant.jpg").alt("Borderlands 3").game(games.get(2)));
         // Create users
-        CreateAndSaveUser("user1","dollie.guerra@mail.com","Dollie","Guerra");
-        CreateAndSaveUser("user2","Cristiano.Rosales@mail.com","Cristiano","Rosales");
-        CreateAndSaveUser("user3", "Kitty.Solis@mail.com", "Kitty", "Solis");
+        // CreateAndSaveUser("user1","dollie.guerra@mail.com","Dollie","Guerra");
+        // CreateAndSaveUser("user2","Cristiano.Rosales@mail.com","Cristiano","Rosales");
+        //CreateAndSaveUser("user3", "Kitty.Solis@mail.com", "Kitty", "Solis");
 
         // create client with theirs users
         /*for (User user : userRepository.findAll()) {
@@ -97,8 +129,16 @@ public class PopulateDataWithEntityService {
             client.setUser(user);
             clientRepository.save(client);
         }*/
+        fillElasticSearchRepository(gameRepository,gameSearchRepository);
+        fillElasticSearchRepository(itemRepository,itemSearchRepository);
+        fillElasticSearchRepository(mediaRepository,mediaSearchRepository);
     }
 
+    private void fillElasticSearchRepository(JpaRepository repository, ElasticsearchRepository elasticsearchRepository){
+        List list = repository.findAll();
+        elasticsearchRepository.saveAll(list);
+    }
+/*
     private void CreateAndSaveUser(String login, String email, String first_name, String last_name){
         User user = new User();
         user.setLogin(login);
@@ -115,7 +155,8 @@ public class PopulateDataWithEntityService {
         user.setCreatedBy("auto_generated");
         if(!userRepository.findOneByLogin(login).isPresent()) {
             userRepository.saveAndFlush(user);
+            userSearchRepository.save(user);
         }
-    }
+    }*/
 
 }

@@ -28,4 +28,16 @@ export class JhiMainComponent implements OnInit {
       }
     });
   }
+
+  onMouseWheel(evt) {
+    if (window.scrollY > 10) {
+      document.getElementById('headerCard').style.paddingTop = '10px';
+    } else {
+      document.getElementById('headerCard').style.paddingTop = '70px';
+    }
+  }
+
+  showCardClass() {
+    return !(this.router.url === '/games');
+  }
 }

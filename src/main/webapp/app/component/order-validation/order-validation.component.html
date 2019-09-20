@@ -1,0 +1,92 @@
+
+<div class="container" id="myWizard">
+
+
+  <!-- progress bar -->
+  <ol class="steps">
+    <li class="step is-active" [ngClass]="{'is-active': currentPage==1,'is-complete': currentPage>1}" data-step="1">
+      Adresse
+    </li>
+    <li class="step" [ngClass]="{'is-active': currentPage==2,'is-complete': currentPage>2}" data-step="2">
+      Payement
+    </li>
+    <li class="step" [ngClass]="{'is-active': currentPage==3,'is-complete': currentPage>3}" data-step="3">
+      Récapitulatif</li>
+  </ol>
+  
+  <div id="checkout-page">
+
+  <div *ngIf="currentPage==1" class="user-details"> 
+
+        <div class="row">
+          <div class="col">
+            <h3 id="mainTitle"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;Vérification de votre adresse :</h3>
+          </div>
+        </div>
+        <div id="adress_container" class="col col-xs-12 col-md-6  offset-md-3 offset-xs-0">
+          <div class="row">
+            <div class="col col-lg-10">
+              <h3>Adresse de facturation :</h3>
+            </div>
+            <div class="col col-lg-2">
+              <img height="40px" src="../../../../../../assets/location-Map.png" alt="locationIcon"/>
+            </div>
+          </div>
+        <jhi-address-update></jhi-address-update>
+        </div>
+      </div>
+
+
+      <div *ngIf="currentPage==2">
+        <div class="row">
+          <div class="col">
+            <h3 id="mainTitle"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp;Saisissez votre moyen de paiement :</h3>
+          </div>
+        </div>
+        <jhi-payement></jhi-payement>
+      </div>
+
+      <div *ngIf="currentPage==3">
+        <div class="row">
+          <div class="col">
+            <h3 id="mainTitle"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Récapitulatif :
+            </h3>
+          </div>
+        </div>
+        <jhi-order-summary></jhi-order-summary>
+      </div>
+
+  </div>
+
+
+  <br />
+
+  <div class="row">
+
+    <div class="col-sm-12 col-md-6">
+      <button *ngIf="currentPage>1" (click)="PrevPage()"
+        class="btn btn-lg btn-block btn-outline-secondary text-uppercase"><i class="fa fa-chevron-left"
+          aria-hidden="true"></i>
+
+        <span>
+          Précedent</span> </button>
+    </div>
+
+    <div class="col-sm-12 col-md-6">
+      <button *ngIf="currentPage<3" (click)="nextPage()" class="btn btn-lg btn-block my-btn-success text-uppercase">
+        <span>
+          Suivant
+        </span>
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </button>
+
+      <button *ngIf="currentPage==3" (click)="confirmCheckout()" class="btn btn-lg btn-block my-btn-confirm text-uppercase">
+        <span><i class="fa fa-check" aria-hidden="true"></i>
+          Payer
+        </span>
+      </button>
+    </div>
+
+  </div>
+
+</div>

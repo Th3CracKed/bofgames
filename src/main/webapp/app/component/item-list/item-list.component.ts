@@ -1,22 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ItemListService } from 'app/service/item-list.service';
 import { Item } from 'app/shared/model/item.model';
+import { PlatformService } from 'app/entities/platform';
+import { filter, map } from 'rxjs/operators';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { IPlatform } from 'app/shared/model/platform.model';
+import { JhiAlertService } from 'ng-jhipster';
 
 @Component({
   selector: 'jhi-item-list',
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.scss']
 })
-export class ItemListComponent implements OnInit {
+export class ItemListComponent implements OnInit, OnDestroy {
+  itemsBk: Item[] = [];
   items: Item[] = [];
-  mark = 0;
-
-  constructor(private itemListService: ItemListService) {}
+  selectedPlatforms: IPlatform[] = [];
+  marks: number[] = [];
+  platforms: IPlatform[];
+  isList = false;
+  isAscSort: boolean;
+  dropdownSettings = {
+    singleSelection: false,
+    idField: 'id',
+    textField: 'name',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+  constructor(
+    private itemListService: ItemListService,
+    private platformService: PlatformService,
+    private jhiAlertService: JhiAlertService
+  ) {}
 
   ngOnInit() {
-    this.itemListService.GetItems().subscribe(items => {
+    this.getPlatforms();
+    this.itemListService.getSearchingStatus().subscribe(() => this.loadItems());
+  }
+
+  ngOnDestroy(): void {
+    this.itemListService.recreate();
+  }
+
+  private loadItems() {
+    this.itemListService.loadItems().subscribe(items => {
       this.items = items;
-      console.log(' mon resultat   est : ' + JSON.stringify(this.items));
+      this.itemsBk = items;
       for (let index = 0; index < items.length; index++) {
         this.calculateMark(items[index]);
       }
@@ -26,10 +57,71 @@ export class ItemListComponent implements OnInit {
   private calculateMark(item: Item) {
     let markTotal = 0;
     item.game.reviews.forEach(review => (markTotal += review.mark || 0));
-    console.log(`markTotal = ${markTotal}`);
     if (item.game.reviews && item.game.reviews.length !== 0) {
-      this.mark = Math.floor(markTotal / item.game.reviews.length);
+      this.marks[item.game.id] = Math.floor(markTotal / item.game.reviews.length);
+    } else {
+      this.marks[item.game.id] = 0;
     }
-    console.log(`this.mark = ${this.mark}`);
+  }
+
+  private getPlatforms() {
+    this.platformService
+      .query()
+      .pipe(
+        filter((res: HttpResponse<IPlatform[]>) => res.ok),
+        map((res: HttpResponse<IPlatform[]>) => res.body)
+      )
+      .subscribe(
+        (res: IPlatform[]) => {
+          this.platforms = res;
+          console.log(JSON.stringify(this.platforms));
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+  }
+
+  onItemSelect() {
+    this.filterBasedOnPlatforms();
+  }
+
+  onItemDeselect() {
+    this.filterBasedOnPlatforms();
+    if (this.items.length === 0) {
+      this.items = this.itemsBk;
+    }
+  }
+
+  private filterBasedOnPlatforms() {
+    this.items = this.itemsBk.filter(item => {
+      let exist = false;
+      this.selectedPlatforms.forEach(platform => {
+        if (platform.name === item.platform.name) {
+          exist = true;
+        }
+      });
+      return exist;
+    });
+  }
+
+  onSelectAll() {
+    this.items = this.itemsBk;
+  }
+
+  sortByPriceAsc() {
+    this.items = this.items.sort((item1, item2) => {
+      return item1.price - item2.price;
+    });
+    this.isAscSort = true;
+  }
+
+  sortByPriceDesc() {
+    this.items = this.items.sort((item1, item2) => {
+      return item2.price - item1.price;
+    });
+    this.isAscSort = false;
+  }
+
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
   }
 }

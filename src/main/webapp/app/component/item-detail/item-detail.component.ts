@@ -7,6 +7,7 @@ import { AccountService } from 'app/core';
 import { Client } from 'app/shared/model/client.model';
 import { Cart } from 'app/shared/model/cart.model';
 import { CartLine } from 'app/shared/model/cart-line.model';
+import { CartService } from 'app/service/cart.service';
 
 @Component({
   selector: 'jhi-detail',
@@ -20,6 +21,7 @@ export class ItemDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private itemDetailService: ItemDetailService,
+    private cartService: CartService,
     private accountService: AccountService,
     private coockies: CookieService
   ) {}
@@ -46,16 +48,16 @@ export class ItemDetailComponent implements OnInit {
 
   addToCard() {
     if (this.isAuthenticated()) {
-      console.log('auth');
       this.accountService.identity().then(account => {
-        if (this.itemDetailService.addToCart((<Client>(<any>account)).id, this.item.id)) {
-          document.getElementById('panier').setAttribute('disabled', 'false');
-        } else {
-          alert("Erreur pendant l'ajout au panier ou l'augmentation de la quantité");
-        }
+        this.cartService.addToCart((<Client>(<any>account)).id, this.item.id).subscribe(cart => {
+          if (cart !== null && cart !== undefined) {
+            this.cartService.updateCart(cart);
+          } else {
+            alert("Erreur pendant l'ajout au panier ou l'augmentation de la quantité : plus de Clé dispo");
+          }
+        });
       });
     } else {
-      console.log('not auth');
       let panier: Cart;
       panier = this.coockies.getObject('panier');
       console.log(panier);
@@ -84,6 +86,7 @@ export class ItemDetailComponent implements OnInit {
         }
         this.coockies.putObject('panier', panier);
       }
+      this.cartService.updateCart(panier);
     }
   }
 

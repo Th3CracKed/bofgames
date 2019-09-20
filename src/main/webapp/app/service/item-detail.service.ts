@@ -17,9 +17,7 @@ export class ItemDetailService {
 
   addToCart(idClient: number, idItem: number): boolean {
     let res: object;
-    this.http
-      .put('http://localhost:8080/' + `api/client/cart/add/?idClient=${idClient}&idItem=${idItem}`, '')
-      .subscribe(result => (res = result));
+    this.http.put(SERVER_API_URL + `api/client/cart/add/?idClient=${idClient}&idItem=${idItem}`, '').subscribe(result => (res = result));
     return res == null;
   }
 }

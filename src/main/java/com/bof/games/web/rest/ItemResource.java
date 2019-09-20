@@ -4,25 +4,28 @@ import com.bof.games.domain.Item;
 import com.bof.games.domain.Media;
 import com.bof.games.repository.ItemRepository;
 import com.bof.games.repository.search.ItemSearchRepository;
+import com.bof.games.service.ItemService;
 import com.bof.games.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link com.bof.games.domain.Item}.
@@ -41,6 +44,9 @@ public class ItemResource {
     private final ItemRepository itemRepository;
 
     private final ItemSearchRepository itemSearchRepository;
+
+    @Autowired
+    private ItemService itemService;
 
     public ItemResource(ItemRepository itemRepository, ItemSearchRepository itemSearchRepository) {
         this.itemRepository = itemRepository;
@@ -111,6 +117,7 @@ public class ItemResource {
 
         List<Item> items = itemRepository.findAll();
         for(Item item : items ){
+            item.setKeys(null);
             for (Media m : item.getGame().getMedia()) {
                 m.setGame(null);
             }
@@ -129,6 +136,7 @@ public class ItemResource {
     public ResponseEntity<Item> getItem(@PathVariable Long id) {
         log.debug("REST request to get Item : {}", id);
         Optional<Item> item = itemRepository.findById(id);
+        item.get().setKeys(null);
         return ResponseUtil.wrapOrNotFound(item);
     }
 
@@ -156,9 +164,18 @@ public class ItemResource {
     @GetMapping("/_search/items")
     public List<Item> searchItems(@RequestParam String query) {
         log.debug("REST request to search Items for query {}", query);
-        return StreamSupport
-            .stream(itemSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+        return itemSearchRepository.findByGameNameContainingIgnoreCase(query);
     }
 
+    /**
+     * {@code SEARCH  /_search/items/query} : search for the item corresponding
+     * to the query.
+     *
+     * @param keyword the query of the item search.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/items/{keyword}")
+    public List<Item> searchItemsThatContains(@PathVariable String keyword) {
+        return itemService.findItemsThatContainsThisString(keyword);
+    }
 }

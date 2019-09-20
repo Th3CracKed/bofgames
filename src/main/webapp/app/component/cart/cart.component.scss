@@ -1,0 +1,117 @@
+#seeShoppingCart {
+  margin-bottom: 5px;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#headerCard {
+  padding-top: 70px; //todo
+  transition: 0.5s;
+}
+
+.footerCard {
+  padding-top: 5px;
+}
+
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+.my-btn-success,
+.my-btn-success:visited {
+  background-color: #282c37;
+  color: #fff;
+}
+
+.my-btn-success:hover,
+.my-btn-success:active {
+  background-color: #3f434d;
+  color: #fff;
+}
+
+.my-btn-danger,
+.my-btn-danger:hover,
+.my-btn-danger:active,
+.my-btn-danger:visited {
+  background-color: #f4511e;
+  color: #fff;
+}
+
+// Plus minus css
+
+.numberCard {
+  display: inline-block;
+  min-width: 70px;
+
+  .minus,
+  .plus {
+    width: 20px;
+    background: #f2f2f2;
+    border-radius: 4px;
+    padding: 8px 5px 8px 5px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .minus:hover,
+  .plus:hover {
+    background: #adacac;
+  }
+
+  .number_value {
+    width: 20px;
+    background: #f2f2f2;
+    border-radius: 4px;
+    padding: 8px 5px 8px 5px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    color: #282c37;
+    font-weight: bold;
+  }
+  input {
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+    font-size: 26px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
+  }
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.my-btn-info-shop,
+.my-btn-info-shop:visited {
+  background-color: #2b90d9;
+  color: #fff;
+}
+
+.my-btn-info-shop:hover,
+.my-btn-info-shop:active {
+  background-color: #205e8a;
+  color: #fff;
+}

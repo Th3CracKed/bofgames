@@ -18,8 +18,9 @@ Navbar
 .navbar {
   padding: 0.2rem 1rem;
   background-color: #fff;
-  border: 1px rgba(0, 0, 0, .125);
+  border: 1px rgba(0, 0, 0, 0.125);
   border-style: none none solid none;
+  z-index: 50;
 
   ul.navbar-nav {
     .nav-item {

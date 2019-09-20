@@ -18,6 +18,7 @@ import { BofgamesHomeModule } from './home/home.module';
 import { BofgamesJHomeModule } from './jhipster_home/jhome.module';
 import { BofgamesAccountModule } from './account/account.module';
 import { BofgamesEntityModule } from './entities/entity.module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
@@ -25,10 +26,20 @@ import { TestComponent } from './test/test.component';
 import { ItemListComponent } from './component/item-list/item-list.component';
 import { ItemDetailComponent } from './component/item-detail/item-detail.component';
 import { FillPipe } from './pipes/fill.pipe';
+import { UserProfilComponent } from './component/user-profil/user-profil.component';
+import { CartComponent } from './component/cart/cart.component';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
+import { OrderHistoryComponent } from './component/order-history/order-history.component';
+import { SearchComponent } from './search/search.component';
+import { AddressUpdateComponent } from './component/address-update/address-update.component';
 
+import { OrderValidationComponent } from './component/order-validation/order-validation.component';
+import { PayementComponent } from './component/payement/payement.component';
+import { OrderSummaryComponent } from './component/order-summary/order-summary.component';
 @NgModule({
   imports: [
     BrowserModule,
+    NgMultiSelectDropDownModule.forRoot(),
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-' }),
     NgJhipsterModule.forRoot({
       // set below to true to make alerts look like toast
@@ -56,7 +67,16 @@ import { FillPipe } from './pipes/fill.pipe';
     TestComponent,
     ItemListComponent,
     ItemDetailComponent,
-    FillPipe
+    FillPipe,
+    UserProfilComponent,
+    CartComponent,
+    SidebarComponent,
+    OrderHistoryComponent,
+    SearchComponent,
+    AddressUpdateComponent,
+    OrderValidationComponent,
+    PayementComponent,
+    OrderSummaryComponent
   ],
   providers: [
     {
