@@ -1,23 +1,21 @@
-<div class="alert alert-success" *ngIf="success" jhiTranslate="address.messages.success">
-        <strong>Address saved!</strong>
-</div>
+
 
     <jhi-alert-error></jhi-alert-error>
 <div class="userdetails" *ngIf="client && !isEditForm">
   <div class="container">
+    <div class="alert alert-success" *ngIf="success" jhiTranslate="address.messages.success">
+        <strong>Address saved!</strong>
+    </div>
     <div class="col col-xs-12">      
-          <h3>Rue :</h3>
-          <p>{{client.street}}</p>
-          <h3>Code postal :</h3>
-          <p>{{client.postCode}}</p>
-          <h3>Pays :</h3>
-          <p>{{client.city}}</p>
-          <h3>Ville :</h3>
-          <p>{{client.country}}</p>
+          <h3>Rue : <b>{{client.street}}</b></h3>
+          <h3>Code postal : <b>{{client.postCode}}</b></h3>
+          <h3>Pays : <b>{{client.city}}</b></h3>
+          <h3>Ville : <b>{{client.country}}</b></h3>
+          
+          <button id="modify-data-btn" class="btn btn-primary my-btn-info-shop" (click)="toogleEditForm()"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</button>
     </div>
 </div>
       
-  <button class="btn btn-primary" (click)="toogleEditForm()"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</button>
 </div>
 <form name="form" role="form" (ngSubmit)="save()" [formGroup]="clientForm" *ngIf="clientForm.get('id').value && isEditForm" novalidate>
                 <div class="form-group" [hidden]="true">

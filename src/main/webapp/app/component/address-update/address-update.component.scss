@@ -1,9 +1,27 @@
 .userdetails {
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid lightblue;
+  border-radius: 3px;
   h3 {
-    border-bottom: 1px solid lightblue;
     font-size: 1.2em;
+    margin: 3px;
+    b {
+      font-weight: bold;
+    }
   }
   p {
     font-weight: bold;
   }
+}
+
+.my-btn-info-shop,
+.my-btn-info-shop:visited {
+  background-color: #2b90d9;
+  color: #fff;
+}
+
+.my-btn-info-shop:hover,
+.my-btn-info-shop:active {
+  background-color: #2776af;
 }
