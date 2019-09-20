@@ -1,12 +1,11 @@
 package com.bof.games.domain;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
-import java.io.Serializable;
 
 import com.bof.games.domain.enumeration.MEDIATYPE;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * A Media.
@@ -35,7 +34,7 @@ public class Media implements Serializable {
     private String alt;
 
     @ManyToOne
-    @JsonIgnoreProperties("media")
+    @JsonIgnore
     private Game game;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

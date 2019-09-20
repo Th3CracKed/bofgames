@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ItemListService } from 'app/service/item-list.service';
 import { Item } from 'app/shared/model/item.model';
 
@@ -7,35 +7,37 @@ import { Item } from 'app/shared/model/item.model';
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.scss']
 })
-export class ItemListComponent implements OnInit {
+export class ItemListComponent implements OnInit, OnDestroy {
   items: Item[] = [];
   marks: number[] = [];
-
+  isFirstTime = true;
   constructor(private itemListService: ItemListService) {}
 
   ngOnInit() {
-    this.itemListService.GetItems().subscribe(items => {
+    this.itemListService.getSearchingStatus().subscribe(() => this.loadItems());
+  }
+
+  ngOnDestroy(): void {
+    this.itemListService.recreate();
+  }
+
+  private loadItems() {
+    this.itemListService.loadItems().subscribe(items => {
       this.items = items;
-      //console.log(' mon resultat   est : ' + JSON.stringify(this.items));
       for (let index = 0; index < items.length; index++) {
         this.calculateMark(items[index]);
-        console.log('test');
       }
-      // this.calculateMark(items[0]);
     });
   }
 
   private calculateMark(item: Item) {
     let markTotal = 0;
     item.game.reviews.forEach(review => (markTotal += review.mark || 0));
-    console.log(`markTotal = ${markTotal}`);
     if (item.game.reviews && item.game.reviews.length !== 0) {
       this.marks[item.game.id] = Math.floor(markTotal / item.game.reviews.length);
     } else {
       this.marks[item.game.id] = 0;
     }
-    console.log(`game id = ${item.game.id}`);
-    console.log(`note = ${this.marks[item.game.id]}`);
   }
 
   displayList() {
