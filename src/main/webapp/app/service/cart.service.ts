@@ -63,4 +63,8 @@ export class CartService {
   deleteItem(idClient: Number, idCart: Number, idItem: Number): Observable<Cart> {
     return this.http.delete('http://localhost:8080/' + `api/client/cart/delete/?idCart=${idCart}&idClient=${idClient}&idItem=${idItem}`);
   }
+
+  buyCart(idClient: Number, idCart: Number) {
+    return this.http.put('http://localhost:8080/' + `api/client/cart/buy/?idCart=${idCart}&idClient=${idClient}`, '');
+  }
 }

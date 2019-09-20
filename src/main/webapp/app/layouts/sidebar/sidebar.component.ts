@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
   isShoppingCart: boolean;
   cart: Cart;
   nbArticle: number;
-  textArticle: String;
+  textArticle: String = 'Aucun article';
 
   constructor(private shopservice: ShoppingService, private router: Router, private cartService: CartService) {}
 
@@ -22,16 +22,20 @@ export class SidebarComponent implements OnInit {
     this.customiseView();
     this.cartService.currentCart.subscribe(cart => {
       this.cart = cart;
-      this.nbArticle = 0;
-      this.cart.cartLines.forEach(element => {
-        this.nbArticle += element.quantity;
-      });
-      if (this.nbArticle === 0) {
+      if (this.cart === undefined || this.cart === null || this.cart.cartLines == null) {
         this.textArticle = 'Aucun article';
-      } else if (this.nbArticle === 1) {
-        this.textArticle = this.nbArticle + ' article';
       } else {
-        this.textArticle = this.nbArticle + ' articles';
+        this.nbArticle = 0;
+        this.cart.cartLines.forEach(element => {
+          this.nbArticle += element.quantity;
+        });
+        if (this.nbArticle === 0) {
+          this.textArticle = 'Aucun article';
+        } else if (this.nbArticle === 1) {
+          this.textArticle = this.nbArticle + ' article';
+        } else {
+          this.textArticle = this.nbArticle + ' articles';
+        }
       }
     });
   }

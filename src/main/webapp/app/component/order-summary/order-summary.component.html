@@ -12,10 +12,10 @@
     </div>
     
 
-      <p>Rue :</p>
-      <p>Code postal :</p>
-      <p>Pays :</p>
-      <p>Ville :</p>
+      <p>Rue : {{client.street}}</p>
+      <p>Code postal : {{client.postCode}} </p>
+      <p>Pays : {{client.country}} </p>
+      <p>Ville : {{client.city}} </p>
     </div>
     <div class="main-col col col-md-6">
 
@@ -37,20 +37,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
+          <tr *ngFor="let cartLine of this.cart.cartLines;">
+            <td>{{cartLine.item.game.name}}</td>
+            <td>{{cartLine.quantity}}</td>
+            <td>{{cartLine.unitPrice | number:'1.2-5'}}€</td>
           </tr>
         </tbody>
       </table>
