@@ -10,6 +10,7 @@ import { CartComponent } from './component/cart/cart.component';
 import { OrderHistoryComponent } from './component/order-history/order-history.component';
 import { OrderValidationComponent } from './component/order-validation/order-validation.component';
 import { UserRouteAccessService } from './core/auth/user-route-access-service';
+import { OrderHistoryDetailsComponent } from './component/order-history-details/order-history-details.component';
 const LAYOUT_ROUTES = [navbarRoute, sidebarRoute, ...errorRoute];
 @NgModule({
   imports: [
@@ -38,6 +39,10 @@ const LAYOUT_ROUTES = [navbarRoute, sidebarRoute, ...errorRoute];
         {
           path: 'orderHistory',
           component: OrderHistoryComponent
+        },
+        {
+          path: 'orderHistory/:id',
+          component: OrderHistoryDetailsComponent
         },
         {
           path: 'games/:id',

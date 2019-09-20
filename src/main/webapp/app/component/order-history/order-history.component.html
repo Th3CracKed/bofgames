@@ -4,17 +4,17 @@
     <thead>
       <tr>
         <th scope="col">Numéro de commande</th>
-        <th scope="col">Date</th>
+        <th scope="col">Montant</th>
         <th scope="col">Articles</th>
         <th scope="col">Détails</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of ordersHistory">
-        <th scope="row">145648{{item}}</th>
-        <td>2019-05-01</td>
-        <td>5</td>
-        <td><a href="#">Voir +</a></td>
+      <tr *ngFor="let cart of carts">
+        <th scope="row"> {{cart.id}} </th>
+        <td>{{amount(cart) | number:'1.2-5'}}€</td>
+        <td>{{nbArticle(cart)}}</td>
+        <td><a href="/orderHistory/{{cart.id}}">Voir +</a></td>
       </tr>
       
     </tbody>

@@ -67,4 +67,8 @@ export class CartService {
   buyCart(idClient: Number, idCart: Number) {
     return this.http.put('http://localhost:8080/' + `api/client/cart/buy/?idCart=${idCart}&idClient=${idClient}`, '');
   }
+
+  getOrders(idClient: Number): Observable<Cart[]> {
+    return this.http.get('http://localhost:8080/' + `api/client/order/${idClient}`).pipe(map((body: any) => body));
+  }
 }
