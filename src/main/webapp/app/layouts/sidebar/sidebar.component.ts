@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
   isShoppingCart: boolean;
   cart: Cart;
   nbArticle: number;
+  hasANewItem = false;
   textArticle: String = 'Aucun article';
 
   constructor(private shopservice: ShoppingService, private router: Router, private cartService: CartService) {}
@@ -37,6 +38,11 @@ export class SidebarComponent implements OnInit {
           this.textArticle = this.nbArticle + ' articles';
         }
       }
+      this.hasANewItem = true;
+
+      setTimeout(() => {
+        this.hasANewItem = false;
+      }, 800);
     });
   }
 

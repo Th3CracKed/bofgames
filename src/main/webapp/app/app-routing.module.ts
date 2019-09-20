@@ -41,7 +41,10 @@ const LAYOUT_ROUTES = [navbarRoute, sidebarRoute, ...errorRoute];
         },
         {
           path: 'games/:id',
-          component: ItemDetailComponent
+          component: ItemDetailComponent,
+          data: {
+            pageTitle: 'home.title'
+          }
         },
         {
           path: 'games',
