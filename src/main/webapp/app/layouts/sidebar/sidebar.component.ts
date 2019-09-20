@@ -52,8 +52,12 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  hiddenRoutes() {
+    return this.router.url === '/shoppingCart' || this.router.url === '/orderValidation';
+  }
+
   customiseView() {
-    this.isShoppingCart = this.router.url === '/shopingCart';
-    this.router.events.subscribe(() => (this.isShoppingCart = this.router.url === '/shopingCart'));
+    this.isShoppingCart = this.hiddenRoutes();
+    this.router.events.subscribe(() => (this.isShoppingCart = this.hiddenRoutes()));
   }
 }

@@ -1,22 +1,27 @@
-<div class="alert alert-success" *ngIf="success" jhiTranslate="address.messages.success">
-        <strong>Address saved!</strong>
-</div>
+
 
     <jhi-alert-error></jhi-alert-error>
-<div *ngIf="client && !isEditForm">
-  <p>
-    {{client.street}}
-    {{client.postCode}}
-    {{client.city}}
-    {{client.country}}
-  </p>
-  <button class="btn-primary" (click)="toogleEditForm()">Edit</button>
+<div class="userdetails" *ngIf="client && !isEditForm">
+  <div class="container">
+    <div class="alert alert-success" *ngIf="success" jhiTranslate="address.messages.success">
+        <strong>Address saved!</strong>
+    </div>
+    <div class="col col-xs-12">      
+          <h3>Rue : <b>{{client.street}}</b></h3>
+          <h3>Code postal : <b>{{client.postCode}}</b></h3>
+          <h3>Pays : <b>{{client.city}}</b></h3>
+          <h3>Ville : <b>{{client.country}}</b></h3>
+          
+          <button id="modify-data-btn" class="btn btn-primary my-btn-info-shop" (click)="toogleEditForm()"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</button>
+    </div>
+</div>
+      
 </div>
 <form name="form" role="form" (ngSubmit)="save()" [formGroup]="clientForm" *ngIf="clientForm.get('id').value && isEditForm" novalidate>
- <div class="form-group">
-                            <label for="id" jhiTranslate="global.field.id">ID</label>
-                            <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                                readonly />
+                <div class="form-group" [hidden]="true">
+                <label for="id" jhiTranslate="global.field.id">ID</label>
+                <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                    readonly />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="address.form.street" for="street">Street</label>
