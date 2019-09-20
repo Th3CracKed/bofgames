@@ -1,8 +1,6 @@
 .userdetails {
   margin-top: 10px;
-  padding: 5px;
-  border: 1px solid lightblue;
-  border-radius: 3px;
+  padding: 5px 5px 50px 5px;
   h3 {
     font-size: 1.2em;
     margin: 3px;
@@ -13,6 +11,10 @@
   p {
     font-weight: bold;
   }
+}
+
+#modify-data-btn {
+  float: right;
 }
 
 .my-btn-info-shop,

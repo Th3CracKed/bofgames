@@ -1,3 +1,4 @@
+
 <div class="container" id="myWizard">
 
 
@@ -22,8 +23,19 @@
             <h3 id="mainTitle"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;Vérification de votre adresse :</h3>
           </div>
         </div>
+        <div id="adress_container" class="col col-xs-12 col-md-6  offset-md-3 offset-xs-0">
+          <div class="row">
+            <div class="col col-lg-10">
+              <h3>Adresse de facturation :</h3>
+            </div>
+            <div class="col col-lg-2">
+              <img height="40px" src="../../../../../../assets/location-Map.png" alt="locationIcon"/>
+            </div>
+          </div>
         <jhi-address-update></jhi-address-update>
+        </div>
       </div>
+
 
       <div *ngIf="currentPage==2">
         <div class="row">
@@ -61,10 +73,15 @@
     </div>
 
     <div class="col-sm-12 col-md-6">
-      <button (click)="nextPage()" class="btn btn-lg btn-block my-btn-success text-uppercase">
+      <button *ngIf="currentPage<3" (click)="nextPage()" class="btn btn-lg btn-block my-btn-success text-uppercase">
 
         <span>
           Suivant</span> <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+        <button *ngIf="currentPage==3" (click)="confirmCheckout()" class="btn btn-lg btn-block my-btn-confirm text-uppercase">
+        
+          <span><i class="fa fa-check" aria-hidden="true"></i>
+            Payer</span></button>
     </div>
 
   </div>
