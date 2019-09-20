@@ -13,7 +13,7 @@
 
       <div class="btn-group filters_toolbar">
 
-        <ng-multiselect-dropdown [placeholder]="'Platforms'" [data]="platforms" [(ngModel)]="selectedPlatforms"
+        <ng-multiselect-dropdown [placeholder]="'Platformes'" [data]="platforms" [(ngModel)]="selectedPlatforms"
           [settings]="dropdownSettings" (onSelect)="onItemSelect()" (onDeSelect)="onItemDeselect()"
           (onSelectAll)="onSelectAll()" class="btn my-btn-info">
         </ng-multiselect-dropdown>
@@ -25,7 +25,7 @@
         </button>
         <button class="btn my-btn-danger" [ngClass]="{'active_filter': !isList}" id="grid" (click)="isList = !isList">
           <i class="fa fa-th-large" aria-hidden="true"></i>
-        </button
+        </button>
       </div>
 
     </div>
@@ -38,6 +38,10 @@
 
 <div id="products" class="row view-group">
 
+  <div id="noItemsFound" *ngIf="items.length==0">
+    <p><i class="fa fa-gamepad" aria-hidden="true"></i></p>
+    <p>Aucun article</p>
+  </div>
   <div *ngFor="let item of items;" class="item grid-group-item col-xs-4 col-md-4 col-lg-3"
     [ngClass]="{'list-group-item': isList}">
     <div class="thumbnail">
