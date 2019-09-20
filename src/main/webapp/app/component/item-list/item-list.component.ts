@@ -19,6 +19,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
   marks: number[] = [];
   platforms: IPlatform[];
   isList = false;
+  isAscSort: boolean;
   dropdownSettings = {
     singleSelection: false,
     idField: 'id',
@@ -110,12 +111,14 @@ export class ItemListComponent implements OnInit, OnDestroy {
     this.items = this.items.sort((item1, item2) => {
       return item1.price - item2.price;
     });
+    this.isAscSort = true;
   }
 
   sortByPriceDesc() {
     this.items = this.items.sort((item1, item2) => {
       return item2.price - item1.price;
     });
+    this.isAscSort = false;
   }
 
   protected onError(errorMessage: string) {

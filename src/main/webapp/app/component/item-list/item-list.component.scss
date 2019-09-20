@@ -114,23 +114,37 @@
 }
 
 .my-btn-info,
-.my-btn-info:hover,
-.my-btn-info:active,
 .my-btn-info:visited {
   background-color: #d9e1e8 !important;
 }
 
 .my-btn-danger,
-.my-btn-danger:hover,
-.my-btn-danger:active,
 .my-btn-danger:visited {
   background-color: #d9e1e8 !important;
 }
 
 .my-btn-info-shop,
-.my-btn-info-shop:hover,
-.my-btn-info-shop:active,
 .my-btn-info-shop:visited {
   background-color: #2b90d9;
   color: #fff;
+}
+
+.my-btn-info:hover,
+.my-btn-info:active,
+.my-btn-danger:hover,
+.my-btn-danger:active {
+  color: #2b90d9 !important;
+}
+
+.active_filter {
+  color: #f4511e !important;
+}
+
+.filters_toolbar {
+  .btn:focus,
+  .btn:active {
+    outline: none !important;
+    box-shadow: none;
+  }
+  border-radius: 3px;
 }
