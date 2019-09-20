@@ -64,7 +64,8 @@
                   <td class="text-center">
                     <!-- input plus minus -->
                       <div class="numberCard">
-                        <span (click)="downQty(cartLine.item.id)" class="noselect minus">-</span>
+                        <span *ngIf="cartLine.quantity != 1" (click)="downQty(cartLine.item.id)" class="noselect minus">-</span>
+                        <span *ngIf="cartLine.quantity == 1" style="pointer-events:  none; background-color : lightgray;" (click)="downQty(cartLine.item.id)" class="noselect minus">-</span>
                         <span class="noselect number_value">{{cartLine.quantity}}</span>
                         <span (click)="upQty(cartLine.item.id)" class="noselect plus">+</span>
                       </div>

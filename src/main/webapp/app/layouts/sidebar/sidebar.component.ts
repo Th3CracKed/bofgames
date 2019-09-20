@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingService } from 'app/service/shopping-view.service';
 import { Router } from '@angular/router';
+import { CartService } from 'app/service/cart.service';
+import { Cart } from 'app/shared/model/cart.model';
 
 @Component({
   selector: 'jhi-sidebar',
@@ -10,11 +12,28 @@ import { Router } from '@angular/router';
 export class SidebarComponent implements OnInit {
   // constructor() {}
   isShoppingCart: boolean;
+  cart: Cart;
+  nbArticle: number;
+  textArticle: String;
 
-  constructor(private shopservice: ShoppingService, private router: Router) {}
+  constructor(private shopservice: ShoppingService, private router: Router, private cartService: CartService) {}
 
   ngOnInit() {
     this.customiseView();
+    this.cartService.currentCart.subscribe(cart => {
+      this.cart = cart;
+      this.nbArticle = 0;
+      this.cart.cartLines.forEach(element => {
+        this.nbArticle += element.quantity;
+      });
+      if (this.nbArticle === 0) {
+        this.textArticle = 'Aucun article';
+      } else if (this.nbArticle === 1) {
+        this.textArticle = this.nbArticle + ' article';
+      } else {
+        this.textArticle = this.nbArticle + ' articles';
+      }
+    });
   }
 
   openNav() {
