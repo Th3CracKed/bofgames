@@ -38,7 +38,6 @@ export class JhiMainComponent implements OnInit {
   }
 
   showCardClass() {
-    console.log('yo je suis un string');
     return !(this.router.url === '/games');
   }
 }

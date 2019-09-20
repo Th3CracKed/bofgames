@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'app/service/cart.service';
+import { Cart } from 'app/shared/model/cart.model';
 
 @Component({
   selector: 'jhi-order-validation',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderValidationComponent implements OnInit {
   currentPage: number;
-  constructor() {
+  private cart: Cart;
+  constructor(private cartService: CartService) {
     this.currentPage = 1;
   }
 
@@ -31,5 +34,14 @@ export class OrderValidationComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  confirmCheckout() {
+    this.cartService.buyCart(this.cart.driver.id, this.cart.id).subscribe(res => {
+      alert('commande Complete');
+      this.cartService.updateCart(null);
+    });
+  }
+
+  ngOnInit() {
+    this.cartService.currentCart.subscribe(cart => (this.cart = cart));
+  }
 }
