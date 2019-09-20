@@ -33,6 +33,8 @@ import { SearchComponent } from './search/search.component';
 import { AddressUpdateComponent } from './component/address-update/address-update.component';
 
 import { OrderValidationComponent } from './component/order-validation/order-validation.component';
+import { PayementComponent } from './component/payement/payement.component';
+import { OrderSummaryComponent } from './component/order-summary/order-summary.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -70,7 +72,9 @@ import { OrderValidationComponent } from './component/order-validation/order-val
     OrderHistoryComponent,
     SearchComponent,
     AddressUpdateComponent,
-    OrderValidationComponent
+    OrderValidationComponent,
+    PayementComponent,
+    OrderSummaryComponent
   ],
   providers: [
     {

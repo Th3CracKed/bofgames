@@ -9,6 +9,7 @@ import { UserProfilComponent } from './component/user-profil/user-profil.compone
 import { CartComponent } from './component/cart/cart.component';
 import { OrderHistoryComponent } from './component/order-history/order-history.component';
 import { OrderValidationComponent } from './component/order-validation/order-validation.component';
+import { UserRouteAccessService } from './core/auth/user-route-access-service';
 const LAYOUT_ROUTES = [navbarRoute, sidebarRoute, ...errorRoute];
 @NgModule({
   imports: [
@@ -28,7 +29,11 @@ const LAYOUT_ROUTES = [navbarRoute, sidebarRoute, ...errorRoute];
         },
         {
           path: 'orderValidation',
-          component: OrderValidationComponent
+          component: OrderValidationComponent,
+          data: {
+            authorities: ['ROLE_USER']
+          },
+          canActivate: [UserRouteAccessService]
         },
         {
           path: 'orderHistory',
