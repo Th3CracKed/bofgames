@@ -1,10 +1,12 @@
 package com.bof.games.web.rest;
 
 import com.bof.games.config.Constants;
+import com.bof.games.domain.Client;
 import com.bof.games.domain.User;
 import com.bof.games.repository.UserRepository;
 import com.bof.games.repository.search.UserSearchRepository;
 import com.bof.games.security.AuthoritiesConstants;
+import com.bof.games.service.ClientService;
 import com.bof.games.service.MailService;
 import com.bof.games.service.UserService;
 import com.bof.games.service.dto.UserDTO;
@@ -72,14 +74,17 @@ public class UserResource {
 
     private final UserService userService;
 
+    private final ClientService clientService;
+
     private final UserRepository userRepository;
 
     private final MailService mailService;
 
     private final UserSearchRepository userSearchRepository;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService, UserSearchRepository userSearchRepository) {
+    public UserResource(ClientService clientService, UserService userService, UserRepository userRepository, MailService mailService, UserSearchRepository userSearchRepository) {
 
+        this.clientService = clientService;
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
@@ -111,11 +116,11 @@ public class UserResource {
         } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
             throw new EmailAlreadyUsedException();
         } else {
-            User newUser = userService.createUser(userDTO);
-            mailService.sendCreationEmail(newUser);
-            return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
-                .headers(HeaderUtil.createAlert(applicationName,  "userManagement.created", newUser.getLogin()))
-                .body(newUser);
+            Client newClient = clientService.createClient(userDTO);
+            mailService.sendCreationEmail(newClient.getUser());
+            return ResponseEntity.created(new URI("/api/users/" + newClient.getUser().getLogin()))
+                .headers(HeaderUtil.createAlert(applicationName,  "userManagement.created", newClient.getUser().getLogin()))
+                .body(newClient.getUser());
         }
     }
 
@@ -192,7 +197,7 @@ public class UserResource {
     @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {
         log.debug("REST request to delete User: {}", login);
-        userService.deleteUser(login);
+        clientService.deleteClient(login);
         return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName,  "userManagement.deleted", login)).build();
     }
 
@@ -208,4 +213,5 @@ public class UserResource {
             .stream(userSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
     }
+
 }

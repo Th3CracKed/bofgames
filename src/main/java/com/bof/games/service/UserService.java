@@ -2,7 +2,6 @@ package com.bof.games.service;
 
 import com.bof.games.config.Constants;
 import com.bof.games.domain.Authority;
-import com.bof.games.domain.Client;
 import com.bof.games.domain.User;
 import com.bof.games.repository.AuthorityRepository;
 import com.bof.games.repository.ClientRepository;
@@ -134,7 +133,6 @@ public class UserService {
         userRepository.save(newUser);
         userSearchRepository.save(newUser);
         this.clearUserCaches(newUser);
-        saveClient(createClient(newUser));
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
@@ -179,22 +177,10 @@ public class UserService {
         userRepository.save(user);
         userSearchRepository.save(user);
         this.clearUserCaches(user);
-        saveClient(createClient(user));
         log.debug("Created Information for User: {}", user);
         return user;
     }
 
-    private Client createClient(User user){
-        // Create and save the Client entity
-        Client client = new Client();
-        client.setUser(user);
-        return client;
-    }
-
-    private void saveClient(Client client){
-        clientRepository.save(client);
-        clientSearchRepository.save(client);
-    }
 
     /**
      * Update basic information (first name, last name, email, language) for the current user.
@@ -257,13 +243,15 @@ public class UserService {
 
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
-            clientRepository.deleteById(user.getId());
-            clientSearchRepository.deleteById(user.getId());
             userRepository.delete(user);
             userSearchRepository.delete(user);
             this.clearUserCaches(user);
             log.debug("Deleted User: {}", user);
         });
+    }
+
+    public Optional<User> getUserByLogin(String login) {
+        return userRepository.findOneByLogin(login);
     }
 
     public void changePassword(String currentClearTextPassword, String newPassword) {
@@ -280,6 +268,8 @@ public class UserService {
                 log.debug("Changed password for User: {}", user);
             });
     }
+
+
 
     @Transactional(readOnly = true)
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
@@ -306,6 +296,7 @@ public class UserService {
      * <p>
      * This is scheduled to get fired everyday, at 01:00 (am).
      */
+    /*
     @Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {
         userRepository
@@ -318,6 +309,11 @@ public class UserService {
                 userSearchRepository.delete(user);
                 this.clearUserCaches(user);
             });
+    }
+    */
+
+    public List<User> findNotActivatedUsersAfterThreeDays() {
+        return userRepository.findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS));
     }
 
     /**
@@ -333,4 +329,5 @@ public class UserService {
         Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE)).evict(user.getLogin());
         Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
     }
+
 }

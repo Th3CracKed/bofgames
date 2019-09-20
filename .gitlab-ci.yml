@@ -1,0 +1,32 @@
+stages:
+  - test/build
+  - deploy
+
+test/build:
+  image: maven:3.6.2-jdk-11-slim
+  stage: test/build
+  before_script:
+    - cp "$SETTINGS_SECURITY" ~/.m2/settings-security.xml
+    - cp "$SETTINGS" ~/.m2/settings.xml
+    - ls -la ~/.m2
+  script:
+    - mvn package -Pprod verify jib:build
+
+deploy:
+  image: docker:stable
+  stage: deploy
+  script:
+    - echo 'It will work one day'
+
+
+# variables:
+#   DOCKER_HOST: "tcp://url:2376"
+#   DOCKER_TLS_VERIFY: 1
+#   STACK_NAME: bofgames
+# script:
+#   - mkdir -p ~/.docker
+#   - echo "$STAGING_DOCKER_CA" > ~/.docker/ca.pem
+#   - echo "$STAGING_DOCKER_CERT" > ~/.docker/cert.pem
+#   - echo "$STAGING_DOCKER_KEY" > ~/.docker/key.pem
+#   - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
+#   - docker stack deploy --with-registry-auth -c docker-compose.yml "$STACK_NAME"

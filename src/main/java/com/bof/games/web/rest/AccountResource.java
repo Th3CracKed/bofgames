@@ -1,9 +1,12 @@
 package com.bof.games.web.rest;
 
 
+import com.bof.games.domain.Client;
 import com.bof.games.domain.User;
+import com.bof.games.repository.ClientRepository;
 import com.bof.games.repository.UserRepository;
 import com.bof.games.security.SecurityUtils;
+import com.bof.games.service.ClientService;
 import com.bof.games.service.MailService;
 import com.bof.games.service.UserService;
 import com.bof.games.service.dto.PasswordChangeDTO;
@@ -39,13 +42,16 @@ public class AccountResource {
 
     private final UserRepository userRepository;
 
+    private final ClientService clientService;
+
     private final UserService userService;
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    public AccountResource(UserRepository userRepository, ClientService clientService, UserService userService, MailService mailService) {
 
         this.userRepository = userRepository;
+        this.clientService = clientService;
         this.userService = userService;
         this.mailService = mailService;
     }
@@ -64,8 +70,8 @@ public class AccountResource {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
-        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
-        mailService.sendActivationEmail(user);
+        Client client = clientService.registerClient(managedUserVM, managedUserVM.getPassword());
+        mailService.sendActivationEmail(client.getUser());
     }
 
     /**
