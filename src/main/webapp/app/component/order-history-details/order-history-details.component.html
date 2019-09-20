@@ -1,0 +1,21 @@
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Produit</th>
+        <th scope="col">Plateform</th>
+        <th scope="col">Clé</th>
+        <th scope="col">Prix</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let key of keys">
+        <th scope="row"> {{key.product}} </th>
+        <td> {{ key.plateform }} </td>
+        <td> {{ key.value }} </td>
+        <td>{{key.price  | number:'1.2-5'}}€</td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>

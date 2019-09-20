@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'app/service/cart.service';
 import { Cart } from 'app/shared/model/cart.model';
+import { RouteConfigLoadEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-order-validation',
@@ -10,11 +11,15 @@ import { Cart } from 'app/shared/model/cart.model';
 export class OrderValidationComponent implements OnInit {
   currentPage: number;
   private cart: Cart;
-  constructor(private cartService: CartService) {
+  private clientId: Number;
+  private cartId: Number;
+
+  constructor(private cartService: CartService, private router: Router) {
     this.currentPage = 1;
   }
 
   nextPage() {
+    console.log(this.cart);
     this.currentPage = this.currentPage + 1;
     this.checkbounderise();
   }
@@ -35,13 +40,21 @@ export class OrderValidationComponent implements OnInit {
   }
 
   confirmCheckout() {
+    console.log(this.cart);
     this.cartService.buyCart(this.cart.driver.id, this.cart.id).subscribe(res => {
-      alert('commande Complete');
-      this.cartService.updateCart(null);
+      console.log('interieur sub');
+      //this.cartService.updateCart(null);
+      this.router.navigate(['/orderHistory/' + this.cart.id]);
     });
   }
 
   ngOnInit() {
-    this.cartService.currentCart.subscribe(cart => (this.cart = cart));
+    this.cartService.currentCart.subscribe(cart => {
+      console.log(cart);
+      this.cart = cart;
+
+      this.cartId = this.cart.id;
+      this.clientId = this.cart.driver.id;
+    });
   }
 }

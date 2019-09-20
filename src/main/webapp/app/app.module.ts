@@ -36,6 +36,7 @@ import { AddressUpdateComponent } from './component/address-update/address-updat
 import { OrderValidationComponent } from './component/order-validation/order-validation.component';
 import { PayementComponent } from './component/payement/payement.component';
 import { OrderSummaryComponent } from './component/order-summary/order-summary.component';
+import { OrderHistoryDetailsComponent } from './component/order-history-details/order-history-details.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -76,7 +77,8 @@ import { OrderSummaryComponent } from './component/order-summary/order-summary.c
     AddressUpdateComponent,
     OrderValidationComponent,
     PayementComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    OrderHistoryDetailsComponent
   ],
   providers: [
     {
