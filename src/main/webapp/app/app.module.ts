@@ -18,6 +18,7 @@ import { BofgamesHomeModule } from './home/home.module';
 import { BofgamesJHomeModule } from './jhipster_home/jhome.module';
 import { BofgamesAccountModule } from './account/account.module';
 import { BofgamesEntityModule } from './entities/entity.module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
@@ -38,6 +39,7 @@ import { OrderSummaryComponent } from './component/order-summary/order-summary.c
 @NgModule({
   imports: [
     BrowserModule,
+    NgMultiSelectDropDownModule.forRoot(),
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-' }),
     NgJhipsterModule.forRoot({
       // set below to true to make alerts look like toast
