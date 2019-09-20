@@ -48,7 +48,6 @@ export class ItemDetailComponent implements OnInit {
 
   addToCard() {
     if (this.isAuthenticated()) {
-      console.log('auth');
       this.accountService.identity().then(account => {
         this.cartService.addToCart((<Client>(<any>account)).id, this.item.id).subscribe(cart => {
           if (cart !== null && cart !== undefined) {
@@ -59,7 +58,6 @@ export class ItemDetailComponent implements OnInit {
         });
       });
     } else {
-      console.log('not auth');
       let panier: Cart;
       panier = this.coockies.getObject('panier');
       console.log(panier);

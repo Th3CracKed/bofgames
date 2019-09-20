@@ -1,6 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ItemListService } from 'app/service/item-list.service';
 import { Item } from 'app/shared/model/item.model';
+import { PlatformService } from 'app/entities/platform';
+import { filter, map } from 'rxjs/operators';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { IPlatform } from 'app/shared/model/platform.model';
+import { JhiAlertService } from 'ng-jhipster';
 
 @Component({
   selector: 'jhi-item-list',
@@ -8,12 +13,29 @@ import { Item } from 'app/shared/model/item.model';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit, OnDestroy {
+  itemsBk: Item[] = [];
   items: Item[] = [];
+  selectedPlatforms: IPlatform[] = [];
   marks: number[] = [];
-  isFirstTime = true;
-  constructor(private itemListService: ItemListService) {}
+  platforms: IPlatform[];
+  isList = false;
+  dropdownSettings = {
+    singleSelection: false,
+    idField: 'id',
+    textField: 'name',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+  constructor(
+    private itemListService: ItemListService,
+    private platformService: PlatformService,
+    private jhiAlertService: JhiAlertService
+  ) {}
 
   ngOnInit() {
+    this.getPlatforms();
     this.itemListService.getSearchingStatus().subscribe(() => this.loadItems());
   }
 
@@ -24,6 +46,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
   private loadItems() {
     this.itemListService.loadItems().subscribe(items => {
       this.items = items;
+      this.itemsBk = items;
       for (let index = 0; index < items.length; index++) {
         this.calculateMark(items[index]);
       }
@@ -40,20 +63,62 @@ export class ItemListComponent implements OnInit, OnDestroy {
     }
   }
 
-  displayList() {
-    const els = document.getElementsByClassName('item');
-    for (let index = 0; index < els.length; index++) {
-      const element = els[index];
-      element.classList.add('list-group-item');
+  private getPlatforms() {
+    this.platformService
+      .query()
+      .pipe(
+        filter((res: HttpResponse<IPlatform[]>) => res.ok),
+        map((res: HttpResponse<IPlatform[]>) => res.body)
+      )
+      .subscribe(
+        (res: IPlatform[]) => {
+          this.platforms = res;
+          console.log(JSON.stringify(this.platforms));
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+  }
+
+  onItemSelect() {
+    this.filterBasedOnPlatforms();
+  }
+
+  onItemDeselect() {
+    this.filterBasedOnPlatforms();
+    if (this.items.length === 0) {
+      this.items = this.itemsBk;
     }
   }
 
-  displayGrid() {
-    const els = document.getElementsByClassName('item');
-    for (let index = 0; index < els.length; index++) {
-      const element = els[index];
-      element.classList.remove('list-group-item');
-      element.classList.add('grid-group-item');
-    }
+  private filterBasedOnPlatforms() {
+    this.items = this.itemsBk.filter(item => {
+      let exist = false;
+      this.selectedPlatforms.forEach(platform => {
+        if (platform.name === item.platform.name) {
+          exist = true;
+        }
+      });
+      return exist;
+    });
+  }
+
+  onSelectAll() {
+    this.items = this.itemsBk;
+  }
+
+  sortByPriceAsc() {
+    this.items = this.items.sort((item1, item2) => {
+      return item1.price - item2.price;
+    });
+  }
+
+  sortByPriceDesc() {
+    this.items = this.items.sort((item1, item2) => {
+      return item2.price - item1.price;
+    });
+  }
+
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
   }
 }
