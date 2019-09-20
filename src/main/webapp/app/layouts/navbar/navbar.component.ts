@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiLanguageService } from 'ng-jhipster';
@@ -20,6 +20,8 @@ export class NavbarComponent implements OnInit {
   swaggerEnabled: boolean;
   modalRef: NgbModalRef;
   version: string;
+  promptEvent: any;
+  showPwaButton = false;
 
   constructor(
     private loginService: LoginService,
@@ -75,5 +77,22 @@ export class NavbarComponent implements OnInit {
 
   getImageUrl() {
     return this.isAuthenticated() ? this.accountService.getImageUrl() : null;
+  }
+
+  @HostListener('window:beforeinstallprompt', ['$event'])
+  beforeinstallprompt(event: any) {
+    this.promptEvent = event;
+    this.showPwaButton = true;
+  }
+
+  installPwa(): void {
+    this.promptEvent.prompt();
+    this.showPwaButton = false;
+    this.promptEvent.userChoice.then((choiceResult: { outcome: string }) => {
+      if (choiceResult.outcome !== 'accepted') {
+        this.showPwaButton = true;
+      }
+    });
+    this.collapseNavbar();
   }
 }
