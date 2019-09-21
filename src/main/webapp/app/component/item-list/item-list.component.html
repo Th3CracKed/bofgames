@@ -20,10 +20,10 @@
         <button class="btn my-btn-info" [ngClass]="{'active_filter': isAscSort === false}" (click)="sortByPriceDesc()"><i class="fa fa-sort" aria-hidden="true"></i> Prix décroissant</button>
         <button class="btn my-btn-info" [ngClass]="{'active_filter': isAscSort === true}" (click)="sortByPriceAsc()"><i class="fa fa-sort" aria-hidden="true"></i> Prix croissant</button>
 
-        <button class="btn my-btn-info" [ngClass]="{'active_filter': isList}" id="list" (click)="isList = !isList">
+        <button class="btn my-btn-info" [ngClass]="{'active_filter': isList}" id="list" (click)="switchListGrid(0)">
           <i class="fa fa-list-ul" aria-hidden="true"></i>
         </button>
-        <button class="btn my-btn-danger" [ngClass]="{'active_filter': !isList}" id="grid" (click)="isList = !isList">
+        <button class="btn my-btn-danger" [ngClass]="{'active_filter': !isList}" id="grid" (click)="switchListGrid(1)">
           <i class="fa fa-th-large" aria-hidden="true"></i>
         </button>
       </div>

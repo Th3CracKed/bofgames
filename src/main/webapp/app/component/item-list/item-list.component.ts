@@ -40,6 +40,15 @@ export class ItemListComponent implements OnInit, OnDestroy {
     this.itemListService.getSearchingStatus().subscribe(() => this.loadItems());
   }
 
+  switchListGrid(btnId: number) {
+    // 0= listBtn 1= gridBrn
+    if (btnId === 0) {
+      this.isList = true;
+    } else {
+      this.isList = false;
+    }
+  }
+
   ngOnDestroy(): void {
     this.itemListService.recreate();
   }
