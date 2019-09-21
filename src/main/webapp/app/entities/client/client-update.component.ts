@@ -53,7 +53,6 @@ export class ClientUpdateComponent implements OnInit {
   }
 
   updateForm(client: IClient) {
-    console.log(`client.birthdate = ${client.birthdate}`);
     this.editForm.patchValue({
       id: client.id,
       street: client.street,
@@ -72,7 +71,6 @@ export class ClientUpdateComponent implements OnInit {
   save() {
     this.isSaving = true;
     const client = this.createFromForm();
-    console.log(`client.birthdate = ${client.birthdate}`);
     if (client.id !== undefined) {
       this.subscribeToSaveResponse(this.clientService.update(client));
     } else {

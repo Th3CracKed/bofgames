@@ -30,7 +30,6 @@ export class ItemDetailComponent implements OnInit {
     this.route.params.subscribe(params =>
       this.itemDetailService.getItem(params.id).subscribe((item: Item) => {
         this.item = item;
-        console.log(` mon resultat  pour l'item numéro ${params.id}` + JSON.stringify(this.item));
         this.calculateMark(item);
       })
     );
@@ -39,11 +38,9 @@ export class ItemDetailComponent implements OnInit {
   calculateMark(item: Item) {
     let markTotal = 0;
     item.game.reviews.forEach(review => (markTotal += review.mark || 0));
-    console.log(`markTotal = ${markTotal}`);
     if (item.game.reviews && item.game.reviews.length !== 0) {
       this.mark = Math.floor(markTotal / item.game.reviews.length);
     }
-    console.log(`this.mark = ${this.mark}`);
   }
 
   addToCard() {
@@ -60,7 +57,6 @@ export class ItemDetailComponent implements OnInit {
     } else {
       let panier: Cart;
       panier = this.coockies.getObject('panier');
-      console.log(panier);
       const item2ad: Item = this.item;
       item2ad.game.reviews = null;
       item2ad.game.media = null;

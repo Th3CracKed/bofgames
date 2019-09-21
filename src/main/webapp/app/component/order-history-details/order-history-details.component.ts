@@ -19,7 +19,6 @@ export class OrderHistoryDetailsComponent implements OnInit {
     this.route.params.subscribe(params =>
       this.cartService.find(params.id).subscribe(res => {
         this.cart = res.body;
-        console.log(this.cart);
         this.cart.cartLines.forEach(cartline => {
           cartline.keys.forEach(key => {
             this.keys.push({

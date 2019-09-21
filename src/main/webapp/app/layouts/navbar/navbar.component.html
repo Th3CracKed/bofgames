@@ -214,7 +214,7 @@
                             <span jhiTranslate="global.menu.account.register">Register</span>
                         </a>
                     </li>
-                    <li *ngSwitchCase="showPwaButton">
+                    <li *ngIf="showPwaButton">
                         <a class="dropdown-item" routerLinkActive="active" (click)="installPwa()">
                             <i class="fa fa-download" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.account.install">Install</span>

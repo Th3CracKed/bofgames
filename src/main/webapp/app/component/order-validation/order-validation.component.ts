@@ -19,7 +19,6 @@ export class OrderValidationComponent implements OnInit {
   }
 
   nextPage() {
-    console.log(this.cart);
     this.currentPage = this.currentPage + 1;
     this.checkbounderise();
   }
@@ -40,9 +39,7 @@ export class OrderValidationComponent implements OnInit {
   }
 
   confirmCheckout() {
-    console.log(this.cart);
     this.cartService.buyCart(this.cart.driver.id, this.cart.id).subscribe(res => {
-      console.log('interieur sub');
       //this.cartService.updateCart(null);
       this.router.navigate(['/orderHistory/' + this.cart.id]);
     });
@@ -50,7 +47,6 @@ export class OrderValidationComponent implements OnInit {
 
   ngOnInit() {
     this.cartService.currentCart.subscribe(cart => {
-      console.log(cart);
       this.cart = cart;
 
       this.cartId = this.cart.id;

@@ -143,8 +143,6 @@ export class CartComponent implements OnInit {
       this.coockies.putObject('panier', this.cart);
       this.cartService.updateCart(this.cart);
     }
-
-    console.log(this.cart);
   }
 
   isAuthenticated() {

@@ -83,7 +83,6 @@ export class ItemListComponent implements OnInit, OnDestroy {
       .subscribe(
         (res: IPlatform[]) => {
           this.platforms = res;
-          console.log(JSON.stringify(this.platforms));
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );

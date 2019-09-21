@@ -1,6 +1,8 @@
-<div title="Rechercher un jeu dans le site" class="search">
-  <input type="text" #inputSearch class="searchTerm" (keyup.enter)="search(inputSearch.value)" placeholder="Rechercher...">
-  <button type="button"  class="searchButton" (click)="search(inputSearch.value)">
+<div title="Barre de Recherche" text="Rechercher un jeu facilement partout dans le site." class="search"
+  joyrideStep="search">
+  <input type="text" #inputSearch class="searchTerm" (keyup.enter)="search(inputSearch.value)"
+    placeholder="Rechercher...">
+  <button type="button" class="searchButton" (click)="search(inputSearch.value)">
     <i class="fa fa-search"></i>
   </button>
 </div>

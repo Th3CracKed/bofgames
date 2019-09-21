@@ -1,6 +1,6 @@
 <div *ngIf="!isShoppingCart" id="openSideBarShop" class="d-none d-md-block" [ngClass]="{'cart_add_animation': hasANewItem}">
   
-  <button id="cart_btn_open" title="Afficher le panier" type="button" class="btn"   (click)="openNav()"> <i class="fa fa-shopping-cart" aria-hidden="true"></i>{{textArticle}}</button>
+  <button id="cart_btn_open"  joyrideStep="cart" title="Le Panier" text="Ce bouton vous permet d'afficher les articles présents dans votre panier." type="button" class="btn"   (click)="openNav()"> <i class="fa fa-shopping-cart" aria-hidden="true"></i>{{textArticle}}</button>
 </div>
 <div id="mySidenav" class="sidenav" (wheel)="onMouseWheelshop()">
   <jhi-cart></jhi-cart>

@@ -46,12 +46,10 @@ export class CartService {
         idClient = (<Client>(<any>account)).id;
         this.getCart(idClient).subscribe(cart => {
           this.updateCart(cart);
-          console.log(this.cart);
         });
       });
     } else {
       this.updateCart(this.coockies.getObject('panier'));
-      console.log(this.cart);
     }
   }
 
