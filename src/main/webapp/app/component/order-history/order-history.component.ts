@@ -10,7 +10,7 @@ import { AccountService } from 'app/core';
   styleUrls: ['./order-history.component.scss']
 })
 export class OrderHistoryComponent implements OnInit {
-  private carts: Cart[] = [];
+  carts: Cart[] = [];
 
   constructor(private cartService: CartService, private accountService: AccountService) {}
 

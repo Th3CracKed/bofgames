@@ -12,7 +12,7 @@ import { Key } from 'app/shared/model/key.model';
 })
 export class OrderHistoryDetailsComponent implements OnInit {
   private cart: ICart;
-  private keys: Object[] = [];
+  keys: Object[] = [];
   constructor(private route: ActivatedRoute, private cartService: CartService) {}
 
   ngOnInit() {

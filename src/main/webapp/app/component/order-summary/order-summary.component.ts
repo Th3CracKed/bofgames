@@ -13,8 +13,8 @@ import { Cart } from 'app/shared/model/cart.model';
   styleUrls: ['./order-summary.component.scss']
 })
 export class OrderSummaryComponent implements OnInit {
-  private client: Client;
-  private cart: Cart;
+  client: Client;
+  cart: Cart;
   constructor(private accountService: AccountService, private clientService: ClientService, private cartService: CartService) {}
   ngOnInit() {
     this.accountService.identity().then(account => {
