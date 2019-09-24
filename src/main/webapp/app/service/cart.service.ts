@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie';
 import { AccountService } from 'app/core';
 import { Client } from 'app/shared/model/client.model';
+import { SERVER_API_URL } from 'app/app.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -19,17 +20,15 @@ export class CartService {
   }
 
   setCart(cart: Cart): Observable<Cart> {
-    return this.http.post('http://localhost:8080/' + 'api/client/cart', cart).pipe(map((body: any) => body));
+    return this.http.post(SERVER_API_URL + 'api/client/cart', cart).pipe(map((body: any) => body));
   }
 
   getCart(idClient: Number): Observable<Cart> {
-    return this.http.get('http://localhost:8080' + `/api/client/${idClient}/cart`).pipe(map((body: any) => body));
+    return this.http.get(SERVER_API_URL + `/api/client/${idClient}/cart`).pipe(map((body: any) => body));
   }
 
   addToCart(idClient: number, idItem: number): Observable<Cart> {
-    return this.http
-      .put('http://localhost:8080/' + `api/client/cart/add/?idClient=${idClient}&idItem=${idItem}`, '')
-      .pipe(map((body: any) => body));
+    return this.http.put(SERVER_API_URL + `api/client/cart/add/?idClient=${idClient}&idItem=${idItem}`, '').pipe(map((body: any) => body));
   }
 
   updateCart(cart: Cart) {
@@ -57,18 +56,18 @@ export class CartService {
   }
 
   decreaseQuantity(idClient: Number, idCart: Number, idItem: Number): Observable<Cart> {
-    return this.http.put('http://localhost:8080/' + `api/client/cart/remove/?idCart=${idCart}&idClient=${idClient}&idItem=${idItem}`, '');
+    return this.http.put(SERVER_API_URL + `api/client/cart/remove/?idCart=${idCart}&idClient=${idClient}&idItem=${idItem}`, '');
   }
 
   deleteItem(idClient: Number, idCart: Number, idItem: Number): Observable<Cart> {
-    return this.http.delete('http://localhost:8080/' + `api/client/cart/delete/?idCart=${idCart}&idClient=${idClient}&idItem=${idItem}`);
+    return this.http.delete(SERVER_API_URL + `api/client/cart/delete/?idCart=${idCart}&idClient=${idClient}&idItem=${idItem}`);
   }
 
   buyCart(idClient: Number, idCart: Number) {
-    return this.http.put('http://localhost:8080/' + `api/client/cart/buy/?idCart=${idCart}&idClient=${idClient}`, '');
+    return this.http.put(SERVER_API_URL + `api/client/cart/buy/?idCart=${idCart}&idClient=${idClient}`, '');
   }
 
   getOrders(idClient: Number): Observable<Cart[]> {
-    return this.http.get('http://localhost:8080/' + `api/client/order/${idClient}`).pipe(map((body: any) => body));
+    return this.http.get(SERVER_API_URL + `api/client/order/${idClient}`).pipe(map((body: any) => body));
   }
 }
