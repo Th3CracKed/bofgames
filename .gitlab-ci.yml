@@ -13,7 +13,6 @@ test/build:
     - mvn package -Pprod verify jib:build
 
 deploy:
-  image: docker:stable
   stage: deploy
   variables:
     DOCKER_HOST: "tcp://bofgames.firmyn.ovh:2376"
