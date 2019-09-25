@@ -13,10 +13,21 @@ services:
     ports:
       - 8080:8080
   bofgames-postgresql:
-    extends:
-      file: postgresql.yml
-      service: bofgames-postgresql
+    image: postgres:11.4
+    # volumes:
+    #     - ~/volumes/jhipster/bofgames/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=bofgames
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
   bofgames-elasticsearch:
-    extends:
-      file: elasticsearch.yml
-      service: bofgames-elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.3
+    # volumes:
+    #     - ~/volumes/jhipster/bofgames/elasticsearch/:/usr/share/elasticsearch/data/
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - 'ES_JAVA_OPTS=-Xms1024m -Xmx1024m'
+      - 'discovery.type=single-node'

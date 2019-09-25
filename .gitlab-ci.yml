@@ -13,7 +13,7 @@ test/build:
     - mvn package -Pprod verify jib:build
 
 deploy:
-  image: docker/compose:1.24.1
+  image: docker:stable
   stage: deploy
   variables:
     DOCKER_HOST: "tcp://bofgames.firmyn.ovh:2376"
@@ -25,4 +25,4 @@ deploy:
     - echo "$BOF_DOCKER_CERT" > ~/.docker/cert.pem
     - echo "$BOF_DOCKER_KEY" > ~/.docker/key.pem
     - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
-    - docker-compose -f src/main/docker/app.yml up
+    - docker stack deploy --with-registry-auth -c src/main/docker/app.yml "$STACK_NAME"
