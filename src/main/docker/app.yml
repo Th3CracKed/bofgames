@@ -1,4 +1,4 @@
-version: '2'
+version: '3.6'
 services:
   bofgames-app:
     image: registry.gitlab.com/projet-ecom-m2gi/bofgames
