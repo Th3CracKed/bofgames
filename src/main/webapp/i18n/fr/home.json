@@ -1,6 +1,13 @@
 {
   "home": {
     "title": "Bienvenue, Java Hipster !",
+    "games": "Catalogue des jeux",
+    "detail": "Détail",
+    "orderHistory": "Historique des commandes",
+    "orderHistoryDetail": "Récapitulatif",
+    "orderValidation": "Validation de commande",
+    "shoppingCart": "Panier",
+    "profil": "Profile",
     "subtitle": "Ceci est votre page d'accueil",
     "logged": {
       "message": "Vous êtes connecté en tant que \"{{username}}\"."

@@ -17,40 +17,53 @@ const LAYOUT_ROUTES = [navbarRoute, sidebarRoute, ...errorRoute];
       [
         {
           path: 'profil',
-          component: UserProfilComponent
+          component: UserProfilComponent,
+          data: {
+            pageTitle: 'home.profil'
+          }
         },
         {
           path: 'shoppingCart',
-          component: CartComponent
+          component: CartComponent,
+          data: {
+            pageTitle: 'home.shoppingCart'
+          }
         },
         {
           path: 'orderValidation',
           component: OrderValidationComponent,
           data: {
-            authorities: ['ROLE_USER']
+            authorities: ['ROLE_USER'],
+            pageTitle: 'home.orderValidation'
           },
           canActivate: [UserRouteAccessService]
         },
         {
           path: 'orderHistory',
-          component: OrderHistoryComponent
+          component: OrderHistoryComponent,
+          data: {
+            pageTitle: 'home.orderHistory'
+          }
         },
         {
           path: 'orderHistory/:id',
-          component: OrderHistoryDetailsComponent
+          component: OrderHistoryDetailsComponent,
+          data: {
+            pageTitle: 'home.orderHistoryDetail'
+          }
         },
         {
           path: 'games/:id',
           component: ItemDetailComponent,
           data: {
-            pageTitle: 'home.title'
+            pageTitle: 'home.detail'
           }
         },
         {
           path: 'games',
           component: ItemListComponent,
           data: {
-            pageTitle: 'home.title'
+            pageTitle: 'home.games'
           }
         },
         {
