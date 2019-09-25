@@ -15,18 +15,14 @@ test/build:
 deploy:
   image: docker:stable
   stage: deploy
+  variables:
+    DOCKER_HOST: "tcp://bofgames.firmyn.ovh:2376"
+    DOCKER_TLS_VERIFY: 1
+    STACK_NAME: bofgames
   script:
-    - echo 'It will work one day'
-
-
-# variables:
-#   DOCKER_HOST: "tcp://url:2376"
-#   DOCKER_TLS_VERIFY: 1
-#   STACK_NAME: bofgames
-# script:
-#   - mkdir -p ~/.docker
-#   - echo "$STAGING_DOCKER_CA" > ~/.docker/ca.pem
-#   - echo "$STAGING_DOCKER_CERT" > ~/.docker/cert.pem
-#   - echo "$STAGING_DOCKER_KEY" > ~/.docker/key.pem
-#   - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
-#   - docker stack deploy --with-registry-auth -c docker-compose.yml "$STACK_NAME"
+    - mkdir -p ~/.docker
+    - echo "$BOF_DOCKER_CA" > ~/.docker/ca.pem
+    - echo "$BOF_DOCKER_CERT" > ~/.docker/cert.pem
+    - echo "$BOF_DOCKER_KEY" > ~/.docker/key.pem
+    - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
+    - docker-compose -f src/main/docker/app.yml up
