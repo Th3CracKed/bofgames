@@ -57,7 +57,7 @@ export class ItemDetailComponent implements OnInit {
     } else {
       let panier: Cart;
       panier = this.coockies.getObject('panier');
-      const item2ad: Item = this.item;
+      const item2ad: Item = JSON.parse(JSON.stringify(this.item));
       item2ad.game.reviews = null;
       item2ad.game.media = null;
       item2ad.keys = null;

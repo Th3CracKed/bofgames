@@ -12,10 +12,10 @@ import { SERVER_API_URL } from 'app/app.constants';
   providedIn: 'root'
 })
 export class CartService {
-  private cart = new BehaviorSubject(null);
+  private cart = new BehaviorSubject<Cart>(null);
   currentCart = this.cart.asObservable();
 
-  constructor(private http: HttpClient, private accountService: AccountService, private coockies: CookieService) {
+  constructor(private http: HttpClient, private accountService: AccountService, private cookies: CookieService) {
     this.reloadCart();
   }
 
@@ -24,7 +24,7 @@ export class CartService {
   }
 
   getCart(idClient: Number): Observable<Cart> {
-    return this.http.get(SERVER_API_URL + `/api/client/${idClient}/cart`).pipe(map((body: any) => body));
+    return this.http.get(SERVER_API_URL + `api/client/${idClient}/cart`).pipe(map((body: any) => body));
   }
 
   addToCart(idClient: number, idItem: number): Observable<Cart> {
@@ -49,7 +49,7 @@ export class CartService {
         });
       });
     } else {
-      this.updateCart(this.coockies.getObject('panier'));
+      this.updateCart(this.cookies.getObject('panier'));
     }
   }
 

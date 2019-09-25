@@ -7,10 +7,10 @@
         <strong>Address saved!</strong>
     </div>
     <div class="col col-xs-12">      
-          <h3>Rue : <b>{{client.street}}</b></h3>
-          <h3>Code postal : <b>{{client.postCode}}</b></h3>
-          <h3>Pays : <b>{{client.city}}</b></h3>
-          <h3>Ville : <b>{{client.country}}</b></h3>
+          <h3>Rue : <b>{{client?.street}}</b></h3>
+          <h3>Code postal : <b>{{client?.postCode}}</b></h3>
+          <h3>Pays : <b>{{client?.city}}</b></h3>
+          <h3>Ville : <b>{{client?.country}}</b></h3>
           
           <button id="modify-data-btn" class="btn btn-primary my-btn-info-shop" (click)="toogleEditForm()"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</button>
     </div>
