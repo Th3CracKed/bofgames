@@ -34,8 +34,9 @@ public class PopulateDataWithEntityService {
     private final MediaSearchRepository mediaSearchRepository;
     private final CartLineSearchRepository cartLineSearchRepository;
     private final CartSearchRepository cartSearchRepository;
+    private final ReviewRepository reviewRepository;
 
-    public PopulateDataWithEntityService(PlatformRepository platformRepository, GameRepository gameRepository, ItemRepository itemRepository, ItemSearchRepository itemSearchRepository, UserRepository userRepository, ClientRepository clientRepository, TagRepository tagRepository, KeyRepository keyRepository, MediaRepository mediaRepository, CartLineRepository cartLineRepository, CartRepository cartRepository, PlatformSearchRepository platformSearchRepository, GameSearchRepository gameSearchRepository, UserSearchRepository userSearchRepository, ClientSearchRepository clientSearchRepository, TagSearchRepository tagSearchRepository, KeySearchRepository keySearchRepository, MediaSearchRepository mediaSearchRepository, CartLineSearchRepository cartLineSearchRepository, CartSearchRepository cartSearchRepository) {
+    public PopulateDataWithEntityService(PlatformRepository platformRepository, GameRepository gameRepository, ItemRepository itemRepository, ItemSearchRepository itemSearchRepository, UserRepository userRepository, ClientRepository clientRepository, TagRepository tagRepository, KeyRepository keyRepository, MediaRepository mediaRepository, CartLineRepository cartLineRepository, CartRepository cartRepository, PlatformSearchRepository platformSearchRepository, GameSearchRepository gameSearchRepository, UserSearchRepository userSearchRepository, ClientSearchRepository clientSearchRepository, TagSearchRepository tagSearchRepository, KeySearchRepository keySearchRepository, MediaSearchRepository mediaSearchRepository, CartLineSearchRepository cartLineSearchRepository, CartSearchRepository cartSearchRepository, ReviewRepository reviewRepository) {
         this.platformRepository = platformRepository;
         this.gameRepository = gameRepository;
         this.itemRepository = itemRepository;
@@ -56,6 +57,7 @@ public class PopulateDataWithEntityService {
         this.mediaSearchRepository = mediaSearchRepository;
         this.cartLineSearchRepository = cartLineSearchRepository;
         this.cartSearchRepository = cartSearchRepository;
+        this.reviewRepository = reviewRepository;
     }
 
 
@@ -64,6 +66,7 @@ public class PopulateDataWithEntityService {
         try {
             // clean database
             mediaRepository.deleteAll();
+            reviewRepository.deleteAll();
             mediaSearchRepository.deleteAll();
             keyRepository.deleteAll();
             keySearchRepository.deleteAll();
@@ -179,6 +182,12 @@ public class PopulateDataWithEntityService {
         mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/q7zlrfk4g4yjomb/orc_assault.jpg").alt("Orc Assault logo").game(games.get(6)));
         mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/ku6grw4ved6ljrq/bug_killers.jpg?dl=0").alt("Bug Killers logo").game(games.get(7)));
 
+        reviewRepository.save(new Review().game(games.get(0)).mark(1));
+        reviewRepository.save(new Review().game(games.get(1)).mark(1));
+        reviewRepository.save(new Review().game(games.get(2)).mark(1));
+        reviewRepository.save(new Review().game(games.get(3)).mark(2));
+        reviewRepository.save(new Review().game(games.get(5)).mark(1));
+        reviewRepository.save(new Review().game(games.get(7)).mark(2));
         fillElasticSearchRepository(gameRepository,gameSearchRepository);
         fillElasticSearchRepository(itemRepository,itemSearchRepository);
         fillElasticSearchRepository(mediaRepository,mediaSearchRepository);

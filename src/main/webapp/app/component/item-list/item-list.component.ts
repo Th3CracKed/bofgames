@@ -58,18 +58,18 @@ export class ItemListComponent implements OnInit, OnDestroy {
       this.items = items;
       this.itemsBk = items;
       for (let index = 0; index < items.length; index++) {
-        this.calculateMark(items[index]);
+        this.calculateMark(items[index], index);
       }
     });
   }
 
-  private calculateMark(item: Item) {
+  private calculateMark(item: Item, index: number) {
     let markTotal = 0;
     item.game.reviews.forEach(review => (markTotal += review.mark || 0));
     if (item.game.reviews && item.game.reviews.length !== 0) {
-      this.marks[item.game.id] = Math.floor(markTotal / item.game.reviews.length);
+      this.marks[index] = Math.floor(markTotal / item.game.reviews.length);
     } else {
-      this.marks[item.game.id] = 0;
+      this.marks[index] = 0;
     }
   }
 
