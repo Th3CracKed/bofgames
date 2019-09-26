@@ -48,8 +48,6 @@ export class CartService {
           this.updateCart(cart);
         });
       });
-    } else {
-      this.updateCart(this.cookies.getObject('panier'));
     }
   }
 

@@ -74,14 +74,12 @@ export class JhiLoginModalComponent implements AfterViewInit {
         this.accountService.identity().then(account => {
           const c: Cart = this.cookies.getObject('panier');
           if (c !== undefined) {
-            c.driver = <Client>(<any>account); // Todo Ask Simon?
+            c.driver = <Client>(<any>account);
             c.id = null;
             this.cartService.setCart(c).subscribe(res => {
-              this.cartService.updateCart(res);
+              this.cartService.reloadCart();
             });
             this.cookies.remove('panier');
-          } else {
-            this.cartService.reloadCart();
           }
         });
 
