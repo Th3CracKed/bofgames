@@ -9,9 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class PopulateDataWithEntityService {
@@ -88,21 +86,41 @@ public class PopulateDataWithEntityService {
         platformRepository.save(new Platform().name("PC"));
         platformRepository.save(new Platform().name("Xbox"));
 
-        gameRepository.save(new Game().name("The last of us").description("Le survival action The Last of Us sur PS3 suit Joel et d Ellie à travers les Etats-Unis. Les deux devront s entraider pour survivre à une mystérieuse peste."));
-        gameRepository.save(new Game().name("Greedfall").description("Greedfall est un Action RPG développé par Spiders et édité par Focus Home Interactive. L action prend place dans un univers fantastique, inspiré de l’Europe du 17ème siècle."));
-        gameRepository.save(new Game().name("Borderlands 3").description("Borderlands 3 est un RPG en vue FPS. Contrairement aux épisodes précédents, les joueurs vont pouvoir visiter Prométhée."));
-
+        gameRepository.save(new Game().name("City Bus Simulator 2018").description("Faites l'expérience du transport de passagers à travers une grande ville impressionnante. Avec le dernier modèle de bus urbain dans la circulation entouré de piétons. Suivez de nombreux itinéraires et débloquez-en de nouveaux en gagnant de l’argent."));
+        gameRepository.save(new Game().name("Race to mars").description("un jeu de simulation de compagnie spatiale au tour par tour. Devenez le chef de la société «New Space» nouvellement créée, dont le but serait d’établir une colonie sur Mars. "));
+        gameRepository.save(new Game().name("3D Paraglider").description("Vous rêvez de voler sans restrictions et de vous rapprocher le plus possible de Dame Nature? Si oui, alors 3D Paraglider est fait pour vous."));
+        gameRepository.save(new Game().name("Pro Fishing Simulator").description("Pro Fishing Simulator est une simulation de pêche sportive authentique pour les débutants et les passionnés de la pêche."));
         List<Platform> platforms = platformRepository.findAll();
         List<Game> games = gameRepository.findAll();
 
-        for(int i = 0; i < Math.min(games.size(), platforms.size()); i++) {
-            Item item = new Item()
-                .price(23.3 + (i*3))
+
+            Item item1 = new Item()
+                .price(23.3)
                 .isBuyable(true)
-                .game(games.get(i))
-                .platform(platforms.get(i));
-            itemRepository.save(item);
-        }
+                .game(games.get(0))
+                .platform(platforms.get(0));
+            Item item2 = new Item()
+            .price(27.3)
+            .isBuyable(true)
+            .game(games.get(1))
+            .platform(platforms.get(0));
+
+            Item item3 = new Item()
+            .price(33.3)
+            .isBuyable(true)
+            .game(games.get(2))
+            .platform(platforms.get(1));
+
+            Item item4 = new Item()
+            .price(11.2)
+            .isBuyable(true)
+            .game(games.get(3))
+            .platform(platforms.get(2));
+            itemRepository.save(item1);
+            itemRepository.save(item2);
+            itemRepository.save(item3);
+            itemRepository.save(item4);
+
 
         tagRepository.save(new Tag().name("Action"));
         tagRepository.save(new Tag().name("FPS"));
@@ -114,21 +132,13 @@ public class PopulateDataWithEntityService {
         keyRepository.save(new Key().value("5P65P-85R23-NS4T9").status(KEYSTATUS.AVAILABLE).item(items.get(1)));
         keyRepository.save(new Key().value("55HCH-D5EC9-66676").status(KEYSTATUS.AVAILABLE).item(items.get(1)));
         keyRepository.save(new Key().value("LG6P7-7SGKG-73NGR").status(KEYSTATUS.AVAILABLE).item(items.get(2)));
+        keyRepository.save(new Key().value("FS6P7-7FSQG-13NGR").status(KEYSTATUS.AVAILABLE).item(items.get(3)));
 
-        mediaRepository.save(new Media().url("http://image.jeuxvideo.com/images-sm/jaquettes/00042999/jaquette-the-last-of-us-playstation-3-ps3-cover-avant-g-1355137960.jpg").alt("The Last Of Us Logo").game(games.get(0)));
-        mediaRepository.save(new Media().url("http://image.jeuxvideo.com/medias-sm/151627/1516269237-1224-jaquette-avant.jpg").alt("Greedfall logo").game(games.get(1)));
-        mediaRepository.save(new Media().url("http://image.jeuxvideo.com/medias-sm/155724/1557239235-3469-jaquette-avant.jpg").alt("Borderlands 3").game(games.get(2)));
-        // Create users
-        // CreateAndSaveUser("user1","dollie.guerra@mail.com","Dollie","Guerra");
-        // CreateAndSaveUser("user2","Cristiano.Rosales@mail.com","Cristiano","Rosales");
-        //CreateAndSaveUser("user3", "Kitty.Solis@mail.com", "Kitty", "Solis");
+        mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/pddlbjc6fasyiez/city_bus.jpg").alt("City Bus Simulator 2018 logo").game(games.get(0)));
+        mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/60l2ueza1t4ynmk/race_to_mars.jpg").alt("Race to mars logo").game(games.get(1)));
+        mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/bkx501kwu0o16sk/3D_Paraglider.jpg").alt("3D Paraglider logo").game(games.get(2)));
+        mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/q0nc83ltt6u6e40/Pro_Fishing_Simulator.jpg").alt("Pro Fishing Simulator logo").game(games.get(3)));
 
-        // create client with theirs users
-        /*for (User user : userRepository.findAll()) {
-            Client client = new Client();
-            client.setUser(user);
-            clientRepository.save(client);
-        }*/
         fillElasticSearchRepository(gameRepository,gameSearchRepository);
         fillElasticSearchRepository(itemRepository,itemSearchRepository);
         fillElasticSearchRepository(mediaRepository,mediaSearchRepository);
@@ -138,25 +148,5 @@ public class PopulateDataWithEntityService {
         List list = repository.findAll();
         elasticsearchRepository.saveAll(list);
     }
-/*
-    private void CreateAndSaveUser(String login, String email, String first_name, String last_name){
-        User user = new User();
-        user.setLogin(login);
-        user.setEmail(email);
-        user.setActivated(true);
-        user.setFirstName(first_name);
-        user.setLastName(last_name);
-        Set<Authority> authorities = new HashSet<>();
-        Authority role_user = new Authority();
-        role_user.setName("ROLE_USER");
-        authorities.add(role_user);
-        user.setAuthorities(authorities);
-        user.setPassword("$2a$10$krj23Ztki8Mn/BrPyURTgOMQTD0TyWeuCurUEvf/.a.Fo3Rw6v2oq");
-        user.setCreatedBy("auto_generated");
-        if(!userRepository.findOneByLogin(login).isPresent()) {
-            userRepository.saveAndFlush(user);
-            userSearchRepository.save(user);
-        }
-    }*/
 
 }
