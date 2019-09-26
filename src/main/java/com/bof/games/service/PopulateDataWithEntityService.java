@@ -90,6 +90,10 @@ public class PopulateDataWithEntityService {
         gameRepository.save(new Game().name("Race to mars").description("un jeu de simulation de compagnie spatiale au tour par tour. Devenez le chef de la société «New Space» nouvellement créée, dont le but serait d’établir une colonie sur Mars. "));
         gameRepository.save(new Game().name("3D Paraglider").description("Vous rêvez de voler sans restrictions et de vous rapprocher le plus possible de Dame Nature? Si oui, alors 3D Paraglider est fait pour vous."));
         gameRepository.save(new Game().name("Pro Fishing Simulator").description("Pro Fishing Simulator est une simulation de pêche sportive authentique pour les débutants et les passionnés de la pêche."));
+        gameRepository.save(new Game().name("Air Battlefront").description("Un jeu de tir à l'arc de combat à la mouche basé sur le thème WW2. Vous jouez en tant que pilote d'un avion de votre pays."));
+        gameRepository.save(new Game().name("10 Years After").description("une horreur basée sur la survie (Open World) Un joueur solo  Après que le gouvernement a lancé une injection au grand public pour endiguer la violence et réprimer les émotions humaines qui se passaient bien"));
+        gameRepository.save(new Game().name("Orc Assault").description("Il était une fois, tout était paisible et serein dans le pays lointain de Camalon,mais le silence a été rompu lorsque les hordes orques sont revenues dans le royaume pacifique pour réclamer la terre qu’elles considéraient comme la plus sacrée."));
+        gameRepository.save(new Game().name("Bug Killers").description("est un tireur dynamique de haut en bas où vous aurez besoin de transformer des foules d'insectes mutants en viande. Le jeu a trois modes: Survie, PvP et PvE. Différents types d'armement vous aideront à détruire efficacement vos ennemis."));
         List<Platform> platforms = platformRepository.findAll();
         List<Game> games = gameRepository.findAll();
 
@@ -116,11 +120,39 @@ public class PopulateDataWithEntityService {
             .isBuyable(true)
             .game(games.get(3))
             .platform(platforms.get(2));
+
+            Item item5 = new Item()
+            .price(25.2)
+            .isBuyable(true)
+            .game(games.get(4))
+            .platform(platforms.get(0));
+
+            Item item6 = new Item()
+            .price(39.2)
+            .isBuyable(true)
+            .game(games.get(5))
+            .platform(platforms.get(2));
+
+            Item item7 = new Item()
+            .price(25.2)
+            .isBuyable(true)
+            .game(games.get(6))
+            .platform(platforms.get(1));
+
+            Item item8 = new Item()
+            .price(25.2)
+            .isBuyable(true)
+            .game(games.get(7))
+            .platform(platforms.get(1));
+
             itemRepository.save(item1);
             itemRepository.save(item2);
             itemRepository.save(item3);
             itemRepository.save(item4);
-
+            itemRepository.save(item5);
+            itemRepository.save(item6);
+            itemRepository.save(item7);
+            itemRepository.save(item8);
 
         tagRepository.save(new Tag().name("Action"));
         tagRepository.save(new Tag().name("FPS"));
@@ -132,12 +164,20 @@ public class PopulateDataWithEntityService {
         keyRepository.save(new Key().value("5P65P-85R23-NS4T9").status(KEYSTATUS.AVAILABLE).item(items.get(1)));
         keyRepository.save(new Key().value("55HCH-D5EC9-66676").status(KEYSTATUS.AVAILABLE).item(items.get(1)));
         keyRepository.save(new Key().value("LG6P7-7SGKG-73NGR").status(KEYSTATUS.AVAILABLE).item(items.get(2)));
-        keyRepository.save(new Key().value("FS6P7-7FSQG-13NGR").status(KEYSTATUS.AVAILABLE).item(items.get(3)));
+        keyRepository.save(new Key().value("FS6P7-7FCZQ-13NGR").status(KEYSTATUS.AVAILABLE).item(items.get(3)));
+        keyRepository.save(new Key().value("EDZ7-5FSQG-1ASSR").status(KEYSTATUS.AVAILABLE).item(items.get(4)));
+        keyRepository.save(new Key().value("DZF7-AFZZG-AFZFR").status(KEYSTATUS.AVAILABLE).item(items.get(5)));
+        keyRepository.save(new Key().value("ZFQP7-7FSQG-13NGR").status(KEYSTATUS.AVAILABLE).item(items.get(6)));
+        keyRepository.save(new Key().value("FZS7S-FSDQG-13NGR").status(KEYSTATUS.AVAILABLE).item(items.get(7)));
 
         mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/pddlbjc6fasyiez/city_bus.jpg").alt("City Bus Simulator 2018 logo").game(games.get(0)));
         mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/60l2ueza1t4ynmk/race_to_mars.jpg").alt("Race to mars logo").game(games.get(1)));
         mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/bkx501kwu0o16sk/3D_Paraglider.jpg").alt("3D Paraglider logo").game(games.get(2)));
         mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/q0nc83ltt6u6e40/Pro_Fishing_Simulator.jpg").alt("Pro Fishing Simulator logo").game(games.get(3)));
+        mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/v9j4i8wlde3zvm6/air_battlefront.jpg").alt("Air BattleFront logo").game(games.get(4)));
+        mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/4xidbqpg6klig7d/10_Years_After.jpg").alt("10 Years After logo").game(games.get(5)));
+        mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/q7zlrfk4g4yjomb/orc_assault.jpg").alt("Orc Assault logo").game(games.get(6)));
+        mediaRepository.save(new Media().url("https://dl.dropboxusercontent.com/s/ku6grw4ved6ljrq/bug_killers.jpg?dl=0").alt("Bug Killers logo").game(games.get(7)));
 
         fillElasticSearchRepository(gameRepository,gameSearchRepository);
         fillElasticSearchRepository(itemRepository,itemSearchRepository);
