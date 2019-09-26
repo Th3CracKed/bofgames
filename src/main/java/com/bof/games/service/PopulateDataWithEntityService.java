@@ -70,6 +70,10 @@ public class PopulateDataWithEntityService {
             mediaSearchRepository.deleteAll();
             keyRepository.deleteAll();
             keySearchRepository.deleteAll();
+            cartLineRepository.deleteAll();
+            cartLineSearchRepository.deleteAll();
+            cartRepository.deleteAll();
+            cartSearchRepository.deleteAll();
             itemRepository.deleteAll();
             itemSearchRepository.deleteAll();
             platformRepository.deleteAll();
@@ -78,10 +82,6 @@ public class PopulateDataWithEntityService {
             tagSearchRepository.deleteAll();
             gameRepository.deleteAll();
             gameSearchRepository.deleteAll();
-            cartLineRepository.deleteAll();
-            cartLineSearchRepository.deleteAll();
-            cartRepository.deleteAll();
-            cartSearchRepository.deleteAll();
             clientRepository.deleteAll();
             clientSearchRepository.deleteAll();
         }catch (Exception ignored){}
