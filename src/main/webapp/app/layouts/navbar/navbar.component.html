@@ -3,7 +3,7 @@
         <span class="logo-img"></span>
         <span jhiTranslate="global.title" class="navbar-title">Bofgames</span> <!-- <span class="navbar-version">{{version}}</span> -->
     </a>
-    <a class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
+    <a id="menuToggleButton" class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
         <fa-icon icon="bars"></fa-icon>
     </a>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
@@ -171,6 +171,18 @@
                     </li>
                 </ul>
             </li>
+            <!-- panier nav -->
+            <li>
+                <a class="nav-link d-sm-block d-lg-none"  href="javascript:void(0);" (click)="openNav()">
+                    <span>
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <span>
+                            Panier
+                        </span>
+                    </span>
+                </a>
+            </li>
+            <!-- panier nav -->
             <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
                   <span *ngIf="!getImageUrl()">

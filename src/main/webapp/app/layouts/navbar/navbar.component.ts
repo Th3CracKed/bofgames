@@ -7,6 +7,7 @@ import { SessionStorageService } from 'ngx-webstorage';
 import { VERSION } from 'app/app.constants';
 import { JhiLanguageHelper, AccountService, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { ShoppingService } from 'app/service/shopping-view.service';
 
 @Component({
   selector: 'jhi-navbar',
@@ -31,7 +32,8 @@ export class NavbarComponent implements OnInit {
     private accountService: AccountService,
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private shopservice: ShoppingService
   ) {
     this.version = VERSION ? 'v' + VERSION : '';
     this.isNavbarCollapsed = true;
@@ -94,5 +96,14 @@ export class NavbarComponent implements OnInit {
       }
     });
     this.collapseNavbar();
+  }
+
+  openNav() {
+    document.getElementById('menuToggleButton').click();
+    this.shopservice.openNav();
+  }
+
+  closeNav() {
+    this.shopservice.closeNav();
   }
 }
