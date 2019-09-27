@@ -66,7 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .accessDeniedHandler(problemSupport)
         .and()
             .headers()
-            .contentSecurityPolicy("default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' https://maxcdn.bootstrapcdn.com  https://fonts.googleapis.com 'unsafe-inline'; img-src 'self' https://dl.dropboxusercontent.com http://image.jeuxvideo.com data:; font-src 'self' https://fonts.gstatic.com data:")
+            .contentSecurityPolicy("default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' https://maxcdn.bootstrapcdn.com  https://fonts.googleapis.com 'unsafe-inline'; img-src 'self' https://dl.dropboxusercontent.com http://image.jeuxvideo.com data:; font-src 'self' https://maxcdn.bootstrapcdn.com https://fonts.gstatic.com data:")
         .and()
             .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
         .and()
