@@ -10,34 +10,46 @@ Features :
 
 ![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/buy.gif)
  - Create account (JWT Authentification) :
+ 
  ![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/create_account_after_user_put_item_in_card.gif)
 
-Change password : 
+- Change password : 
+
 ![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/change_password.gif)
-Edit profil :
+
+- Edit profil :
+
 ![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/edit_profil.gif)
 
-Commands history:
+- Commands history:
 
 ![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/command_history.gif)
 
-Search using ElasticSearch with string fuziness :
+- Search using ElasticSearch with string fuziness :
+
 ![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/elasticSearch.gif)
-Filter : 
+- Filter : 
+
 ![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/features_tour.gif)
+
  - Sort :
+ 
 ![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/sorting.gif)
 
  - Features tour :
-	![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/features_tour.gif)
+ 
+![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/features_tour.gif)
+
  - Change list view:
- ![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/listview.gif)
+ 
+![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/listview.gif)
+
  - Mobile Responsive
- -  PWA Ready
- -  Unit tested
- -  Docker
+ - PWA Ready
+ - Unit tested
+ - Docker
  - Ci/CD :
- ![enter image description here](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/gitlab%20ci_cd.PNG)
+ ![gitlab_ci_cd_job](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/gitlab%20ci_cd.PNG)
 **Note :** 
 This project is done in less than 2 weeks, and we had to learn new stack to do it.
 To solve concurrency of two users buying a product, we used a table lock which is not the best way to do it.
