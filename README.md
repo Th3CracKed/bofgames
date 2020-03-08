@@ -1,5 +1,47 @@
-# bofgames
 
+# bofgames
+Features :
+
+ - Add to card (cookie)
+
+![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/add_to_card_not_logged.gif)
+
+ - Buy An Item
+
+![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/buy.gif)
+ - Create account (JWT Authentification) :
+ ![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/create_account_after_user_put_item_in_card.gif)
+
+Change password : 
+![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/change_password.gif)
+Edit profil :
+![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/edit_profil.gif)
+
+Commands history:
+
+![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/command_history.gif)
+
+Search using ElasticSearch with string fuziness :
+![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/elasticSearch.gif)
+Filter : 
+![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/features_tour.gif)
+ - Sort :
+![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/sorting.gif)
+
+ - Features tour :
+	![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/features_tour.gif)
+ - Change list view:
+ ![](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/listview.gif)
+ - Mobile Responsive
+ -  PWA Ready
+ -  Unit tested
+ -  Docker
+ - Ci/CD :
+ ![enter image description here](https://raw.githubusercontent.com/Th3CracKed/bofgames/develop/readme_assets/gitlab%20ci_cd.PNG)
+**Note :** 
+This project is done in less than 2 weeks, and we had to learn new stack to do it.
+To solve concurrency of two users buying a product, we used a table lock which is not the best way to do it.
+# JHIPSTER README
 This application was generated using JHipster 6.2.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.2.0](https://www.jhipster.tech/documentation-archive/v6.2.0).
 
 ## Development
