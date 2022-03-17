@@ -34,7 +34,7 @@
     "ngx-joyride": "^2.2.10",
     "ngx-webstorage": "4.0.1",
     "rxjs": "6.5.2",
-    "swagger-ui": "2.2.10",
+    "swagger-ui": "4.1.3",
     "tslib": "1.10.0",
     "zone.js": "0.9.1"
   },
